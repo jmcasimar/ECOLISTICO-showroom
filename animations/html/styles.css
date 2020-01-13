@@ -1,0 +1,299 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 95%;
+    width: 95%;
+    /*background: linear-gradient(to bottom, #1e5799 0%,#7db9e8 100%);*/
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.sprite {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+  /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.spritePlay {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite1 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite1Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite2 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite2Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite3 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite3Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite4 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite4Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite5 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite5Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite6 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite6Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.sprite7 {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    /*animation: playFan 0.33s steps(11) infinite;*/
+}
+.sprite7Play {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    top: -10%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_fan-animation.png');
+    transform: scale(0.25);
+    animation: playFan 0.33s steps(11) infinite;
+}
+
+.waterTank {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: -15%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank1 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: -3%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank2 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank3 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: 22%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank4 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank5 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 0%;
+    left: 47%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+.waterTank6 {
+    width: 720px;
+    height: 540px;
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    background-image: url('./merge_waterTank.png');
+    transform: scale(0.25);
+    animation: playTank 2s steps(60) infinite;
+    animation-direction: alternate;
+}
+
+@keyframes playFan {
+   from { background-position:    0px; }
+     to { background-position: -3300px; }
+}
+
+@keyframes playTank {
+   from { background-position:    0px; }
+     to { background-position: -43200px; }
+}
