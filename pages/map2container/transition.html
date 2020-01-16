@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ECOLISTICO</title>
+	<style>
+    #myVideo {
+      height: 100%;
+      left: 0;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+
+    .custom-mute {
+      display: block;
+      background-image: url('./mute.png');
+      background-size: cover;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      z-index: 50;
+      opacity: 0.5;
+    }
+    .custom-mute:hover {
+    	opacity: 1;
+    }
+    .custom-unmute {
+      display: block;
+      background-image: url('./unmute.png');
+      background-size: cover;
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 1%;
+      right: 1%;
+      z-index: 50;
+      opacity: 0.5;
+    }
+    .custom-unmute:hover {
+    	opacity: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <button class="custom-mute" id="mute-button" onclick="onSoundClick()">
+  </button>
+  <div>
+    <video autoplay muted id="myVideo">
+      <source src="Closeup merge1.mp4" type="video/mp4">
+    </video>
+  </div>
+  <script type="text/javascript">
+    function onSoundClick() {
+      var element = document.getElementById("myVideo");
+      if(element.muted === true){ element.muted = false; }
+      else { element.muted = true; }
+      var but = document.getElementById("mute-button");
+      if(but.getAttribute("class") === "custom-mute"){ but.setAttribute("class", "custom-unmute"); }
+      else { but.setAttribute("class", "custom-mute"); }
+    }
+  </script>
+</body>
+</html>

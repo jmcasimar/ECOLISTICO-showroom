@@ -1,0 +1,703 @@
+2019-11-21 09:05:06 INFO     Irrigation State charged
+2019-11-21 09:05:08 INFO     Permission to start GrowGreens accepted
+2019-11-21 09:05:08 INFO     Setting up devices...
+2019-11-21 09:05:09 INFO     Devices ready
+2019-11-21 09:05:09 INFO     MQTT Connection succesful
+2019-11-21 09:05:09 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 09:05:13 WARNING  Request boot was answered
+2019-11-21 09:37:41 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 09:37:41 INFO     Closing devices
+2019-11-21 09:37:41 INFO     GrowGreens Finished
+2019-11-21 09:37:42 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 12:09:11 INFO     Irrigation State charged
+2019-11-21 12:09:12 INFO     Permission to start GrowGreens accepted
+2019-11-21 12:09:13 INFO     Setting up devices...
+2019-11-21 12:09:14 INFO     Devices ready
+2019-11-21 12:09:14 INFO     MQTT Connection succesful
+2019-11-21 12:09:14 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 12:09:17 WARNING  Request boot was answered
+2019-11-21 12:29:12 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:31:36 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,0,1,5
+2019-11-21 12:32:21 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,0,1,5
+2019-11-21 12:36:45 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:39:16 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:46:48 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:49:15 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:56:47 WARNING  Request updateIrrigationState was answered
+2019-11-21 12:59:16 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:00:22 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,0,1,3
+2019-11-21 13:00:44 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 13:00:44 INFO     Closing devices
+2019-11-21 13:00:44 INFO     GrowGreens Finished
+2019-11-21 13:00:50 INFO     Email sent to ['jmcasimar@sippys.com.mx', 'trigger@applet.ifttt.com'], Subject=Ecolistico Alerta, Message=GrowGreens se detuvo
+2019-11-21 13:02:17 INFO     Irrigation State charged
+2019-11-21 13:02:18 INFO     Permission to start GrowGreens accepted
+2019-11-21 13:02:19 INFO     Setting up devices...
+2019-11-21 13:02:20 INFO     Devices ready
+2019-11-21 13:02:20 INFO     MQTT Connection succesful
+2019-11-21 13:02:20 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 13:02:23 WARNING  Request boot was answered
+2019-11-21 13:03:21 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:06:41 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,0,1,3
+2019-11-21 13:08:21 WARNING  inputHandler-[generalControl] Raw Command=se
+2019-11-21 13:10:55 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:13:22 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:20:55 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:23:22 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:30:56 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:33:22 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:40:55 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:43:22 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:50:56 WARNING  Request updateIrrigationState was answered
+2019-11-21 13:58:38 WARNING  Request requestSolution was answered
+2019-11-21 13:58:48 WARNING  Request requestSolution was answered
+2019-11-21 13:58:58 WARNING  Request requestSolution was answered
+2019-11-21 13:59:08 WARNING  Request requestSolution was answered
+2019-11-21 13:59:18 WARNING  Request requestSolution was answered
+2019-11-21 13:59:29 WARNING  Request requestSolution was answered
+2019-11-21 13:59:38 WARNING  Request requestSolution was answered
+2019-11-21 13:59:48 WARNING  Request requestSolution was answered
+2019-11-21 13:59:58 WARNING  Request requestSolution was answered
+2019-11-21 14:00:08 WARNING  Request requestSolution was answered
+2019-11-21 14:00:18 WARNING  Request requestSolution was answered
+2019-11-21 14:00:28 WARNING  Request requestSolution was answered
+2019-11-21 14:00:38 WARNING  Request requestSolution was answered
+2019-11-21 14:00:48 WARNING  Request requestSolution was answered
+2019-11-21 14:00:58 WARNING  Request requestSolution was answered
+2019-11-21 14:01:09 WARNING  Request requestSolution was answered
+2019-11-21 14:01:19 WARNING  Request requestSolution was answered
+2019-11-21 14:01:29 WARNING  Request requestSolution was answered
+2019-11-21 14:01:39 WARNING  Request requestSolution was answered
+2019-11-21 14:01:49 WARNING  Request requestSolution was answered
+2019-11-21 14:01:59 WARNING  Request requestSolution was answered
+2019-11-21 14:02:08 WARNING  Request requestSolution was answered
+2019-11-21 14:02:18 WARNING  Request requestSolution was answered
+2019-11-21 14:02:28 WARNING  Request requestSolution was answered
+2019-11-21 14:02:38 WARNING  Request requestSolution was answered
+2019-11-21 14:02:48 WARNING  Request requestSolution was answered
+2019-11-21 14:02:58 WARNING  Request requestSolution was answered
+2019-11-21 14:03:08 WARNING  Request requestSolution was answered
+2019-11-21 14:03:18 WARNING  Request requestSolution was answered
+2019-11-21 14:03:29 WARNING  Request requestSolution was answered
+2019-11-21 14:03:39 WARNING  Request requestSolution was answered
+2019-11-21 14:03:49 WARNING  Request requestSolution was answered
+2019-11-21 14:03:59 WARNING  Request requestSolution was answered
+2019-11-21 14:04:09 WARNING  Request requestSolution was answered
+2019-11-21 14:04:19 WARNING  Request requestSolution was answered
+2019-11-21 14:04:29 WARNING  Request requestSolution was answered
+2019-11-21 14:04:39 WARNING  Request requestSolution was answered
+2019-11-21 14:04:48 WARNING  Request requestSolution was answered
+2019-11-21 14:04:58 WARNING  Request requestSolution was answered
+2019-11-21 14:05:08 WARNING  Request requestSolution was answered
+2019-11-21 14:05:18 WARNING  Request requestSolution was answered
+2019-11-21 14:05:28 WARNING  Request requestSolution was answered
+2019-11-21 14:05:38 WARNING  Request requestSolution was answered
+2019-11-21 14:05:48 WARNING  Request requestSolution was answered
+2019-11-21 14:05:59 WARNING  Request requestSolution was answered
+2019-11-21 14:06:09 WARNING  Request requestSolution was answered
+2019-11-21 14:06:19 WARNING  Request requestSolution was answered
+2019-11-21 14:06:29 WARNING  Request requestSolution was answered
+2019-11-21 14:06:39 WARNING  Request requestSolution was answered
+2019-11-21 14:06:49 WARNING  Request requestSolution was answered
+2019-11-21 14:06:59 WARNING  Request requestSolution was answered
+2019-11-21 14:07:08 WARNING  Request requestSolution was answered
+2019-11-21 14:07:18 WARNING  Request requestSolution was answered
+2019-11-21 14:07:28 WARNING  Request requestSolution was answered
+2019-11-21 14:07:38 WARNING  Request requestSolution was answered
+2019-11-21 14:07:48 WARNING  Request requestSolution was answered
+2019-11-21 14:07:58 WARNING  Request requestSolution was answered
+2019-11-21 14:08:09 WARNING  Request requestSolution was answered
+2019-11-21 14:08:19 WARNING  Request requestSolution was answered
+2019-11-21 14:08:29 WARNING  Request requestSolution was answered
+2019-11-21 14:08:39 WARNING  Request requestSolution was answered
+2019-11-21 14:08:49 WARNING  Request requestSolution was answered
+2019-11-21 14:08:59 WARNING  Request requestSolution was answered
+2019-11-21 14:09:09 WARNING  Request requestSolution was answered
+2019-11-21 14:09:19 WARNING  Request requestSolution was answered
+2019-11-21 14:09:29 WARNING  Request requestSolution was answered
+2019-11-21 14:09:38 WARNING  Request requestSolution was answered
+2019-11-21 14:09:48 WARNING  Request requestSolution was answered
+2019-11-21 14:09:58 WARNING  Request requestSolution was answered
+2019-11-21 14:10:08 WARNING  Request requestSolution was answered
+2019-11-21 14:10:18 WARNING  Request requestSolution was answered
+2019-11-21 14:10:28 WARNING  Request requestSolution was answered
+2019-11-21 14:10:38 WARNING  Request requestSolution was answered
+2019-11-21 14:10:49 WARNING  Request requestSolution was answered
+2019-11-21 14:10:59 WARNING  Request requestSolution was answered
+2019-11-21 14:11:09 WARNING  Request requestSolution was answered
+2019-11-21 14:11:19 WARNING  Request requestSolution was answered
+2019-11-21 14:11:29 WARNING  Request requestSolution was answered
+2019-11-21 14:11:39 WARNING  Request requestSolution was answered
+2019-11-21 14:11:49 WARNING  Request requestSolution was answered
+2019-11-21 14:11:59 WARNING  Request requestSolution was answered
+2019-11-21 14:12:09 WARNING  Request requestSolution was answered
+2019-11-21 14:12:19 WARNING  Request requestSolution was answered
+2019-11-21 14:12:28 WARNING  Request requestSolution was answered
+2019-11-21 14:12:38 WARNING  Request requestSolution was answered
+2019-11-21 14:12:48 WARNING  Request requestSolution was answered
+2019-11-21 14:12:58 WARNING  Request requestSolution was answered
+2019-11-21 14:13:08 WARNING  Request requestSolution was answered
+2019-11-21 14:13:18 WARNING  Request requestSolution was answered
+2019-11-21 14:13:29 WARNING  Request requestSolution was answered
+2019-11-21 14:13:39 WARNING  Request requestSolution was answered
+2019-11-21 14:13:49 WARNING  Request requestSolution was answered
+2019-11-21 14:13:59 WARNING  Request requestSolution was answered
+2019-11-21 14:14:09 WARNING  Request requestSolution was answered
+2019-11-21 14:14:19 WARNING  Request requestSolution was answered
+2019-11-21 14:14:29 WARNING  Request requestSolution was answered
+2019-11-21 14:14:39 WARNING  Request requestSolution was answered
+2019-11-21 14:14:49 WARNING  Request requestSolution was answered
+2019-11-21 14:14:59 WARNING  Request requestSolution was answered
+2019-11-21 14:15:08 WARNING  Request requestSolution was answered
+2019-11-21 14:15:18 WARNING  Request requestSolution was answered
+2019-11-21 14:15:28 WARNING  Request requestSolution was answered
+2019-11-21 14:15:38 WARNING  Request requestSolution was answered
+2019-11-21 14:15:48 WARNING  Request requestSolution was answered
+2019-11-21 14:15:58 WARNING  Request requestSolution was answered
+2019-11-21 14:16:09 WARNING  Request requestSolution was answered
+2019-11-21 14:16:09 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 14:16:09 INFO     Closing devices
+2019-11-21 14:16:09 INFO     GrowGreens Finished
+2019-11-21 14:16:15 INFO     Email sent to ['jmcasimar@sippys.com.mx', 'trigger@applet.ifttt.com'], Subject=Ecolistico Alerta, Message=GrowGreens se detuvo
+2019-11-21 14:32:54 INFO     Irrigation State charged
+2019-11-21 14:32:55 INFO     Permission to start GrowGreens accepted
+2019-11-21 14:32:55 INFO     Setting up devices...
+2019-11-21 14:32:56 INFO     Devices ready
+2019-11-21 14:32:56 INFO     MQTT Connection succesful
+2019-11-21 14:32:56 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 14:33:01 WARNING  Sending response for request boot
+2019-11-21 14:33:01 WARNING  Request boot was answered
+2019-11-21 14:34:35 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 14:34:35 INFO     Closing devices
+2019-11-21 14:34:35 INFO     GrowGreens Finished
+2019-11-21 14:34:36 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 14:34:39 INFO     Irrigation State charged
+2019-11-21 14:34:40 INFO     Permission to start GrowGreens accepted
+2019-11-21 14:34:40 INFO     Setting up devices...
+2019-11-21 14:34:41 INFO     Devices ready
+2019-11-21 14:34:41 INFO     MQTT Connection succesful
+2019-11-21 14:34:41 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 14:34:46 WARNING  Sending response for request boot
+2019-11-21 14:34:46 WARNING  Request boot was answered
+2019-11-21 14:35:03 WARNING  Sending response for request requestSolution
+2019-11-21 14:35:03 WARNING  Processing: requestSolution
+2019-11-21 14:35:03 WARNING  Prepare Solution line: ?solutionMaker,82.45,1,6.50,1000
+2019-11-21 14:35:03 WARNING  Prepare Solution parameters: 82.45,1,6.5,1000
+2019-11-21 14:35:03 WARNING  Request requestSolution was answered
+2019-11-21 14:35:05 WARNING  Sending response for request requestAccepted
+2019-11-21 14:35:05 WARNING  Request requestAccepted was answered
+2019-11-21 14:35:15 WARNING  Sending response for request solutionFinished
+2019-11-21 14:35:15 WARNING  Request solutionFinished was answered
+2019-11-21 14:53:31 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 14:53:31 INFO     Closing devices
+2019-11-21 14:53:31 INFO     GrowGreens Finished
+2019-11-21 14:53:32 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 14:55:04 INFO     Irrigation State charged
+2019-11-21 14:55:05 INFO     Permission to start GrowGreens accepted
+2019-11-21 14:55:06 INFO     Setting up devices...
+2019-11-21 14:55:07 INFO     Devices ready
+2019-11-21 14:55:07 INFO     MQTT Connection succesful
+2019-11-21 14:55:07 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 14:55:11 WARNING  Sending response for request boot
+2019-11-21 14:55:11 WARNING  Request boot was answered
+2019-11-21 15:06:44 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 15:06:44 INFO     Closing devices
+2019-11-21 15:06:44 INFO     GrowGreens Finished
+2019-11-21 15:06:45 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 15:08:00 INFO     Irrigation State charged
+2019-11-21 15:08:01 INFO     Permission to start GrowGreens accepted
+2019-11-21 15:08:01 INFO     Setting up devices...
+2019-11-21 15:08:02 INFO     Devices ready
+2019-11-21 15:08:02 INFO     MQTT Connection succesful
+2019-11-21 15:08:02 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 15:08:07 WARNING  Sending response for request boot
+2019-11-21 15:08:07 WARNING  Request boot was answered
+2019-11-21 15:09:25 WARNING  Sending response for request requestSolution
+2019-11-21 15:09:25 WARNING  Processing: requestSolution
+2019-11-21 15:09:25 WARNING  Prepare Solution line: ?solutionMaker,80.16,2,6.50,1000
+2019-11-21 15:09:25 WARNING  Prepare Solution parameters: 80.16,2,6.5,1000
+2019-11-21 15:09:25 WARNING  Request requestSolution was answered
+2019-11-21 15:09:28 WARNING  Sending response for request requestAccepted
+2019-11-21 15:09:28 WARNING  Request requestAccepted was answered
+2019-11-21 15:09:37 WARNING  Sending response for request solutionFinished
+2019-11-21 15:09:37 WARNING  Request solutionFinished was answered
+2019-11-21 15:15:18 INFO     Closing devices
+2019-11-21 15:15:18 INFO     GrowGreens Finished
+2019-11-21 15:15:18 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./growMaster.py", line 275, in <module>
+    log.logger.exception("Exception Raised")
+  File "/usr/lib/python3.5/logging/__init__.py", line 1315, in exception
+    self.error(msg, *args, exc_info=exc_info, **kwargs)
+  File "/usr/lib/python3.5/logging/__init__.py", line 1309, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "/usr/lib/python3.5/logging/__init__.py", line 1416, in _log
+    self.handle(record)
+  File "/usr/lib/python3.5/logging/__init__.py", line 1426, in handle
+    self.callHandlers(record)
+  File "/usr/lib/python3.5/logging/__init__.py", line 1488, in callHandlers
+    hdlr.handle(record)
+  File "/usr/lib/python3.5/logging/__init__.py", line 856, in handle
+    self.emit(record)
+  File "/usr/lib/python3.5/logging/handlers.py", line 71, in emit
+    if self.shouldRollover(record):
+  File "/usr/lib/python3.5/logging/handlers.py", line 187, in shouldRollover
+    msg = "%s\n" % self.format(record)
+  File "/usr/lib/python3.5/logging/__init__.py", line 831, in format
+    return fmt.format(record)
+  File "/usr/lib/python3.5/logging/__init__.py", line 576, in format
+    record.exc_text = self.formatException(record.exc_info)
+  File "/usr/lib/python3.5/logging/__init__.py", line 526, in formatException
+    traceback.print_exception(ei[0], ei[1], tb, None, sio)
+  File "/usr/lib/python3.5/traceback.py", line 100, in print_exception
+    type(value), value, tb, limit=limit).format(chain=chain):
+  File "/usr/lib/python3.5/traceback.py", line 474, in __init__
+    capture_locals=capture_locals)
+  File "/usr/lib/python3.5/traceback.py", line 358, in extract
+    f.line
+  File "/usr/lib/python3.5/traceback.py", line 282, in line
+    self._line = linecache.getline(self.filename, self.lineno).strip()
+  File "/usr/lib/python3.5/linecache.py", line 16, in getline
+    lines = getlines(filename, module_globals)
+  File "/usr/lib/python3.5/linecache.py", line 47, in getlines
+    return updatecache(filename, module_globals)
+  File "/usr/lib/python3.5/linecache.py", line 136, in updatecache
+    with tokenize.open(fullname) as fp:
+  File "/usr/lib/python3.5/tokenize.py", line 456, in open
+    encoding, lines = detect_encoding(buffer.readline)
+  File "/usr/lib/python3.5/tokenize.py", line 375, in detect_encoding
+    filename = readline.__self__.name
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1018, in __init__
+    keyfile=keyfile)
+  File "/usr/lib/python3.5/ssl.py", line 500, in _create_unverified_context
+    context = SSLContext(protocol)
+  File "/usr/lib/python3.5/ssl.py", line 369, in __new__
+    self = _SSLContext.__new__(cls, protocol)
+KeyboardInterrupt
+2019-11-21 15:16:14 INFO     Irrigation State charged
+2019-11-21 15:16:16 INFO     Permission to start GrowGreens accepted
+2019-11-21 15:16:16 INFO     Setting up devices...
+2019-11-21 15:16:17 INFO     Devices ready
+2019-11-21 15:16:17 INFO     MQTT Connection succesful
+2019-11-21 15:16:17 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 15:16:22 WARNING  Sending response for request boot
+2019-11-21 15:16:22 WARNING  Request boot was answered
+2019-11-21 15:29:20 WARNING  Sending response for request requestSolution
+2019-11-21 15:29:20 WARNING  Processing: requestSolution
+2019-11-21 15:29:20 WARNING  Prepare Solution line: ?solutionMaker,167.19,2,6.50,1000
+2019-11-21 15:29:20 WARNING  Prepare Solution parameters: 167.19,2,6.5,1000
+2019-11-21 15:29:20 WARNING  Request requestSolution was answered
+2019-11-21 15:29:22 WARNING  Sending response for request requestAccepted
+2019-11-21 15:29:22 WARNING  Request requestAccepted was answered
+2019-11-21 15:29:32 WARNING  Sending response for request solutionFinished
+2019-11-21 15:29:32 WARNING  Request solutionFinished was answered
+2019-11-21 15:40:41 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 15:40:41 INFO     Closing devices
+2019-11-21 15:40:41 INFO     GrowGreens Finished
+2019-11-21 15:40:41 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 15:45:38 INFO     Irrigation State charged
+2019-11-21 15:45:39 INFO     Permission to start GrowGreens accepted
+2019-11-21 15:45:39 INFO     Setting up devices...
+2019-11-21 15:45:40 INFO     Devices ready
+2019-11-21 15:45:40 INFO     MQTT Connection succesful
+2019-11-21 15:45:40 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 15:45:45 WARNING  Sending response for request boot
+2019-11-21 15:45:45 WARNING  Request boot was answered
+2019-11-21 15:53:06 WARNING  Sending response for request requestSolution
+2019-11-21 15:53:06 WARNING  Processing: requestSolution
+2019-11-21 15:53:06 WARNING  Prepare Solution line: ?solutionMaker,167.19,2,6.50,1000
+2019-11-21 15:53:06 WARNING  Prepare Solution parameters: 167.19,2,6.5,1000
+2019-11-21 15:53:06 WARNING  Request requestSolution was answered
+2019-11-21 15:53:09 WARNING  Sending response for request requestAccepted
+2019-11-21 15:53:09 WARNING  Request requestAccepted was answered
+2019-11-21 15:53:18 WARNING  Sending response for request solutionFinished
+2019-11-21 15:53:18 WARNING  Request solutionFinished was answered
+2019-11-21 16:02:26 WARNING  inputHandler-[generalControl] Raw Command=solenoid,0,0,4,2
+2019-11-21 16:02:52 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,0,4,2
+2019-11-21 16:03:12 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,0,4,2
+2019-11-21 16:03:21 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,2,0,4,2
+2019-11-21 16:03:35 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,3,0,4,2
+2019-11-21 16:03:45 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,4,4,2
+2019-11-21 16:03:57 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,4,4,2
+2019-11-21 16:04:04 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,2,4,4,2
+2019-11-21 16:04:15 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,3,4,4,2
+2019-11-21 16:04:27 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,0,0,2
+2019-11-21 16:04:39 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,0,0,2
+2019-11-21 16:04:47 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,2,0,0,2
+2019-11-21 16:04:54 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,3,0,0,2
+2019-11-21 16:05:03 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,0,4,0,2
+2019-11-21 16:05:09 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,1,4,0,2
+2019-11-21 16:05:16 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,2,4,0,2
+2019-11-21 16:05:24 WARNING  inputHandler-[generalControl] Raw Command=solenoid,setTimeOn,3,4,0,2
+2019-11-21 16:05:54 WARNING  Sending response for request updateIrrigationState
+2019-11-21 16:05:54 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 135, in <module>
+    serialControl.loop()
+  File "./src/serialCallback.py", line 385, in loop
+    self.response()
+  File "./src/serialCallback.py", line 150, in response
+    elif(resp == "updateIrrigationState"): self.updateIrrigationState(i)
+  File "./src/serialCallback.py", line 93, in updateIrrigationState
+    self.logMain.debug('looking for error:' + param)
+TypeError: Can't convert 'list' object to str implicitly
+2019-11-21 16:05:54 INFO     Closing devices
+2019-11-21 16:05:54 INFO     GrowGreens Finished
+2019-11-21 16:06:00 INFO     Email sent to ['jmcasimar@sippys.com.mx', 'trigger@applet.ifttt.com'], Subject=Ecolistico Alerta, Message=GrowGreens se detuvo
+2019-11-21 17:08:37 INFO     Irrigation State charged
+2019-11-21 17:08:37 INFO     Permission to start GrowGreens accepted
+2019-11-21 17:08:38 INFO     Setting up devices...
+2019-11-21 17:08:39 INFO     Devices ready
+2019-11-21 17:08:39 INFO     MQTT Connection succesful
+2019-11-21 17:08:39 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 17:08:56 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 17:08:56 INFO     Closing devices
+2019-11-21 17:08:56 INFO     GrowGreens Finished
+2019-11-21 17:08:56 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 17:17:55 INFO     Irrigation State charged
+2019-11-21 17:17:56 INFO     Permission to start GrowGreens accepted
+2019-11-21 17:17:56 INFO     Setting up devices...
+2019-11-21 17:17:57 INFO     Devices ready
+2019-11-21 17:17:57 INFO     MQTT Connection succesful
+2019-11-21 17:17:57 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 17:18:02 WARNING  Sending response for request boot
+2019-11-21 17:18:02 WARNING  Request boot was answered
+2019-11-21 17:18:49 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 17:18:49 INFO     Closing devices
+2019-11-21 17:18:49 INFO     GrowGreens Finished
+2019-11-21 17:18:49 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 703, in create_connection
+    sock.connect(sa)
+KeyboardInterrupt
+2019-11-21 17:18:53 INFO     Irrigation State charged
+2019-11-21 17:18:53 INFO     Permission to start GrowGreens accepted
+2019-11-21 17:18:54 INFO     Setting up devices...
+2019-11-21 17:18:55 INFO     Devices ready
+2019-11-21 17:18:55 INFO     MQTT Connection succesful
+2019-11-21 17:18:55 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 17:18:59 WARNING  Sending response for request boot
+2019-11-21 17:18:59 WARNING  Request boot was answered
+2019-11-21 17:26:23 ERROR    Exception Raised
+Traceback (most recent call last):
+  File "./growMaster.py", line 140, in <module>
+    if mqttControl.clientConnected: client.loop()
+  File "/usr/local/lib/python3.5/dist-packages/paho/mqtt/client.py", line 1057, in loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+2019-11-21 17:26:23 INFO     Closing devices
+2019-11-21 17:26:23 INFO     GrowGreens Finished
+2019-11-21 17:26:23 ERROR    Email Error, cannot send the email
+Traceback (most recent call last):
+  File "./src/smtp.py", line 26, in sendMail
+    server = smtplib.SMTP_SSL("smtp.yandex.com.tr", 465)
+  File "/usr/lib/python3.5/smtplib.py", line 1021, in __init__
+    source_address)
+  File "/usr/lib/python3.5/smtplib.py", line 251, in __init__
+    (code, msg) = self.connect(host, port)
+  File "/usr/lib/python3.5/smtplib.py", line 335, in connect
+    self.sock = self._get_socket(host, port, self.timeout)
+  File "/usr/lib/python3.5/smtplib.py", line 1027, in _get_socket
+    self.source_address)
+  File "/usr/lib/python3.5/socket.py", line 694, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/lib/python3.5/socket.py", line 733, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+KeyboardInterrupt
+2019-11-21 17:48:05 INFO     Irrigation State charged
+2019-11-21 17:48:05 INFO     Permission to start GrowGreens accepted
+2019-11-21 17:48:06 INFO     Setting up devices...
+2019-11-21 17:48:07 INFO     Devices ready
+2019-11-21 17:48:07 INFO     MQTT Connection succesful
+2019-11-21 17:48:07 INFO     Subscribed topic= 15-113-001/#
+2019-11-21 17:48:11 WARNING  Sending response for request boot
+2019-11-21 17:48:11 WARNING  Request boot was answered
+2019-11-21 18:05:06 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:05:06 WARNING  looking for error: updateIrrigationState,3,97.69,79.00,3.15,1.00
+2019-11-21 18:05:06 INFO     Irrigation Solution Updated
+2019-11-21 18:05:06 INFO     Irrigation volNut Updated
+2019-11-21 18:05:06 INFO     Irrigation volH2O Updated
+2019-11-21 18:05:06 INFO     Irrigation consNut Updated
+2019-11-21 18:05:06 INFO     Irrigation consH2O Updated
+2019-11-21 18:05:06 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:12:40 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:12:40 WARNING  looking for error: updateIrrigationState,0,100.00,78.39,3.15,0.80
+2019-11-21 18:12:40 ERROR    Cannot Update Solution State
+2019-11-21 18:12:40 INFO     Irrigation volNut Updated
+2019-11-21 18:12:40 INFO     Irrigation volH2O Updated
+2019-11-21 18:12:40 INFO     Irrigation consNut Updated
+2019-11-21 18:12:40 INFO     Irrigation consH2O Updated
+2019-11-21 18:12:40 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:19:26 WARNING  Sending response for request requestSolution
+2019-11-21 18:19:26 WARNING  Processing: requestSolution
+2019-11-21 18:19:26 WARNING  Prepare Solution line: ?solutionMaker,94.30,0,6.50,1000
+2019-11-21 18:19:26 WARNING  Prepare Solution parameters: 94.3,0,6.5,1000
+2019-11-21 18:19:26 WARNING  Request requestSolution was answered
+2019-11-21 18:19:29 WARNING  Sending response for request requestAccepted
+2019-11-21 18:19:29 WARNING  Request requestAccepted was answered
+2019-11-21 18:19:39 WARNING  Sending response for request solutionFinished
+2019-11-21 18:19:39 WARNING  Request solutionFinished was answered
+2019-11-21 18:27:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:27:18 WARNING  looking for error: updateIrrigationState,0,206.63,78.39,3.25,0.80
+2019-11-21 18:27:18 ERROR    Cannot Update Solution State
+2019-11-21 18:27:18 INFO     Irrigation volNut Updated
+2019-11-21 18:27:18 INFO     Irrigation volH2O Updated
+2019-11-21 18:27:18 INFO     Irrigation consNut Updated
+2019-11-21 18:27:18 INFO     Irrigation consH2O Updated
+2019-11-21 18:27:18 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:34:51 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:34:51 WARNING  looking for error: updateIrrigationState,0,206.63,77.81,3.25,0.69
+2019-11-21 18:34:51 ERROR    Cannot Update Solution State
+2019-11-21 18:34:51 INFO     Irrigation volNut Updated
+2019-11-21 18:34:51 INFO     Irrigation volH2O Updated
+2019-11-21 18:34:51 INFO     Irrigation consNut Updated
+2019-11-21 18:34:51 INFO     Irrigation consH2O Updated
+2019-11-21 18:34:51 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:37:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:37:18 WARNING  looking for error: updateIrrigationState,0,203.44,77.81,3.22,0.69
+2019-11-21 18:37:18 ERROR    Cannot Update Solution State
+2019-11-21 18:37:18 INFO     Irrigation volNut Updated
+2019-11-21 18:37:18 INFO     Irrigation volH2O Updated
+2019-11-21 18:37:18 INFO     Irrigation consNut Updated
+2019-11-21 18:37:18 INFO     Irrigation consH2O Updated
+2019-11-21 18:37:18 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:44:51 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:44:51 WARNING  looking for error: updateIrrigationState,0,203.44,77.23,3.22,0.64
+2019-11-21 18:44:51 ERROR    Cannot Update Solution State
+2019-11-21 18:44:51 INFO     Irrigation volNut Updated
+2019-11-21 18:44:51 INFO     Irrigation volH2O Updated
+2019-11-21 18:44:51 INFO     Irrigation consNut Updated
+2019-11-21 18:44:51 INFO     Irrigation consH2O Updated
+2019-11-21 18:44:51 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:47:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:47:18 WARNING  looking for error: updateIrrigationState,0,200.29,77.23,3.19,0.64
+2019-11-21 18:47:18 ERROR    Cannot Update Solution State
+2019-11-21 18:47:18 INFO     Irrigation volNut Updated
+2019-11-21 18:47:18 INFO     Irrigation volH2O Updated
+2019-11-21 18:47:18 INFO     Irrigation consNut Updated
+2019-11-21 18:47:18 INFO     Irrigation consH2O Updated
+2019-11-21 18:47:18 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:54:51 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:54:51 WARNING  looking for error: updateIrrigationState,0,200.29,76.66,3.19,0.60
+2019-11-21 18:54:51 ERROR    Cannot Update Solution State
+2019-11-21 18:54:51 INFO     Irrigation volNut Updated
+2019-11-21 18:54:51 INFO     Irrigation volH2O Updated
+2019-11-21 18:54:51 INFO     Irrigation consNut Updated
+2019-11-21 18:54:51 INFO     Irrigation consH2O Updated
+2019-11-21 18:54:51 WARNING  Request updateIrrigationState was answered
+2019-11-21 18:57:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 18:57:18 WARNING  looking for error: updateIrrigationState,0,197.18,76.66,3.15,0.60
+2019-11-21 18:57:18 ERROR    Cannot Update Solution State
+2019-11-21 18:57:18 INFO     Irrigation volNut Updated
+2019-11-21 18:57:18 INFO     Irrigation volH2O Updated
+2019-11-21 18:57:18 INFO     Irrigation consNut Updated
+2019-11-21 18:57:18 INFO     Irrigation consH2O Updated
+2019-11-21 18:57:18 WARNING  Request updateIrrigationState was answered
+2019-11-21 19:04:51 WARNING  Sending response for request updateIrrigationState
+2019-11-21 19:04:51 WARNING  looking for error: updateIrrigationState,0,197.18,76.09,3.15,0.59
+2019-11-21 19:04:51 ERROR    Cannot Update Solution State
+2019-11-21 19:04:51 INFO     Irrigation volNut Updated
+2019-11-21 19:04:51 INFO     Irrigation volH2O Updated
+2019-11-21 19:04:51 INFO     Irrigation consNut Updated
+2019-11-21 19:04:51 INFO     Irrigation consH2O Updated
+2019-11-21 19:04:51 WARNING  Request updateIrrigationState was answered
+2019-11-21 19:07:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 19:07:19 WARNING  looking for error: updateIrrigationState,0,194.03,76.09,3.15,0.59
+2019-11-21 19:07:19 ERROR    Cannot Update Solution State
+2019-11-21 19:07:19 INFO     Irrigation volNut Updated
+2019-11-21 19:07:19 INFO     Irrigation volH2O Updated
+2019-11-21 19:07:19 INFO     Irrigation consNut Updated
+2019-11-21 19:07:19 INFO     Irrigation consH2O Updated
+2019-11-21 19:07:19 WARNING  Request updateIrrigationState was answered
+2019-11-21 19:14:52 WARNING  Sending response for request updateIrrigationState
+2019-11-21 19:14:52 WARNING  looking for error: updateIrrigationState,0,194.03,75.51,3.15,0.58
+2019-11-21 19:14:52 ERROR    Cannot Update Solution State
+2019-11-21 19:14:52 INFO     Irrigation volNut Updated
+2019-11-21 19:14:52 INFO     Irrigation volH2O Updated
+2019-11-21 19:14:52 INFO     Irrigation consNut Updated
+2019-11-21 19:14:52 INFO     Irrigation consH2O Updated
+2019-11-21 19:14:52 WARNING  Request updateIrrigationState was answered
+2019-11-21 19:17:18 WARNING  Sending response for request updateIrrigationState
+2019-11-21 19:17:18 WARNING  looking for error: updateIrrigationState,0,190.99,75.51,3.09,0.58
+2019-11-21 19:17:18 ERROR    Cannot Update Solution State
+2019-11-21 19:17:18 INFO     Irrigation volNut Updated
+2019-11-21 19:17:18 INFO     Irrigation volH2O Updated
+2019-11-21 19:17:18 INFO     Irrigation consNut Updated
+2019-11-21 19:17:18 INFO     Irrigation consH2O Updated
+2019-11-21 19:17:18 WARNING  Request updateIrrigationState was answered
