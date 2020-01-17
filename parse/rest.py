@@ -3,7 +3,6 @@ import json
 os.environ["PARSE_API_ROOT"] = "http://localhost:1337/parse"
 
 # Everything else same as usual
-
 from parse_rest.datatypes import Function, Object, GeoPoint
 from parse_rest.connection import register
 from parse_rest.query import QueryResourceDoesNotExist
@@ -27,9 +26,9 @@ register(APPLICATION_ID, REST_API_KEY, master_key=MASTER_KEY)
 #gameScore.save()
 
 # Example for getting all the results in system class
-class system(Object):
+class State(Object):
     pass
 
-sys = system.Query.all()
+sys = State.Query.all()
 for result in sys:
     print(result.EV4A1)

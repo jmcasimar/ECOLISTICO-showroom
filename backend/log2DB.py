@@ -12,7 +12,7 @@ from parse_rest.query import QueryResourceDoesNotExist
 from parse_rest.connection import ParseBatcher
 from parse_rest.core import ResourceRequestBadRequest, ParseError
 
-systemKeys = ["P_Nut","L1S1","L1S2","L1S3","L1S4","L2S1","L2S2","L2S3","L2S4","L3S1","L3S2","L3S3","L3S4","L4S1","L4S2","L4S3","L4S4","IN_FAN1",
+stateKeys = ["P_Nut","L1S1","L1S2","L1S3","L1S4","L2S1","L2S2","L2S3","L2S4","L3S1","L3S2","L3S3","L3S4","L4S1","L4S2","L4S3","L4S4","IN_FAN1",
 "IN_FAN2","IN_FAN3","IN_FAN4","OUT_FAN1","OUT_FAN2","OUT_FAN3","OUT_FAN4","FAN1","FAN2","FAN3","FAN4","P_H2O","P_Tank","Vol_Nut",
 "Vol_H2O","Vol1","Vol2","Vol3","Vol4","Vol5","Vol_SMaker","Vol_Recirculation","PumpIn","PumpOut","PumpSMaker","compressor","Fill_H2O",
 "EV1A1","EV1A2","EV1A3","EV1A4","EV1B1","EV1B2","EV1B3","EV1B4","EV2A1","EV2A2","EV2A3","EV2A4","EV2B1","EV2B2","EV2B3","EV2B4",
@@ -31,15 +31,16 @@ def newEntry(object, newObject, properties):
 # App Variables
 APPLICATION_ID = '123456'
 REST_API_KEY = '...'
-MASTER_KEY = None
+MASTER_KEY = '...'
 register(APPLICATION_ID, REST_API_KEY, master_key=MASTER_KEY)
 
 # File Variables
 file = r"\\192.168.1.100\log\growMaster.log"
 fSize = os.path.getsize(file)
 print(fSize)
-# Create System Class to Query and write in it
-class system(Object):
+
+# Create State Class to Query and write in it
+class State(Object):
     P_Nut = False
     L1S1 = False
     L1S2 = False
@@ -119,17 +120,18 @@ class system(Object):
     EV4B3 = False
     EV4B4 = False
     pass
-"""
-# Query the last state saved in the system
-sys = system.Query.all().order_by("createdAt", descending=True).limit(1)
-if(len(sys)==1):
-    sys = sys[0]
-    print(sys.objectId)
-    sys.P_Nut = 100
-    newSys = system()
-    newEntry(sys, newSys, systemKeys)
-sleep(1)
 
+# Query the last state saved in the State class
+st = State.Query.all().order_by("createdAt", descending=True).limit(1)
+
+if(len(st)==1):
+    st = st[0]
+    print(st.objectId)
+    #st.P_Nut = 100
+    newSt = State()
+    newEntry(st, newSt, stateKeys)
+sleep(1)
+"""
 # DEBUG
 # EXAMPLE FOR SAVING NEW OBJECT IN GameScore Class
 #class GameScore(Object):
@@ -139,7 +141,7 @@ sleep(1)
 #gameScore.cheat_mode = True
 #gameScore.level = 20
 #gameScore.save()
-"""
+
 while True:
     if(fSize < os.path.getsize(file)):
         with open(file, 'r') as infile:
@@ -162,3 +164,4 @@ while True:
         fSize = os.path.getsize(file)
     elif(fSize > os.path.getsize(file)): fSize = os.path.getsize(file)
     sleep(1)
+    """
