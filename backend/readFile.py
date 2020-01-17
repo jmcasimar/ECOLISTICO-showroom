@@ -119,7 +119,7 @@ class system(Object):
     EV4B3 = False
     EV4B4 = False
     pass
-
+"""
 # Query the last state saved in the system
 sys = system.Query.all().order_by("createdAt", descending=True).limit(1)
 if(len(sys)==1):
@@ -139,7 +139,7 @@ sleep(1)
 #gameScore.cheat_mode = True
 #gameScore.level = 20
 #gameScore.save()
-
+"""
 while True:
     if(fSize < os.path.getsize(file)):
         with open(file, 'r') as infile:
