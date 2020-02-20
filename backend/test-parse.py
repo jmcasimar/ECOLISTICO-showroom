@@ -123,6 +123,49 @@ class State(Object):
     humExt = 0
     pass
 
+# Class to manage ESP32's data
+class espObject():
+    def __init__(self):
+        # Default values
+        self.T1R = 0
+        self.T1L = 0
+        self.T2R = 0
+        self.T2L = 0
+        self.T3R = 0
+        self.T3L = 0
+        self.T4R = 0
+        self.T4L = 0
+        self.H1R = 0
+        self.H1L = 0
+        self.H2R = 0
+        self.H2L = 0
+        self.H3R = 0
+        self.H3L = 0
+        self.H4R = 0
+        self.H4L = 0
+
+    def getData(self):
+        struct = {
+            "T1R": self.T1R,
+            "T1L": self.T1L,
+            "T2R": self.T2R,
+            "T2L": self.T2L,
+            "T3R": self.T3R,
+            "T3L": self.T3L,
+            "T4R": self.T4R,
+            "T4L": self.T4L,
+            "H1R": self.H1R,
+            "H1L": self.H1L,
+            "H2R": self.H2R,
+            "H2L": self.H2L,
+            "H3R": self.H3R,
+            "H3L": self.H3L,
+            "H4R": self.H4R,
+            "H4L": self.H4L
+        }
+
+        return struct
+
 def newEntry(object, properties):
     newObject = State()
     for property in properties:
@@ -135,10 +178,14 @@ REST_API_KEY = '...'
 MASTER_KEY = '...'
 register(APPLICATION_ID, REST_API_KEY, master_key=MASTER_KEY)
 
-conf = Config.Query.all().order_by('createdAt', descending=True).limit(1)
+conf = Config.Query.filter(city='Valle de Bravo').filter(state='Edo. de Mexico').filter(locationNumber=1)
 conf = conf[0]
 print(conf.objectId)
 
+esp = espObject()
+print(esp.getData())
+print( getattr(esp, "T1R"))
+"""
 st = State.Query.all().order_by('createdAt', descending=True).limit(1)
 st = st[0]
 print(st.objectId)
@@ -146,3 +193,4 @@ if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
     setattr(st, 'system', getPointer('Config', conf.objectId))
 
 newEntry(st, stateKeys)
+"""
