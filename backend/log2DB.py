@@ -4,28 +4,15 @@ import json
 from bson import json_util
 from time import sleep
 from datetime import datetime
+import credentials as cr
 # Define path to parse app
-os.environ['PARSE_API_ROOT'] = 'http://localhost:1337/parse'
+os.environ['PARSE_API_ROOT'] = cr.db_uri
 
 from parse_rest.datatypes import Function, Object, GeoPoint
 from parse_rest.connection import register
 from parse_rest.query import QueryResourceDoesNotExist
 from parse_rest.connection import ParseBatcher
 from parse_rest.core import ResourceRequestBadRequest, ParseError
-
-# Data Structures
-configKeys = ['systemId','city','state','hardwareVersion','softwareVersion','ledConfig',
-'max_pressure','min_pressure','critical_pressure','floor1','floor2','floor3','floor4']
-
-screenKeys = ['system','mainScreen','compressor','recirculation','floor1','floor2','floor3','floor4']
-
-stateKeys = ['system','RealTime','Vol_Recirculation','Vol1','Vol2','Vol3','Vol4','Vol5','Vol_SMaker',
-'FAN1','FAN2','FAN3','FAN4','IN_FAN1','IN_FAN2','IN_FAN3','IN_FAN4','OUT_FAN1','OUT_FAN2','OUT_FAN3','OUT_FAN4',
-'L1S1','L1S2','L1S3','L1S4','L2S1','L2S2','L2S3','L2S4','L3S1','L3S2','L3S3','L3S4','L4S1','L4S2','L4S3','L4S4',
-'PumpIn','PumpOut','PumpSMaker','Fill_H2O','ESP_Front','ESP_Center','ESP_Back','Grower1','Grower2','Grower3','Grower4',
-'EV1A1','EV1A2','EV1A3','EV1A4','EV1B1','EV1B2','EV1B3','EV1B4','EV2A1','EV2A2','EV2A3','EV2A4','EV2B1','EV2B2','EV2B3','EV2B4',
-'EV3A1','EV3A2','EV3A3','EV3A4','EV3B1','EV3B2','EV3B3','EV3B4','EV4A1','EV4A2','EV4A3','EV4A4','EV4B1','EV4B2','EV4B3','EV4B4',
-'compressor','Vol_Nut','Vol_H2O','P_Nut','P_Tank','P_H2O','tempExt', 'humExt']
 
 #Create Config State to Query
 class Config(Object):
@@ -121,19 +108,70 @@ class State(Object):
     P_H2O = 0
     tempExt = 0
     humExt = 0
+    altitude = 0
     pass
 
 # Class to manage ESP32's data
 class espObject():
-    pass
+    def __init__(self):
+        # Default values
+        self.T1R = 0
+        self.T1L = 0
+        self.T2R = 0
+        self.T2L = 0
+        self.T3R = 0
+        self.T3L = 0
+        self.T4R = 0
+        self.T4L = 0
+        self.H1R = 0
+        self.H1L = 0
+        self.H2R = 0
+        self.H2L = 0
+        self.H3R = 0
+        self.H3L = 0
+        self.H4R = 0
+        self.H4L = 0
+
+    def getData(self):
+        struct = {
+            'T1R': self.T1R,
+            'T1L': self.T1L,
+            'T2R': self.T2R,
+            'T2L': self.T2L,
+            'T3R': self.T3R,
+            'T3L': self.T3L,
+            'T4R': self.T4R,
+            'T4L': self.T4L,
+            'H1R': self.H1R,
+            'H1L': self.H1L,
+            'H2R': self.H2R,
+            'H2L': self.H2L,
+            'H3R': self.H3R,
+            'H3L': self.H3L,
+            'H4R': self.H4R,
+            'H4L': self.H4L
+        }
+        return struct
 
 # Class to manage Grower's data
 class growerObject():
-    pass
+    def __init__(self):
+        # Default values
+        self.temp = 0
+        self.hum = 0
+        self.co2 = 0
+        self.x = 0
+        self.y = 0
 
-# Global Variables
-second = 0
-update = False
+    def getData(self):
+        struct = {
+            'temp': self.temp,
+            'hum': self.hum,
+            'co2': self.co2,
+            'x': self.x,
+            'y': self.y,
+        }
+        return struct
 
 # Global Functions
 # Function to save new object
@@ -146,25 +184,66 @@ def newEntry(object, properties):
 # Function to update some property in state
 def updateState(object, property, value):
     global update
-    if(getattr(object, property) != value):
+
+    if property.startswith('Grower'):
+        subObject = int(property.split(',')[0][-1]) - 1
+        subProperty = property.split(',')[1]
+        print(subProperty)
+        if getattr(growerArray[subObject], subProperty) != value:
+            update = True
+            setattr(growerArray[subObject], subProperty, value)
+            setattr(object, property.split(',')[0], growerArray[subObject].getData())
+    elif property.startswith('ESP'):
+        index = -1
+        subObject = property.split(',')[0][-1]
+        if 'Front' in subObject: index = 0
+        elif 'Center' in subObject: index = 1
+        elif 'Back' in subObject: index = 2
+        subProperty = property.split(',')[1]
+        if index != -1:
+            if getattr(espArray[index], subProperty) != value:
+                update = True
+                setattr(espArray[subObject], subProperty, value)
+                setattr(object, property.split(',')[0], espArray[subObject].getData())
+        elif: print('ESP index ERROR')
+    elif(getattr(object, property) != value):
         update = True
         setattr(object, property, value)
 
-# App Variables
-APPLICATION_ID = '123456'
-REST_API_KEY = '...'
-MASTER_KEY = '...'
-register(APPLICATION_ID, REST_API_KEY, master_key=MASTER_KEY)
+# Get pointer
+def getPointer(classes, id):
+    ptr = {
+        '__type': 'Pointer',
+        'className': classes,
+        'objectId': id
+    }
+    return ptr
+
+# Global Variables
+second = 0
+update = False
+growerArray = [growerObject(), growerObject(), growerObject(), growerObject()]
+espArray = [espObject(), espObject(), espObject(), espObject()]
+
+register(cr.APPLICATION_ID, cr.REST_API_KEY, master_key=cr.MASTER_KEY)
 
 # File Variables
-file = r'\\192.168.1.100\log\growMaster.log'
+file = cr.log_uri
 fSize = os.path.getsize(file)
 print(fSize)
+
+# Query the configuration of the system
+conf = Config.Query.filter(city=cr.cityFilter).filter(state=cr.stateFilter).filter(locationNumber=cr.numberFilter)
+conf = conf[0]
+print(conf.objectId)
 
 # Query the last state saved in the State class
 st = State.Query.all().order_by('createdAt', descending=True).limit(1)
 st = st[0]
 
+# Create a Pointer object to State Class
+if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
+    setattr(st, 'system', getPointer('Config', conf.objectId))
 """
 # DEBUG
 # Example to write in DataBase
@@ -172,7 +251,7 @@ if(len(st)==1):
     st = st[0]
     print(st.objectId)
     updateState(st, 'P_Nut', 150)
-    newEntry(st, stateKeys)
+    newEntry(st, cr.stateKeys)
 print('CUT')
 sleep(10)
 
@@ -221,6 +300,7 @@ while True:
                                         if(len(extData) == 3):
                                             updateState(st, 'tempExt', float(extData[0]))
                                             updateState(st, 'humExt', float(extData[1]))
+                                            updateState(st, 'altitude', float(extData[2]))
                             # Get relevant generalControl info
                             elif(device.startswith('generalControl')):
                                 if('Turn On' in msg): # If something turn on
@@ -268,6 +348,7 @@ while True:
                                         pressure = re.findall('\d+\.\d+', msg)[0]
                                         if('Kegs_h2o' in msg): updateState(st, 'P_H2O', float(pressure))
                                         elif('Kegs_nut' in msg): updateState(st, 'P_Nut', float(pressure))
+                                        # If compressor / airTank desire generalControl needs to print
                                     except:
                                         print('REGEX failed getting pressure')
                                 elif('liters' in msg): # Info from pressure sensors
@@ -292,6 +373,6 @@ while True:
             fSize = os.path.getsize(file)
             if(update):
                 updateState(st, 'RealTime', dateObj)
-                newEntry(st, stateKeys) # Update database
+                newEntry(st, cr.stateKeys) # Update database
         elif(fSize > os.path.getsize(file)): fSize = os.path.getsize(file)
     sleep(0.1) # Avoiding HIGH CPU usage
