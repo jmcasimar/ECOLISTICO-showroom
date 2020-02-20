@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 
 string = "T2R=13.9, H2R=99.9, T2L=13.8, H2L=90.3"

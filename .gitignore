@@ -1,2 +1,4 @@
+# All temporary folders
+**/__pycache__
 # Confidential Files
 backend/credentials.py
