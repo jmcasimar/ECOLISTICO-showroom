@@ -185,6 +185,7 @@ conf = conf[0]
 print(conf.objectId)
 
 esp = espObject()
+esp.T1R = 20
 print(esp.getData())
 print( getattr(esp, "T1R"))
 """

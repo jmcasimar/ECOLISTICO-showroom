@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/main.css">
+
+    <title>Crecimiento 02</title>
+</head>
+<body>
+
+    <div class="dataCont">
+        <div class="dataTemp">
+            <img src="./img/Medidor_Temp/Medidor_Temp_0.png" alt="Medidor Temperatura" id="medTemp">
+            <p>Temperatura: <span id="tempText">0ºC</span></p>
+        </div>
+
+        <div class="dataHum">
+            <img src="./img/Medidor_Humedad/Medidor_Humedad_0.png" alt="Medidor Humedad" id="medHum">
+            <p>Humedad: <span id="tempText">0%</span></p>
+        </div>
+
+        <div class="dataCO2">
+            <img src="./img/Medidor_CO2/Medidor_CO2_0.png" alt="Medidor CO2"  id="medCO2">
+            <p>CO2: <span id="tempText">0%</span></p>
+        </div>
+
+        <div class="dataLoc">
+            <img src="./img/placeholder.png" alt="Ubicación dentro del Contenedor">
+        </div>
+    </div>
+
+    <div class="framesCont">
+        <img src="./img/Fondo.png" alt="Fondo Sistema de Crecimiento">
+
+        <img src="./img/Ventiladores/Ventiladores_0.png" alt="Ventiladores" id="ventiladores">
+
+        <img src="./img/PlantasP2/PlantitasP2_0.png" alt="Plantas Etapa 2" id="plantas">
+
+        <img src="./img/ChorrosAgua/ChorrosAgua_0.png" alt="Riego" id="riego">
+
+        <img src="./img/FocosMorados/FocosMorados_0.png" alt="Iluminación" id="luces">
+    </div>
+
+    <div class="btnCont">
+        <button id="sistemaPlantas">Entrada de Plantas</button>
+        <button id="sistemaRiego">Prender Sistema de Riego</button>
+        <button id="sistemaLuces">Prender Sistema de Luces</button>
+        <button id="sistemaLucesOff">Apagar Sistema de Luces</button>
+        <button id="sistemaVentilacion">Prender Sistema de Ventilación</button>
+    </div>
+
+    <div class="dataBtnCont">
+        <button id="temp10">Temp 10ºC</button>
+        <button id="temp15">Temp 15ºC</button>
+        <button id="temp20">Temp 20ºC</button>
+        <button id="temp25">Temp 25ºC</button>
+        <button id="temp30">Temp 30ºC</button>
+
+        <button id="hum20">Humedad 20%</button>
+        <button id="hum40">Humedad 40%</button>
+        <button id="hum60">Humedad 60%</button>
+        <button id="hum80">Humedad 80%</button>
+        <button id="hum100">Humedad 100%</button>
+
+        <button id="co2_20">CO2 20%</button>
+        <button id="co2_40">CO2 40%</button>
+        <button id="co2_60">CO2 60%</button>
+        <button id="co2_80">CO2 80%</button>
+        <button id="co2_100">CO2 100%</button>
+    </div>
+
+    <!-- jQuery -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>
