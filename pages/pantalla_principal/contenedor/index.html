@@ -15,7 +15,7 @@
             <span class="descIcon">
                 <img src="./img/location.png" alt="Ubicación Icon">
             </span>
-            Ubicación:
+            <b>Ubicación:</b>
             <span id="loc">LOC</span>
         </p>
 
@@ -23,7 +23,7 @@
             <span class="descIcon">
                 <img src="./img/temperature.png" alt="Temperatura Icon">
             </span>
-            Temperatura:
+            <b>Temperatura:</b>
             <span id="temp">TEMP</span>
         </p>
 
@@ -31,7 +31,7 @@
             <span class="descIcon">
                 <img src="./img/humidity.png" alt="Humedad Icon">
             </span>
-            Humedad:
+            <b>Humedad:</b>
             <span id="hum">HUM</span>
         </p>
 
@@ -39,7 +39,7 @@
             <span class="descIcon">
                 <img src="./img/system.png" alt="Sistema Icon">
             </span>
-            Versión de Sistema:
+            <b>Versión de Sistema:</b>
             <span id="vos">VOS</span>
         </p>
 
@@ -47,7 +47,7 @@
             <span class="descIcon">
                 <img src="./img/software.png" alt="Software Icon">
             </span>
-            Versión de Software:
+            <b>Versión de Software:</b>
             <span id="vsw">VSW</span>
         </p>
     </div>
@@ -58,9 +58,9 @@
         <map name="contenedorEcolistico">
             <area shape="poly" coords="182,301,314,338,315,541,181,500" href="#contenedor" alt="Puerta de contenedor">
 
-            <area shape="poly" coords="401,533,395,514,387,514,387,531,379,528,381,510,373,503,376,425,376,414,388,409,403,408,418,417,428,412,441,412,450,416,456,413,449,407,448,404,445,398,449,390,461,385,465,378,476,382,480,394,484,391,484,404,488,405,488,412,483,413,488,417,489,496,483,502,476,505,478,518,467,518,467,503,462,505,456,502,452,506,448,507,445,527,438,528,432,510,427,509,425,527,419,524,418,507,412,512,408,531" href="#tanques1" alt="Tanques de alimentación">
+            <area shape="poly" coords="401,533,395,514,387,514,387,531,379,528,381,510,373,503,376,425,376,414,388,409,403,408,418,417,428,412,441,412,450,416,456,413,449,407,448,404,445,398,449,390,461,385,465,378,476,382,480,394,484,391,484,404,488,405,488,412,483,413,488,417,489,496,483,502,476,505,478,518,467,518,467,503,462,505,456,502,452,506,448,507,445,527,438,528,432,510,427,509,425,527,419,524,418,507,412,512,408,531" href="#tanques1" alt="Sistema de Compresión">
 
-            <area shape="poly" coords="528,507,529,487,507,483,502,475,503,396,508,391,519,387,538,387,553,390,561,392,565,390,566,385,570,382,578,377,591,377,600,377,605,374,614,372,624,369,635,369,663,363,670,358,679,356,689,355,699,355,704,354,710,351,717,350,726,350,738,346,746,342,752,341,759,341,765,342,771,343,776,343,782,349,785,418,791,423,790,434,798,434,799,426,804,423,809,420,820,418,834,418,843,421,851,426,856,429,856,435,844,440,830,443,814,443,801,441,792,444,791,447,663,479" href="#tanques2" alt="Tanques de almacenamiento">
+            <area shape="poly" coords="528,507,529,487,507,483,502,475,503,396,508,391,519,387,538,387,553,390,561,392,565,390,566,385,570,382,578,377,591,377,600,377,605,374,614,372,624,369,635,369,663,363,670,358,679,356,689,355,699,355,704,354,710,351,717,350,726,350,738,346,746,342,752,341,759,341,765,342,771,343,776,343,782,349,785,418,791,423,790,434,798,434,799,426,804,423,809,420,820,418,834,418,843,421,851,426,856,429,856,435,844,440,830,443,814,443,801,441,792,444,791,447,663,479" href="#tanques2" alt="Sistema de Recirculación">
         </map>
     </div>
 
@@ -68,6 +68,10 @@
         <a id="btnCorner" href="#modalPrompt" rel="modal:open">TimeLapse</a>
         <a id="btnCorner" href="#">Fotos Grower</a>
         <a id="btnCorner" href="../maps/index.html">Regresar a Mapa</a>
+    </div>
+
+    <div class="btnContainer1">
+        <a id="btnCorner" href="../login/index.html">Cerrar Sesión</a>
     </div>
 
     <!-- Modal HTML embedded directly into document -->
@@ -82,7 +86,8 @@
         </div>
     </div>
 
-    <script src="./js/main.js"></script>
+    <!-- Parse -->
+    <script src="./js/parse.min.js"></script>
 
     <!-- jQuery -->
     <script
@@ -90,6 +95,9 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous">
     </script>
+
+    <!-- Main JS -->
+    <script src="./js/main.js"></script>
 
     <!-- Image Mapping -->
     <script src="./js/jquery.rwdImageMaps.min.js"></script>
@@ -103,25 +111,5 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-    <script>
-        $(document).ready(function(e) {
-            $('img[usemap]').rwdImageMaps();
-        });
-
-        $('area').on('click', function() {
-            alert($(this).attr('alt') + ' seleccionada');
-        });
-
-        $(function() {
-            $('input[name="datetimes"]').daterangepicker({
-                timePicker: true,
-                startDate: moment().startOf('hour'),
-                endDate: moment().startOf('hour').add(32, 'hour'),
-                locale: {
-                    format: 'DD/MM/YYYY hh:mm A'
-                }
-            });
-        });
-    </script>
 </body>
 </html>

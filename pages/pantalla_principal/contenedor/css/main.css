@@ -1,5 +1,9 @@
-body {
-    background-color: #00b44f;
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #368f3f;
 }
 
 .descIcon {
@@ -14,20 +18,18 @@ body {
     padding: 0;
 }
 
-
 .infoSistema {
     position: absolute;
-    font-size: 14px;
-    padding: 20px 5%;
+    font-size: 16px;
     width: 400px;
     color: #fff;
-    left: 10%;
+    left: 5%;
 }
 
 .mapContainer {
     width: 80%;
-    margin: 50px auto;
-    padding-top: 125px;
+    margin: 0px auto;
+    padding-top: 80px;
 }
 
 .mapContainer img, .mapContainer map, .mapContainer svg {
@@ -53,12 +55,38 @@ body {
     padding: 5px 10px;
 }
 
+.btnContainer1 {
+    position: absolute;
+    right: 10%;
+    width: 200px;
+    bottom: 30px;
+}
+
+.btnContainer1 a {
+    display: block;
+    width: 60%;
+    margin: 15px auto;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    background-color: #b40000;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
 .pickerWrap input {
     border: 1px solid grey;
     padding: 5px 10px;
     margin-bottom: 25px;
     width: 350px;
     text-align: center;
+}
+
+.btnsWrap {
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 
 .modalAccept, .modalReject {
@@ -72,9 +100,9 @@ body {
 }
 
 .modalAccept {
-    background-color: #2b7ee4;
+    background-color: #82bc00;
 }
 
 .modalReject {
-    background-color: #ff5e66;
+    background-color: #3c3c3b;
 }
