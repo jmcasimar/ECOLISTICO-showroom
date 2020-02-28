@@ -2,7 +2,7 @@ Parse.initialize("123456", "...", "...");
 Parse.serverURL = 'http://localhost:1337/parse';
 
 // System ID
-sysID = "15-113-001";
+const sysID = "15-113-001";
 
 /* Definición de variables de ubicación, temperatura, humedad, systema y software */
 let locationV = '';
