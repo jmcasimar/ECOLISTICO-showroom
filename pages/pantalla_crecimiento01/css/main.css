@@ -9,17 +9,19 @@ body {
     width: 80%;
     margin: 50px auto;
     margin-top: 25px;
+    color: white;
 }
 
 .framesCont {
-    width: 80%;
+    width: 75%;
     margin: 50px auto;
+    margin-left: 0;
     margin-bottom: 0;
 }
 
-.dataTemp, .dataHum, .dataCO2, .dataLoc {
+.dataTemp, .dataHum, .dataCO2, .dataLoc, .ventilador1, .ventilador2 {
     float: left;
-    width: 25%;
+    width: 20%;
 }
 
 .dataCont div img {
@@ -35,6 +37,16 @@ body {
 }
 
 .dataLoc img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
+.dataContainer {
+    float: right;
+    width: 30%;
+}
+
+.dataContainer img {
     width: 100% !important;
     padding: 20px 5% !important;
 }
@@ -57,31 +69,39 @@ body {
 #ventiladores {
     z-index: 10;
     position: absolute;
-    left: 10.35%;
-    top: 235px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #plantas {
     z-index: 20;
     position: absolute;
-    left: 10.35%;
-    top: 235px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #riego {
     z-index: 30;
     position: absolute;
-    left: 10.35%;
-    top: 235px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #luces {
     z-index: 40;
     position: absolute;
-    left: 10.35%;
-    top: 235px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
+}
+
+#container {
+    z-index: 50;
+    position: absolute;
+    left: 73%;
+    top: 250px;
+    width: 30%;
 }

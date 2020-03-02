@@ -9,32 +9,36 @@
     <title>Crecimiento 01</title>
 </head>
 <body>
-    <div class="tittle">
+    <div id="header" class="tittle" style="visibility: hidden;">
       Germinación
     </div>
-    
-    <div class="dataCont">
+
+    <div id="medidores" class="dataCont" style="visibility: hidden;">
         <div class="dataTemp">
             <img src="./img/Medidor_Temp/Medidor_Temp_0.png" alt="Medidor Temperatura" id="medTemp">
-            <p>Temperatura: <span id="tempText">0ºC</span></p>
+            <p><span id="tempText">0 ºC</span></p>
         </div>
 
         <div class="dataHum">
             <img src="./img/Medidor_Humedad/Medidor_Humedad_0.png" alt="Medidor Humedad" id="medHum">
-            <p>Humedad: <span id="humText">0%</span></p>
+            <p><span id="humText">0 %</span></p>
         </div>
 
         <div class="dataCO2">
             <img src="./img/Medidor_CO2/Medidor_CO2_0.png" alt="Medidor CO2"  id="medCO2">
-            <p>CO2: <span id="co2Text">0%</span></p>
+            <p><span id="co2Text">0 ppm</span></p>
         </div>
-
-        <div class="dataLoc">
-            <img src="./img/placeholder.png" alt="Ubicación dentro del Contenedor">
+        <div class="ventilador1">
+            <img src="./img/Medidor_CO2/Medidor_CO2_0.png" alt="Medidor CO2"  id="medCO2">
+            <p><span id="ventilador1">Ventilador 1</span></p>
+        </div>
+        <div class="ventilador2">
+            <img src="./img/Medidor_CO2/Medidor_CO2_0.png" alt="Medidor CO2"  id="medCO2">
+            <p><span id="co2Text">Ventilador 2</span></p>
         </div>
     </div>
 
-    <div class="framesCont">
+    <div id="mainLayout" class="framesCont" style="visibility: hidden;">
         <img src="./img/Fondo.png" alt="Fondo Sistema de Crecimiento" id="img-background">
 
         <img src="./img/Ventiladores/Ventiladores_0.png" alt="Ventiladores" id="ventiladores">
@@ -44,7 +48,12 @@
         <img src="./img/ChorrosAgua/ChorrosAgua_0.png" alt="Riego" id="riego">
 
         <img src="./img/FocosMorados/FocosMorados_0.png" alt="Iluminación" id="luces">
+
+        <img src="./img/Container_Frontal.png" alt="Container" id="container">
     </div>
+
+    <!-- Parse -->
+    <script src="./js/parse.min.js"></script>
 
     <!-- jQuery -->
     <script
