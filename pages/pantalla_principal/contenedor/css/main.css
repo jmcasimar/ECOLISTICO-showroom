@@ -24,12 +24,13 @@ html, body {
     width: 400px;
     color: #fff;
     left: 5%;
+    padding-top: 10px;
 }
 
 .mapContainer {
     width: 80%;
     margin: 0px auto;
-    padding-top: 80px;
+    padding-top: 150px;
 }
 
 .mapContainer img, .mapContainer map, .mapContainer svg {

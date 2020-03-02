@@ -2,13 +2,19 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-
-    background-color: lightgray;
+    background-color: #368f3f;
 }
 
-.dataCont, .framesCont {
+.dataCont {
     width: 80%;
     margin: 50px auto;
+    margin-top: 25px;
+}
+
+.framesCont {
+    width: 80%;
+    margin: 50px auto;
+    margin-bottom: 0;
 }
 
 .dataTemp, .dataHum, .dataCO2, .dataLoc {
@@ -37,54 +43,45 @@ body {
     width: 100%;
 }
 
-.btnCont {
-    position: absolute;
-    top: 20px;
-    right: 10%;
+.tittle {
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  margin-top: 10px;
 }
 
-.dataBtnCont {
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    width: 100px;
-}
-
-.dataBtnCont button {
-    width: 100px;
-    margin: 5px 0;
-    float: left;
-    display: block;
+#img-background {
+    border: 5px solid #3c3c3b;
 }
 
 #ventiladores {
     z-index: 10;
     position: absolute;
-    left: 10%;
-    top: 210px;
+    left: 10.35%;
+    top: 235px;
     width: 80%;
 }
 
 #plantas {
     z-index: 20;
     position: absolute;
-    left: 10%;
-    top: 210px;
+    left: 10.35%;
+    top: 235px;
     width: 80%;
 }
 
 #riego {
     z-index: 30;
     position: absolute;
-    left: 10%;
-    top: 210px;
+    left: 10.35%;
+    top: 235px;
     width: 80%;
 }
 
 #luces {
     z-index: 40;
     position: absolute;
-    left: 10%;
-    top: 210px;
+    left: 10.35%;
+    top: 235px;
     width: 80%;
 }

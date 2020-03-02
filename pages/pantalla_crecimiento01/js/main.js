@@ -1,25 +1,3 @@
-// botones de acción
-const $botonPlantas = $('#sistemaPlantas');
-const $botonRiego = $('#sistemaRiego');
-const $botonLuces = $('#sistemaLuces');
-const $botonLucesOff = $('#sistemaLucesOff');
-const $botonVentiladores = $('#sistemaVentilacion');
-const $botonMedTemp10 = $('#temp10');
-const $botonMedTemp15 = $('#temp15');
-const $botonMedTemp20 = $('#temp20');
-const $botonMedTemp25 = $('#temp25');
-const $botonMedTemp30 = $('#temp30');
-const $botonMedHum20 = $('#hum20');
-const $botonMedHum40 = $('#hum40');
-const $botonMedHum60 = $('#hum60');
-const $botonMedHum80 = $('#hum80');
-const $botonMedHum100 = $('#hum100');
-const $botonMedCO2_20 = $('#co2_20');
-const $botonMedCO2_40 = $('#co2_40');
-const $botonMedCO2_60 = $('#co2_60');
-const $botonMedCO2_80 = $('#co2_80');
-const $botonMedCO2_100 = $('#co2_100');
-
 // contenedores de información
 const $textoTemp = $('#tempText');
 const $textoHum = $('#humText');
@@ -84,6 +62,10 @@ let timeWhenLastUpdateLuces;
 let timeFromLastUpdateLuces;
 let frameNumberLuces = 1;
 
+let timeWhenLastUpdateMedTemp;
+let timeFromLastUpdateMedTemp;
+let frameNumberMedTemp = 1;
+
 let timeWhenLastUpdateMedTemp10;
 let timeFromLastUpdateMedTemp10;
 let frameNumberMedTemp10 = 1;
@@ -133,11 +115,11 @@ let timeFromLastUpdateMedHum100;
 let frameNumberMedHum100 = 1;
 
 /* ANIMACION DE PLANTAS */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionPlantas(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdatePlantas) timeWhenLastUpdatePlantas = startTime;
@@ -151,7 +133,7 @@ function animacionPlantas(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $plantas.attr('src', pathPlantas + `PlantitasP1_${frameNumberPlantas}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -163,6 +145,10 @@ function animacionPlantas(startTime){
        if (frameNumberPlantas >= framesPlantas) {
            $plantas.attr('src', pathPlantas + `PlantitasP1_${frameNumberPlantas}.png`);
            return;
+       } else if (frameNumberPlantas >= framesPlantas/3) {
+         requestAnimationFrame(animacionVentiladores);
+         requestAnimationFrame(animacionRiego);
+         frameNumberPlantas = frameNumberPlantas + 1;
        } else {
            frameNumberPlantas = frameNumberPlantas + 1;
        }
@@ -171,11 +157,11 @@ function animacionPlantas(startTime){
 }
 
 /* ANIMACION VENTILADORES */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionVentiladores(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateVentiladores) timeWhenLastUpdateVentiladores = startTime;
@@ -189,7 +175,7 @@ function animacionVentiladores(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $ventiladores.attr('src', pathVentiladores + `Ventiladores_${frameNumberVentiladores}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -199,8 +185,9 @@ function animacionVentiladores(startTime){
        Incrementamos el frame o forzamos un reseteo si es el último frame
        */
        if (frameNumberVentiladores >= framesVentiladores) {
-           $ventiladores.attr('src', pathVentiladores + `Ventiladores_${frameNumberVentiladores}.png`);
-           return;
+           frameNumberVentiladores = 13;
+           //$ventiladores.attr('src', pathVentiladores + `Ventiladores_${frameNumberVentiladores}.png`);
+           //return;
        } else {
            frameNumberVentiladores = frameNumberVentiladores + 1;
        }
@@ -209,11 +196,11 @@ function animacionVentiladores(startTime){
 }
 
 /* ANIMACION LUCES */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionLuces(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateLuces) timeWhenLastUpdateLuces = startTime;
@@ -227,7 +214,7 @@ function animacionLuces(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $luces.attr('src', pathLuces + `FocosMorados_${frameNumberLuces}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -247,15 +234,15 @@ function animacionLuces(startTime){
 }
 
 /* ANIMACION RIEGO */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionRiego(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateRiego) timeWhenLastUpdateRiego = startTime;
@@ -269,7 +256,7 @@ function animacionRiego(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $riego.attr('src', pathRiego + `ChorrosAgua_${frameNumberRiego}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -289,15 +276,15 @@ function animacionRiego(startTime){
 }
 
 /* ANIMACION Medidor CO2 20% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionCO2_20(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedCO2_20) timeWhenLastUpdateMedCO2_20 = startTime;
@@ -311,7 +298,7 @@ function animacionCO2_20(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medCO2.attr('src', pathMedCO2 + `Medidor_CO2_${frameNumberMedCO2_20}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -331,15 +318,15 @@ function animacionCO2_20(startTime){
 }
 
 /* ANIMACION Medidor CO2 40% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionCO2_40(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedCO2_40) timeWhenLastUpdateMedCO2_40 = startTime;
@@ -353,7 +340,7 @@ function animacionCO2_40(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medCO2.attr('src', pathMedCO2 + `Medidor_CO2_${frameNumberMedCO2_40}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -373,15 +360,15 @@ function animacionCO2_40(startTime){
 }
 
 /* ANIMACION Medidor CO2 60% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionCO2_60(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedCO2_60) timeWhenLastUpdateMedCO2_60 = startTime;
@@ -395,7 +382,7 @@ function animacionCO2_60(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medCO2.attr('src', pathMedCO2 + `Medidor_CO2_${frameNumberMedCO2_60}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -415,15 +402,15 @@ function animacionCO2_60(startTime){
 }
 
 /* ANIMACION Medidor CO2 80% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionCO2_80(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedCO2_80) timeWhenLastUpdateMedCO2_80 = startTime;
@@ -437,7 +424,7 @@ function animacionCO2_80(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medCO2.attr('src', pathMedCO2 + `Medidor_CO2_${frameNumberMedCO2_80}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -457,15 +444,15 @@ function animacionCO2_80(startTime){
 }
 
 /* ANIMACION Medidor CO2 100% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionCO2_100(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedCO2_100) timeWhenLastUpdateMedCO2_100 = startTime;
@@ -479,7 +466,7 @@ function animacionCO2_100(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medCO2.attr('src', pathMedCO2 + `Medidor_CO2_${frameNumberMedCO2_100}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -499,15 +486,15 @@ function animacionCO2_100(startTime){
 }
 
 /* ANIMACION Medidor Humedad 20% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionHumedad20(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedHum20) timeWhenLastUpdateMedHum20 = startTime;
@@ -521,7 +508,7 @@ function animacionHumedad20(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medHum.attr('src', pathMedHum + `Medidor_Humedad_${frameNumberMedHum20}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -541,15 +528,15 @@ function animacionHumedad20(startTime){
 }
 
 /* ANIMACION Medidor Humedad 40% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionHumedad40(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedHum40) timeWhenLastUpdateMedHum40 = startTime;
@@ -563,7 +550,7 @@ function animacionHumedad40(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medHum.attr('src', pathMedHum + `Medidor_Humedad_${frameNumberMedHum40}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -583,15 +570,15 @@ function animacionHumedad40(startTime){
 }
 
 /* ANIMACION Medidor Humedad 60% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionHumedad60(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedHum60) timeWhenLastUpdateMedHum60 = startTime;
@@ -605,7 +592,7 @@ function animacionHumedad60(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medHum.attr('src', pathMedHum + `Medidor_Humedad_${frameNumberMedHum60}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -625,15 +612,15 @@ function animacionHumedad60(startTime){
 }
 
 /* ANIMACION Medidor Humedad 80% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionHumedad80(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedHum80) timeWhenLastUpdateMedHum80 = startTime;
@@ -647,7 +634,7 @@ function animacionHumedad80(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medHum.attr('src', pathMedHum + `Medidor_Humedad_${frameNumberMedHum80}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -667,15 +654,15 @@ function animacionHumedad80(startTime){
 }
 
 /* ANIMACION Medidor Humedad 100% */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionHumedad100(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedHum100) timeWhenLastUpdateMedHum100 = startTime;
@@ -689,7 +676,7 @@ function animacionHumedad100(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medHum.attr('src', pathMedHum + `Medidor_Humedad_${frameNumberMedHum100}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -709,15 +696,15 @@ function animacionHumedad100(startTime){
 }
 
 /* ANIMACION Medidor Temperatura 10 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionTemperatura10(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedTemp10) timeWhenLastUpdateMedTemp10 = startTime;
@@ -731,7 +718,7 @@ function animacionTemperatura10(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medTemp.attr('src', pathMedTemp + `Medidor_Temp_${frameNumberMedTemp10}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -751,15 +738,15 @@ function animacionTemperatura10(startTime){
 }
 
 /* ANIMACION Medidor Temperatura 15 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionTemperatura15(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedTemp15) timeWhenLastUpdateMedTemp15 = startTime;
@@ -773,7 +760,7 @@ function animacionTemperatura15(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medTemp.attr('src', pathMedTemp + `Medidor_Temp_${frameNumberMedTemp15}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -793,15 +780,15 @@ function animacionTemperatura15(startTime){
 }
 
 /* ANIMACION Medidor Temperatura 20 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionTemperatura20(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedTemp20) timeWhenLastUpdateMedTemp20 = startTime;
@@ -815,7 +802,7 @@ function animacionTemperatura20(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medTemp.attr('src', pathMedTemp + `Medidor_Temp_${frameNumberMedTemp20}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -835,15 +822,15 @@ function animacionTemperatura20(startTime){
 }
 
 /* ANIMACION Medidor Temperatura 25 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionTemperatura25(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedTemp25) timeWhenLastUpdateMedTemp25 = startTime;
@@ -857,7 +844,7 @@ function animacionTemperatura25(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medTemp.attr('src', pathMedTemp + `Medidor_Temp_${frameNumberMedTemp25}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -877,15 +864,15 @@ function animacionTemperatura25(startTime){
 }
 
 /* ANIMACION Medidor Temperatura 30 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionTemperatura30(startTime){
     /*
     Empezaremos reseteando el tiempo en caso de no ser la primera vez que se lanza la animación
     */
-    
-    /* 
+
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateMedTemp30) timeWhenLastUpdateMedTemp30 = startTime;
@@ -899,7 +886,7 @@ function animacionTemperatura30(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $medTemp.attr('src', pathMedTemp + `Medidor_Temp_${frameNumberMedTemp30}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -1090,3 +1077,6 @@ $(window).on('load', () => {
     });
 
 });
+
+requestAnimationFrame(animacionPlantas);
+requestAnimationFrame(animacionLuces);

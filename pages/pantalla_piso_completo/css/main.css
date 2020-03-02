@@ -1,0 +1,222 @@
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    /*background-color: #3c3c3b;*/
+    /*background-color: #d5d5d5;*/
+    background-color: #a0a09e;
+}
+
+.dataCont, .framesCont {
+    width: 80%;
+    margin: 50px auto;
+    color: white;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.dataTemp, .dataHum, .dataCO2, .dataLoc {
+    float: left;
+    width: 25%;
+}
+
+.dataCont div img {
+    width: 40%;
+    float: left;
+    padding: 20px 5%;
+}
+
+.dataCont div p {
+    width: 40%;
+    float: left;
+    padding: 20px 5%;
+}
+
+.dataLoc img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
+.framesCont img {
+    width: 100%;
+}
+
+.framesCont1 img {
+    width: 100%;
+}
+
+.btnCont {
+    position: absolute;
+    top: 10px;
+    right: 10%;
+}
+
+.dataBtnCont {
+    position: absolute;
+    top: 35px;
+    right: 10%;
+}
+
+.scaled {
+  transform: scale(0.75);
+}
+
+#fondo1 {
+    z-index: 0;
+    position: absolute;
+    left: -75%;
+    width: 80%;
+}
+
+#ventiladores1 {
+    z-index: 10;
+    position: absolute;
+    left: -75%;
+    top: 5px;
+    width: 80%;
+}
+
+#plantas1 {
+    z-index: 20;
+    position: absolute;
+    left: -75%;
+    top: 5px;
+    width: 80%;
+}
+
+#riego1 {
+    z-index: 30;
+    position: absolute;
+    left: -75%;
+    top: 5px;
+    width: 80%;
+}
+
+#luces1 {
+    z-index: 40;
+    position: absolute;
+    left: -75%;
+    top: 5px;
+    width: 80%;
+}
+
+#fondo2 {
+    z-index: 0;
+    position: absolute;
+    left: 5%;
+    width: 80%;
+}
+
+#ventiladores2 {
+    z-index: 10;
+    position: absolute;
+    left: 5%;
+    top: 5px;
+    width: 80%;
+}
+
+#plantas2 {
+    z-index: 20;
+    position: absolute;
+    left: 5%;
+    top: 5px;
+    width: 80%;
+}
+
+#riego2 {
+    z-index: 30;
+    position: absolute;
+    left: 5%;
+    top: 5px;
+    width: 80%;
+}
+
+#luces2 {
+    z-index: 40;
+    position: absolute;
+    left: 5%;
+    top: 5px;
+    width: 80%;
+}
+
+#fondo3 {
+    z-index: 0;
+    position: absolute;
+    left: 85%;
+    width: 80%;
+}
+
+#ventiladores3 {
+    z-index: 10;
+    position: absolute;
+    left: 85%;
+    top: 5px;
+    width: 80%;
+}
+
+#plantas3 {
+    z-index: 20;
+    position: absolute;
+    left: 85%;
+    top: 5px;
+    width: 80%;
+}
+
+#riego3 {
+    z-index: 30;
+    position: absolute;
+    left: 85%;
+    top: 5px;
+    width: 80%;
+}
+
+#luces3 {
+    z-index: 40;
+    position: absolute;
+    left: 85%;
+    top: 5px;
+    width: 80%;
+}
+
+#fondo4 {
+    z-index: 0;
+    position: absolute;
+    left: 165%;
+    width: 80%;
+}
+
+#ventiladores4 {
+    z-index: 10;
+    position: absolute;
+    left: 165%;
+    top: 5px;
+    width: 80%;
+}
+
+#plantas4 {
+    z-index: 20;
+    position: absolute;
+    left: 165%;
+    top: 5px;
+    width: 80%;
+}
+
+#riego4 {
+    z-index: 30;
+    position: absolute;
+    left: 165%;
+    top: 5px;
+    width: 80%;
+}
+
+#luces4 {
+    z-index: 40;
+    position: absolute;
+    left: 165%;
+    top: 5px;
+    width: 80%;
+}
