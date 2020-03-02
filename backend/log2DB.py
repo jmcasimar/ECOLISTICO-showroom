@@ -242,6 +242,8 @@ def getPointer(classes, id):
 # Global Variables
 second = 0
 update = False
+updateValve = False
+updateTime = ''
 growerArray = [growerObject(), growerObject(), growerObject(), growerObject()]
 espArray = [espObject(), espObject(), espObject()]
 
@@ -347,114 +349,139 @@ while True:
             except Exception as e: log.logger.error("Cannot connect with MQTT Broker [{}]".format(e))
 
     # Check for updates in log
-    if(second!=now.second and now.second%2==0):
-        second = now.second
-        if(fSize < os.path.getsize(file)):
-            update = False
-            try:
-                with open(file, 'r') as infile:
-                    infile.seek(fSize, 0)
-                    for line in infile:
-                        # Let ony useful lines
-                        if line[-1] == '\n': line = line[:-1]
-                        if line != '':
-                            # Here is where I have to decode te lines and parse to database
-                            if len(line)>45:
-                                dateString = line[0:19]
-                                dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
-                                device = line[20:36].strip(' ')
-                                level = line[36:45].strip(' ')
-                                msg = line[45:]
-                                # Get relevant master info
-                                if(device.startswith('master')):
-                                    if('C' in msg and '%RH' in msg and 'm' in msg):
-                                            extData = re.findall('\d+\.\d+', msg)
-                                            if(len(extData) == 3):
-                                                updateState(st, 'tempExt', float(extData[0]))
-                                                updateState(st, 'humExt', float(extData[1]))
-                                                updateState(st, 'altitude', float(extData[2]))
-                                # Get relevant generalControl info
-                                elif(device.startswith('generalControl')):
-                                    if('Turn On' in msg): # If something turn on
-                                        # Check if it was an irrigation solenoid
-                                        ev = re.findall('[1-4][(A-B)][1-4]', msg)
-                                        inFan = re.findall('Input Fan-[1-4]', msg)
-                                        outFan = re.findall('Output Fan-[1-4]', msg)
-                                        fan = re.findall('Vent Fan-[1-4]', msg)
-                                        led = re.findall('[L][(1-4)][S][1-4]', msg)
-                                        #hum = re.findall('Hum Valve-[1-4]', msg)
-                                        if(len(ev) == 1 ): updateState(st, 'EV{}'.format(ev[0]), True)
-                                        # Check input fans
-                                        elif(len(inFan) == 1 ): updateState(st, 'IN_FAN{}'.format(inFan[0][-1]), True)
-                                        # Check output fans
-                                        elif(len(outFan) == 1 ): updateState(st, 'OUT_FAN{}'.format(outFan[0][-1]), True)
-                                        # Check ventilation fans
-                                        elif(len(fan) == 1 ): updateState(st, 'FAN{}'.format(fan[0][-1]), True)
-                                        # Check LED's
-                                        elif(len(led) == 1 ): updateState(st, '{}'.format(led[0]), True)
-                                        # Check humidty valves
-                                        #elif(len(hum) == 1 ): updateState(st, 'HUM{}'.format(hum[0][-1]), True)
+    if(fSize < os.path.getsize(file)):
+        update = False
+        try:
+            with open(file, 'r') as infile:
+                infile.seek(fSize, 0)
+                for line in infile:
+                    # Let ony useful lines
+                    if line[-1] == '\n': line = line[:-1]
+                    if line != '':
+                        if (updateTime != line[0:19]):
+                            updateTime = line[0:19]
+                            for i in range(3):
+                                if espArray[i].update:
+                                    espArray[i].update = False
+                                    if i==0: st.ESP_Front = espArray[i].getData()
+                                    elif i==1: st.ESP_Center = espArray[i].getData()
+                                    elif i==2: st.ESP_Back = espArray[i].getData()
+                                    if not update: update = True
+                            for i in range(4):
+                                if growerArray[i].update:
+                                    growerArray[i].update = False
+                                    if i==0: st.Grower1 = growerArray[i].getData()
+                                    elif i==1: st.Grower2 = growerArray[i].getData()
+                                    elif i==2: st.Grower3 = growerArray[i].getData()
+                                    elif i==3: st.Grower4 = growerArray[i].getData()
+                                    if not update: update = True
+                            if(update and updateValve):
+                                updateValve = False
+                                updateState(st, 'RealTime', dateObj)
+                                newEntry(st, cr.stateKeys) # Update database
+                                print("DB UPDATED")
+                        # Here is where I have to decode te lines and parse to database
+                        if len(line)>45:
+                            dateString = line[0:19]
+                            dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
+                            device = line[20:36].strip(' ')
+                            level = line[36:45].strip(' ')
+                            msg = line[45:]
+                            # Get relevant master info
+                            if(device.startswith('master')):
+                                if('C' in msg and '%RH' in msg and 'm' in msg):
+                                        extData = re.findall('\d+\.\d+', msg)
+                                        if(len(extData) == 3):
+                                            updateState(st, 'tempExt', float(extData[0]))
+                                            updateState(st, 'humExt', float(extData[1]))
+                                            updateState(st, 'altitude', float(extData[2]))
+                            # Get relevant generalControl info
+                            elif(device.startswith('generalControl')):
+                                if('Turn On' in msg): # If something turn on
+                                    # Check if it was an irrigation solenoid
+                                    ev = re.findall('[1-4][(A-B)][1-4]', msg)
+                                    inFan = re.findall('Input Fan-[1-4]', msg)
+                                    outFan = re.findall('Output Fan-[1-4]', msg)
+                                    fan = re.findall('Vent Fan-[1-4]', msg)
+                                    led = re.findall('[L][(1-4)][S][1-4]', msg)
+                                    #hum = re.findall('Hum Valve-[1-4]', msg)
+                                    if(len(ev) == 1 ):
+                                        updateValve = True
+                                        updateState(st, 'EV{}'.format(ev[0]), True)
+                                    # Check input fans
+                                    elif(len(inFan) == 1 ): updateState(st, 'IN_FAN{}'.format(inFan[0][-1]), True)
+                                    # Check output fans
+                                    elif(len(outFan) == 1 ): updateState(st, 'OUT_FAN{}'.format(outFan[0][-1]), True)
+                                    # Check ventilation fans
+                                    elif(len(fan) == 1 ): updateState(st, 'FAN{}'.format(fan[0][-1]), True)
+                                    # Check LED's
+                                    elif(len(led) == 1 ): updateState(st, '{}'.format(led[0]), True)
+                                    # Check humidty valves
+                                    #elif(len(hum) == 1 ): updateState(st, 'HUM{}'.format(hum[0][-1]), True)
 
-                                    elif('Turn Off' in msg): # If something turn off
-                                        # Check if it was an irrigation solenoid
-                                        ev = re.findall('[1-4][(A-B)][1-4]', msg)
-                                        inFan = re.findall('Input Fan-[1-4]', msg)
-                                        outFan = re.findall('Output Fan-[1-4]', msg)
-                                        fan = re.findall('Vent Fan-[1-4]', msg)
-                                        led = re.findall('[L][(1-4)][S][1-4]', msg)
-                                        #hum = re.findall('Hum Valve-[1-4]', msg)
-                                        if(len(ev) == 1 ): updateState(st, 'EV{}'.format(ev[0]), False)
-                                        # Check input fans
-                                        elif(len(inFan) == 1 ): updateState(st, 'IN_FAN{}'.format(inFan[0][-1]), False)
-                                        # Check output fans
-                                        elif(len(outFan) == 1 ): updateState(st, 'OUT_FAN{}'.format(outFan[0][-1]), False)
-                                        # Check ventilation fans
-                                        elif(len(fan) == 1 ): updateState(st, 'FAN{}'.format(fan[0][-1]), False)
-                                        # Check LED's
-                                        elif(len(led) == 1 ): updateState(st, '{}'.format(led[0]), False)
-                                        # Check humidty valves
-                                        #elif(len(hum) == 1 ): updateState(st, 'HUM{}'.format(hum[0][-1]), False)
+                                elif('Turn Off' in msg): # If something turn off
+                                    # Check if it was an irrigation solenoid
+                                    ev = re.findall('[1-4][(A-B)][1-4]', msg)
+                                    inFan = re.findall('Input Fan-[1-4]', msg)
+                                    outFan = re.findall('Output Fan-[1-4]', msg)
+                                    fan = re.findall('Vent Fan-[1-4]', msg)
+                                    led = re.findall('[L][(1-4)][S][1-4]', msg)
+                                    #hum = re.findall('Hum Valve-[1-4]', msg)
+                                    if(len(ev) == 1 ):
+                                        updateValve = True
+                                        updateState(st, 'EV{}'.format(ev[0]), False)
+                                    # Check input fans
+                                    elif(len(inFan) == 1 ): updateState(st, 'IN_FAN{}'.format(inFan[0][-1]), False)
+                                    # Check output fans
+                                    elif(len(outFan) == 1 ): updateState(st, 'OUT_FAN{}'.format(outFan[0][-1]), False)
+                                    # Check ventilation fans
+                                    elif(len(fan) == 1 ): updateState(st, 'FAN{}'.format(fan[0][-1]), False)
+                                    # Check LED's
+                                    elif(len(led) == 1 ): updateState(st, '{}'.format(led[0]), False)
+                                    # Check humidty valves
+                                    #elif(len(hum) == 1 ): updateState(st, 'HUM{}'.format(hum[0][-1]), False)
 
-                                    elif('psi' in msg): # Info from pressure sensors
-                                        try:
-                                            pressure = re.findall('\d+\.\d+', msg)[0]
-                                            if('Kegs_h2o' in msg): updateState(st, 'P_H2O', float(pressure))
-                                            elif('Kegs_nut' in msg): updateState(st, 'P_Nut', float(pressure))
-                                            # If compressor / airTank desire generalControl needs to print
-                                        except:
-                                            print('REGEX failed getting pressure')
-                                    elif('liters' in msg): # Info from pressure sensors
-                                        liters = re.findall('\d+\.\d+', msg)[0]
-                                        #print('liters', liters)
-                                #elif(device.startswith('motorsGrower')): print('motorsGrower')
-                                #elif(device.startswith('solutionMaker')): print('solutionMaker')
-                                elif(device.startswith('esp')):
-                                    espData = re.findall('[TH][1-4][RL]', msg)
-                                    if(len(espData)==4): completeEspData(msg, device)
-                                elif(device.startswith('grower')): completeGrowerData(msg, device)
+                                elif('psi' in msg): # Info from pressure sensors
+                                    try:
+                                        pressure = re.findall('\d+\.\d+', msg)[0]
+                                        if('Kegs_h2o' in msg): updateState(st, 'P_H2O', float(pressure))
+                                        elif('Kegs_nut' in msg): updateState(st, 'P_Nut', float(pressure))
+                                        # If compressor / airTank desire generalControl needs to print
+                                    except:
+                                        print('REGEX failed getting pressure')
+                                elif('liters' in msg): # Info from pressure sensors
+                                    liters = re.findall('\d+\.\d+', msg)[0]
+                                    #print('liters', liters)
+                            #elif(device.startswith('motorsGrower')): print('motorsGrower')
+                            #elif(device.startswith('solutionMaker')): print('solutionMaker')
+                            elif(device.startswith('esp')):
+                                espData = re.findall('[TH][1-4][RL]', msg)
+                                if(len(espData)==4): completeEspData(msg, device)
+                            elif(device.startswith('grower')): completeGrowerData(msg, device)
 
-                            # To Debug
-                            #print(line)
-                fSize = os.path.getsize(file)
-                for i in range(3):
-                    if espArray[i].update:
-                        espArray[i].update = False
-                        if i==0: st.ESP_Front = espArray[i].getData()
-                        elif i==1: st.ESP_Center = espArray[i].getData()
-                        elif i==2: st.ESP_Back = espArray[i].getData()
-                        if not update: update = True
-                for i in range(4):
-                    if growerArray[i].update:
-                        growerArray[i].update = False
-                        if i==0: st.Grower1 = growerArray[i].getData()
-                        elif i==1: st.Grower2 = growerArray[i].getData()
-                        elif i==2: st.Grower3 = growerArray[i].getData()
-                        elif i==3: st.Grower4 = growerArray[i].getData()
-                        if not update: update = True
-                if(update):
-                    updateState(st, 'RealTime', dateObj)
-                    newEntry(st, cr.stateKeys) # Update database
-                    print("DB UPDATED")
-            except Exception as e: print(e)
-        elif(fSize > os.path.getsize(file)): fSize = os.path.getsize(file)
+                        # To Debug
+                        #print(line)
+            fSize = os.path.getsize(file)
+            for i in range(3):
+                if espArray[i].update:
+                    espArray[i].update = False
+                    if i==0: st.ESP_Front = espArray[i].getData()
+                    elif i==1: st.ESP_Center = espArray[i].getData()
+                    elif i==2: st.ESP_Back = espArray[i].getData()
+                    if not update: update = True
+            for i in range(4):
+                if growerArray[i].update:
+                    growerArray[i].update = False
+                    if i==0: st.Grower1 = growerArray[i].getData()
+                    elif i==1: st.Grower2 = growerArray[i].getData()
+                    elif i==2: st.Grower3 = growerArray[i].getData()
+                    elif i==3: st.Grower4 = growerArray[i].getData()
+                    if not update: update = True
+            if(update):
+                if updateValve: updateValve = False
+                updateState(st, 'RealTime', dateObj)
+                newEntry(st, cr.stateKeys) # Update database
+                print("DB UPDATED")
+        except Exception as e: print(e)
+    elif(fSize > os.path.getsize(file)): fSize = os.path.getsize(file)
     sleep(0.1) # Avoiding HIGH CPU usage
