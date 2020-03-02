@@ -42,7 +42,7 @@ const framesMedCO2_100 = 120;
 
 const timePerFrameVentiladores = 42;
 const timePerFramePlantas = 42;
-const timePerFrameRiego = 42;
+const timePerFrameRiego = 21;
 const timePerFrameLuces = 42;
 const timePerFrameMedidores = 42;
 

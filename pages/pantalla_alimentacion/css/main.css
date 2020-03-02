@@ -1,0 +1,22 @@
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    background-color: lightgray;
+}
+
+.framesCont {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.framesCont img {
+    width: 100%;
+}
+
+.btnCont {
+    position: absolute;
+    top: 20px;
+    right: 10%;
+}
