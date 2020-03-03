@@ -2,18 +2,27 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-
-    background-color: lightgray;
+    background-color: #368f3f;
 }
 
-.dataCont, .framesCont {
+.dataCont {
     width: 80%;
     margin: 50px auto;
+    margin-top: 25px;
+    color: white;
+    font-size: 20px;
 }
 
-.dataTemp, .dataHum, .dataCO2, .dataLoc {
+.framesCont {
+    width: 75%;
+    margin: 50px auto;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.dataTemp, .dataHum, .dataCO2, .dataLoc, .ventilador1, .ventilador2 {
     float: left;
-    width: 25%;
+    width: 20%;
 }
 
 .dataCont div img {
@@ -33,58 +42,67 @@ body {
     padding: 20px 5% !important;
 }
 
+.dataContainer {
+    float: right;
+    width: 30%;
+}
+
+.dataContainer img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
 .framesCont img {
     width: 100%;
 }
 
-.btnCont {
-    position: absolute;
-    top: 20px;
-    right: 10%;
+.tittle {
+  text-align: center;
+  font-size: 40px;
+  color: white;
+  margin-top: 10px;
 }
 
-.dataBtnCont {
-    position: absolute;
-    top: 20px;
-    left: 10px;
-    width: 100px;
-}
-
-.dataBtnCont button {
-    width: 100px;
-    margin: 5px 0;
-    float: left;
-    display: block;
+#img-background {
+    border: 5px solid #3c3c3b;
 }
 
 #ventiladores {
     z-index: 10;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #plantas {
     z-index: 20;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #riego {
     z-index: 30;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
 }
 
 #luces {
     z-index: 40;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.35%;
+    top: 220px;
+    width: 75%;
+}
+
+#container {
+    z-index: 50;
+    position: absolute;
+    left: 73%;
+    top: 250px;
+    width: 30%;
 }
