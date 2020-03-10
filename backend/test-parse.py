@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 # Define path to parse app
-os.environ["PARSE_API_ROOT"] = "http://localhost:1337/parse"
+os.environ["PARSE_API_ROOT"] = "http://192.168.1.84:1337/parse"
 
 from parse_rest.datatypes import Function, Object, GeoPoint
 from parse_rest.connection import register
