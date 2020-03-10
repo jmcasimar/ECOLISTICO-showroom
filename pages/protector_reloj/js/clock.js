@@ -4,11 +4,7 @@ Parse.serverURL = 'http://localhost:1337/parse';
 // System ID
 const sysID = "15-113-001";
 
-// Manecillas del reloj
-const secondHand = document.querySelector('.second-hand');
-const minsHand = document.querySelector('.min-hand');
-const hourHand = document.querySelector('.hour-hand');
-
+// Asignación variables mongoDB-Parse
 var Config = Parse.Object.extend("Config");
 var query = new Parse.Query(Config);
 let configId = '';
@@ -16,6 +12,25 @@ let configId = '';
 var Screen = Parse.Object.extend("Screens");
 var scr = new Screen();
 
+// contenedores de sprites
+const $growy = $('#Growy');
+
+// Manecillas del reloj
+const secondHand = document.querySelector('.second-hand');
+const minsHand = document.querySelector('.min-hand');
+const hourHand = document.querySelector('.hour-hand');
+
+// Total Frames
+const framesGrowy = 1865;
+const timePerFrameGrowy = 42;
+let frameNumberGrowy = 0;
+
+// Timers
+let timeWhenLastUpdateGrowy;
+let timeFromLastUpdateGrowy;
+
+
+/*
 query.equalTo('systemId', sysID);
 query.descending('createdAt');
 query.limit(1);
@@ -41,7 +56,7 @@ let subscription = liveScreens.subscribe().then( (sub) => {
 }, (error) => {
   console.log(error);
 });
-
+*/
 function setDate() {
   var seconds = 0;
   var mins = 0;
@@ -74,6 +89,41 @@ function setDate() {
   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 }
 
-setInterval(setDate, 1000);
+/* ANIMACION LUCES */
+function animacionGrowy(startTime){
+   if (!timeWhenLastUpdateGrowy) timeWhenLastUpdateGrowy = startTime;
+   timeFromLastUpdateGrowy = startTime - timeWhenLastUpdateGrowy;
 
-setDate();
+   if (timeFromLastUpdateGrowy > timePerFrameGrowy) {
+     console.log(frameNumberGrowy);
+     let imageUrl = '';
+       if (frameNumberGrowy<10){
+         imageUrl = `./img/Growy/Growy_0000${frameNumberGrowy}.png`;
+       } else if (frameNumberGrowy<100) {
+         imageUrl = `./img/Growy/Growy_000${frameNumberGrowy}.png`;
+       } else if (frameNumberGrowy<1000) {
+         imageUrl = `./img/Growy/Growy_00${frameNumberGrowy}.png`;
+       } else if (frameNumberGrowy<10000) {
+         imageUrl = `./img/Growy/Growy_0${frameNumberGrowy}.png`;
+       } else {
+         imageUrl = `./img/Growy/Growy_${frameNumberGrowy}.png`;
+       }
+       //$growy.css('background-image', 'url(' + imageUrl + ')');
+       $growy.attr('src', imageUrl);
+       timeWhenLastUpdateGrowy = startTime;
+
+       if (frameNumberGrowy >= framesGrowy) {
+           //$growy.css('background-image', `url(./img/Growy/Growy_0${frameNumberGrowy}.png)`);
+           $growy.attr('src', './img/Growy/Growy_0${frameNumberGrowy}.png');
+           return;
+       } else {
+           frameNumberGrowy = frameNumberGrowy + 1;
+       }
+   }
+   requestAnimationFrame(animacionGrowy);
+}
+
+//setInterval(setDate, 1000);
+
+//setDate();
+animacionGrowy();

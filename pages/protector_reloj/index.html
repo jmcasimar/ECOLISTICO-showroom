@@ -9,16 +9,25 @@
     <title>Protector de Pantalla Reloj</title>
 </head>
 <body>
-    <div class="clock">
+    <div class="clock" style="visibility: hidden;">
         <div class="clock-face">
             <div class="hand hour-hand"></div>
             <div class="hand min-hand"></div>
             <div class="hand second-hand"></div>
         </div>
     </div>
+    <div class="GrowyAnimated">
+      <img src="./img/Growy/Growy_00000.png" alt="Growy" id="Growy">
+    </div>
 
     <!-- Parse -->
     <script src="./js/parse.min.js"></script>
+    <!-- jQuery -->
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+    </script>
     <!-- Clock -->
     <script src="./js/clock.js"></script>
 </body>

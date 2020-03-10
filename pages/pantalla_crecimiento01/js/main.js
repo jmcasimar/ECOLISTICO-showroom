@@ -26,6 +26,14 @@ const $luces = $('#luces');
 const $medTemp = $('#medTemp');
 const $medHum = $('#medHum');
 const $medCO2 = $('#medCO2');
+const $Rec1 = $('#Rec1');
+const $Rec2 = $('#Rec2');
+const $Rec3 = $('#Rec3');
+const $Rec4 = $('#Rec4');
+const $Rec5 = $('#Rec5');
+const $Rec6 = $('#Rec6');
+const $Rec7 = $('#Rec7');
+const $Rec8 = $('#Rec8');
 
 // Path to img
 const pathVentiladores = './img/Ventiladores/';
@@ -35,6 +43,7 @@ const pathLuces = './img/FocosMorados/';
 const pathMedTemp = './img/Medidor_Temp/';
 const pathMedHum = './img/Medidor_Humedad/';
 const pathMedCO2 = './img/Medidor_CO2/';
+const pathRectangulos = './img/Rectangulos/Rectangulo';
 
 // Total Frames
 const framesVentiladores = 120;
@@ -44,6 +53,7 @@ const framesLuces = 336;
 const totalFramesMedTemp = 120;
 const totalFramesMedHum = 120;
 const totalFramesMedCO2 = 120;
+const totalFramesRectangulo = 48;
 
 // Animation velocity
 const timePerFrameVentiladores = 42;
@@ -51,11 +61,20 @@ const timePerFramePlantas = 42;
 const timePerFrameRiego = 21;
 const timePerFrameLuces = 42;
 const timePerFrameMedidores = 42;
+const timePerFrameRectangulo = 42;
 
 // Actual Frames
 let framesMedTemp = 1;
 let framesMedHum = 1;
 let framesMedCO2 = 1;
+let framesRec1 = 0;
+let framesRec2 = 0;
+let framesRec3 = 0;
+let framesRec4 = 0;
+let framesRec5 = 0;
+let framesRec6 = 0;
+let framesRec7 = 0;
+let framesRec8 = 0;
 let frameNumberVentiladores = 1;
 let frameNumberPlantas = 1;
 let frameNumberRiego = 1;
@@ -63,6 +82,14 @@ let frameNumberLuces = 1;
 let frameNumberMedTemp = 1;
 let frameNumberMedHum = 1;
 let frameNumberMedCO2 = 1;
+let frameNumberRec1 = 0;
+let frameNumberRec2 = 0;
+let frameNumberRec3 = 0;
+let frameNumberRec4 = 0;
+let frameNumberRec5 = 0;
+let frameNumberRec6 = 0;
+let frameNumberRec7 = 0;
+let frameNumberRec8 = 0;
 
 // Timers
 let timeWhenLastUpdateVentiladores;
@@ -86,11 +113,36 @@ let timeFromLastUpdateMedHum;
 let timeWhenLastUpdateMedCO2;
 let timeFromLastUpdateMedCO2;
 
+let timeWhenLastUpdateRec1;
+let timeFromLastUpdateRec1;
+let timeWhenLastUpdateRec2;
+let timeFromLastUpdateRec2;
+let timeWhenLastUpdateRec3;
+let timeFromLastUpdateRec3;
+let timeWhenLastUpdateRec4;
+let timeFromLastUpdateRec4;
+let timeWhenLastUpdateRec5;
+let timeFromLastUpdateRec5;
+let timeWhenLastUpdateRec6;
+let timeFromLastUpdateRec6;
+let timeWhenLastUpdateRec7;
+let timeFromLastUpdateRec7;
+let timeWhenLastUpdateRec8;
+let timeFromLastUpdateRec8;
+
 // Aux variables
 let runVentiladores = true;
 let actualTemp = 0;
 let actualHum = 0;
 let actualCO2 = 0;
+let colorRec1 = 'gray';
+let colorRec2 = 'gray';
+let colorRec3 = 'gray';
+let colorRec4 = 'gray';
+let colorRec5 = 'gray';
+let colorRec6 = 'gray';
+let colorRec7 = 'gray';
+let colorRec8 = 'gray';
 
 // Initial Container_Frontal
 var startSequence = true;
@@ -186,7 +238,7 @@ function animacionRiego(startTime){
 }
 
 
-/* ANIMACION Temp */
+/* ANIMACION TEMP */
 function requestTemp(temp) {
   actualTemp = temp;
   let percentage = 2.8571*temp;
@@ -274,6 +326,359 @@ function animacionCO2(startTime) {
        }
    }
    requestAnimationFrame(animacionCO2);
+}
+
+/* ANIMACION RECTANGULOS */
+function requestRec1(color) {
+  if (colorRec1 !== color) {
+    if (color === 'gray'){
+      if (colorRec1 === 'blue') {
+        framesRec1 = 72;
+      } else if (colorRec1 === 'yellow') {
+        framesRec1 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec1 = 48;
+      if (colorRec1 === 'gray') {
+        frameNumberRec1 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec1 = 24;
+      if (colorRec1 === 'gray') {
+        frameNumberRec1 = 0;
+      }
+    }
+    colorRec1 = color;
+  }
+  requestAnimationFrame(animacionRec1);
+}
+
+function animacionRec1(startTime) {
+  if (!timeWhenLastUpdateRec1) timeWhenLastUpdateRec1 = startTime;
+  timeFromLastUpdateRec1 = startTime - timeWhenLastUpdateRec1;
+
+  if (timeFromLastUpdateRec1 > timePerFrameRectangulo) {
+      $Rec1.attr('src', pathRectangulos + `1/Rectangulo1_${frameNumberRec1}.png`);
+      timeWhenLastUpdateRec1 = startTime;
+
+      if (frameNumberRec1 == framesRec1) {
+          $Rec1.attr('src', pathRectangulos + `1/Rectangulo1_${frameNumberRec1}.png`);
+          return;
+      } else if (frameNumberRec1 > framesRec1) {
+          frameNumberRec1 = frameNumberRec1 - 1;
+      } else {
+          frameNumberRec1 = frameNumberRec1 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec1);
+}
+
+function requestRec2(color) {
+  if (colorRec2 !== color) {
+    if (color === 'gray'){
+      if (colorRec2 === 'blue') {
+        framesRec2 = 72;
+      } else if (colorRec2 === 'yellow') {
+        framesRec2 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec2 = 48;
+      if (colorRec2 === 'gray') {
+        frameNumberRec2 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec2 = 24;
+      if (colorRec2 === 'gray') {
+        frameNumberRec2 = 0;
+      }
+    }
+    colorRec2 = color;
+  }
+  requestAnimationFrame(animacionRec2);
+}
+
+function animacionRec2(startTime) {
+  if (!timeWhenLastUpdateRec2) timeWhenLastUpdateRec2 = startTime;
+  timeFromLastUpdateRec2 = startTime - timeWhenLastUpdateRec2;
+
+  if (timeFromLastUpdateRec2 > timePerFrameRectangulo) {
+      $Rec2.attr('src', pathRectangulos + `2/Rectangulo2_${frameNumberRec2}.png`);
+      timeWhenLastUpdateRec2 = startTime;
+
+      if (frameNumberRec2 == framesRec2) {
+          $Rec2.attr('src', pathRectangulos + `2/Rectangulo2_${frameNumberRec2}.png`);
+          return;
+      } else if (frameNumberRec2 > framesRec2) {
+          frameNumberRec2 = frameNumberRec2 - 1;
+      } else {
+          frameNumberRec2 = frameNumberRec2 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec2);
+}
+
+function requestRec3(color) {
+  if (colorRec3 !== color) {
+    if (color === 'gray'){
+      if (colorRec3 === 'blue') {
+        framesRec3 = 72;
+      } else if (colorRec3 === 'yellow') {
+        framesRec3 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec3 = 48;
+      if (colorRec3 === 'gray') {
+        frameNumberRec3 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec3 = 24;
+      if (colorRec3 === 'gray') {
+        frameNumberRec3 = 0;
+      }
+    }
+    colorRec3 = color;
+  }
+  requestAnimationFrame(animacionRec3);
+}
+
+function animacionRec3(startTime) {
+  if (!timeWhenLastUpdateRec3) timeWhenLastUpdateRec3 = startTime;
+  timeFromLastUpdateRec3 = startTime - timeWhenLastUpdateRec3;
+
+  if (timeFromLastUpdateRec3 > timePerFrameRectangulo) {
+      $Rec3.attr('src', pathRectangulos + `3/Rectangulo3_${frameNumberRec3}.png`);
+      timeWhenLastUpdateRec3 = startTime;
+
+      if (frameNumberRec3 == framesRec3) {
+          $Rec3.attr('src', pathRectangulos + `3/Rectangulo3_${frameNumberRec3}.png`);
+          return;
+      } else if (frameNumberRec3 > framesRec3) {
+          frameNumberRec3 = frameNumberRec3 - 1;
+      } else {
+          frameNumberRec3 = frameNumberRec3 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec3);
+}
+
+function requestRec4(color) {
+  if (colorRec4 !== color) {
+    if (color === 'gray'){
+      if (colorRec4 === 'blue') {
+        framesRec4 = 72;
+      } else if (colorRec4 === 'yellow') {
+        framesRec4 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec4 = 48;
+      if (colorRec4 === 'gray') {
+        frameNumberRec4 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec4 = 24;
+      if (colorRec4 === 'gray') {
+        frameNumberRec4 = 0;
+      }
+    }
+    colorRec4 = color;
+  }
+  requestAnimationFrame(animacionRec4);
+}
+
+function animacionRec4(startTime) {
+  if (!timeWhenLastUpdateRec4) timeWhenLastUpdateRec4 = startTime;
+  timeFromLastUpdateRec4 = startTime - timeWhenLastUpdateRec4;
+
+  if (timeFromLastUpdateRec4 > timePerFrameRectangulo) {
+      $Rec4.attr('src', pathRectangulos + `4/Rectangulo4_${frameNumberRec4}.png`);
+      timeWhenLastUpdateRec4 = startTime;
+
+      if (frameNumberRec4 == framesRec4) {
+          $Rec4.attr('src', pathRectangulos + `4/Rectangulo4_${frameNumberRec4}.png`);
+          return;
+      } else if (frameNumberRec4 > framesRec4) {
+          frameNumberRec4 = frameNumberRec4 - 1;
+      } else {
+          frameNumberRec4 = frameNumberRec4 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec4);
+}
+
+function requestRec5(color) {
+  if (colorRec5 !== color) {
+    if (color === 'gray'){
+      if (colorRec5 === 'blue') {
+        framesRec5 = 72;
+      } else if (colorRec5 === 'yellow') {
+        framesRec5 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec5 = 48;
+      if (colorRec5 === 'gray') {
+        frameNumberRec5 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec5 = 24;
+      if (colorRec5 === 'gray') {
+        frameNumberRec5 = 0;
+      }
+    }
+    colorRec5 = color;
+  }
+  requestAnimationFrame(animacionRec5);
+}
+
+function animacionRec5(startTime) {
+  if (!timeWhenLastUpdateRec5) timeWhenLastUpdateRec5 = startTime;
+  timeFromLastUpdateRec5 = startTime - timeWhenLastUpdateRec5;
+
+  if (timeFromLastUpdateRec5 > timePerFrameRectangulo) {
+      $Rec5.attr('src', pathRectangulos + `5/Rectangulo5_${frameNumberRec5}.png`);
+      timeWhenLastUpdateRec5 = startTime;
+
+      if (frameNumberRec5 == framesRec5) {
+          $Rec5.attr('src', pathRectangulos + `5/Rectangulo5_${frameNumberRec5}.png`);
+          return;
+      } else if (frameNumberRec5 > framesRec5) {
+          frameNumberRec5 = frameNumberRec5 - 1;
+      } else {
+          frameNumberRec5 = frameNumberRec5 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec5);
+}
+
+function requestRec6(color) {
+  if (colorRec6 !== color) {
+    if (color === 'gray'){
+      if (colorRec6 === 'blue') {
+        framesRec6 = 72;
+      } else if (colorRec6 === 'yellow') {
+        framesRec6 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec6 = 48;
+      if (colorRec6 === 'gray') {
+        frameNumberRec6 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec6 = 24;
+      if (colorRec6 === 'gray') {
+        frameNumberRec6 = 0;
+      }
+    }
+    colorRec6 = color;
+  }
+  requestAnimationFrame(animacionRec6);
+}
+
+function animacionRec6(startTime) {
+  if (!timeWhenLastUpdateRec6) timeWhenLastUpdateRec6 = startTime;
+  timeFromLastUpdateRec6 = startTime - timeWhenLastUpdateRec6;
+
+  if (timeFromLastUpdateRec6 > timePerFrameRectangulo) {
+      $Rec6.attr('src', pathRectangulos + `6/Rectangulo6_${frameNumberRec6}.png`);
+      timeWhenLastUpdateRec6 = startTime;
+
+      if (frameNumberRec6 == framesRec6) {
+          $Rec6.attr('src', pathRectangulos + `6/Rectangulo6_${frameNumberRec6}.png`);
+          return;
+      } else if (frameNumberRec6 > framesRec6) {
+          frameNumberRec6 = frameNumberRec6 - 1;
+      } else {
+          frameNumberRec6 = frameNumberRec6 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec6);
+}
+
+function requestRec7(color) {
+  if (colorRec7 !== color) {
+    if (color === 'gray'){
+      if (colorRec7 === 'blue') {
+        framesRec7 = 72;
+      } else if (colorRec7 === 'yellow') {
+        framesRec7 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec7 = 48;
+      if (colorRec7 === 'gray') {
+        frameNumberRec7 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec7 = 24;
+      if (colorRec7 === 'gray') {
+        frameNumberRec7 = 0;
+      }
+    }
+    colorRec7 = color;
+  }
+  requestAnimationFrame(animacionRec7);
+}
+
+function animacionRec7(startTime) {
+  if (!timeWhenLastUpdateRec7) timeWhenLastUpdateRec7 = startTime;
+  timeFromLastUpdateRec7 = startTime - timeWhenLastUpdateRec7;
+
+  if (timeFromLastUpdateRec7 > timePerFrameRectangulo) {
+      $Rec7.attr('src', pathRectangulos + `7/Rectangulo7_${frameNumberRec7}.png`);
+      timeWhenLastUpdateRec7 = startTime;
+
+      if (frameNumberRec7 == framesRec7) {
+          $Rec7.attr('src', pathRectangulos + `7/Rectangulo7_${frameNumberRec7}.png`);
+          return;
+      } else if (frameNumberRec7 > framesRec7) {
+          frameNumberRec7 = frameNumberRec7 - 1;
+      } else {
+          frameNumberRec7 = frameNumberRec7 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec7);
+}
+
+function requestRec8(color) {
+  if (colorRec8 !== color) {
+    if (color === 'gray'){
+      if (colorRec8 === 'blue') {
+        framesRec8 = 72;
+      } else if (colorRec8 === 'yellow') {
+        framesRec8 = 0;
+      }
+    } else if (color === 'blue') {
+      framesRec8 = 48;
+      if (colorRec8 === 'gray') {
+        frameNumberRec8 = 72;
+      }
+    } else if (color === 'yellow') {
+      framesRec8 = 24;
+      if (colorRec8 === 'gray') {
+        frameNumberRec8 = 0;
+      }
+    }
+    colorRec8 = color;
+  }
+  requestAnimationFrame(animacionRec8);
+}
+
+function animacionRec8(startTime) {
+  if (!timeWhenLastUpdateRec8) timeWhenLastUpdateRec8 = startTime;
+  timeFromLastUpdateRec8 = startTime - timeWhenLastUpdateRec8;
+
+  if (timeFromLastUpdateRec8 > timePerFrameRectangulo) {
+      $Rec8.attr('src', pathRectangulos + `8/Rectangulo8_${frameNumberRec8}.png`);
+      timeWhenLastUpdateRec8 = startTime;
+
+      if (frameNumberRec8 == framesRec8) {
+          $Rec8.attr('src', pathRectangulos + `8/Rectangulo8_${frameNumberRec8}.png`);
+          return;
+      } else if (frameNumberRec8 > framesRec8) {
+          frameNumberRec8 = frameNumberRec8 - 1;
+      } else {
+          frameNumberRec8 = frameNumberRec8 + 1;
+      }
+  }
+  requestAnimationFrame(animacionRec8);
 }
 
 function start() {
@@ -439,5 +844,12 @@ $(document).ready(() => {
 
 /* Cuando hayan cargado todas las imágenes empezaremos las animaciones o podremos activarlas por medio de los botones correspondientes */
 $(window).on('load', () => {
-
+  requestRec1('yellow');
+  requestRec2('yellow');
+  requestRec3('yellow');
+  requestRec4('yellow');
+  requestRec5('yellow');
+  requestRec6('yellow');
+  requestRec7('yellow');
+  requestRec8('yellow');
 });
