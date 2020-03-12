@@ -3,7 +3,8 @@ html, body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: #368f3f;
+    font-family: "Trebuchet MS";
+    background-color: #c8a2c8;
 }
 
 .descIcon {
@@ -20,9 +21,9 @@ html, body {
 
 .infoSistema {
     position: absolute;
-    font-size: 16px;
-    width: 400px;
-    color: #fff;
+    font-size: 20px;
+    width: 450px;
+    color: #3c3c3b;
     left: 5%;
     padding-top: 10px;
 }

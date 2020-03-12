@@ -844,12 +844,14 @@ $(document).ready(() => {
 
 /* Cuando hayan cargado todas las imágenes empezaremos las animaciones o podremos activarlas por medio de los botones correspondientes */
 $(window).on('load', () => {
-  requestRec1('yellow');
+  /*requestRec1('yellow');
   requestRec2('yellow');
   requestRec3('yellow');
   requestRec4('yellow');
   requestRec5('yellow');
   requestRec6('yellow');
   requestRec7('yellow');
-  requestRec8('yellow');
+  requestRec8('yellow');*/
+  requestAnimationFrame(animacionPlantas);
+  requestAnimationFrame(animacionLuces);
 });

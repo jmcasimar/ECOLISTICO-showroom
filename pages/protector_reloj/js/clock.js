@@ -126,4 +126,4 @@ function animacionGrowy(startTime){
 //setInterval(setDate, 1000);
 
 //setDate();
-animacionGrowy();
+//animacionGrowy();

@@ -1,15 +1,23 @@
+@font-face {
+        font-family: "Dolce";
+        src: url("../fonts/Dolce Vita Heavy Bold.ttf");
+}
+
 body {
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: #368f3f;
+    background-color: #c8a2c8;
+    font-family: "Trebuchet MS";
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .dataCont {
     width: 80%;
     margin: 50px auto;
     margin-top: 25px;
-    color: white;
+    color: #3c3c3b;
     font-size: 20px;
 }
 
@@ -20,9 +28,14 @@ body {
     margin-bottom: 0;
 }
 
-.dataTemp, .dataHum, .dataCO2, .dataLoc, .ventilador1, .ventilador2 {
+.dataTemp, .dataHum, .dataCO2, .dataLoc {
     float: left;
     width: 20%;
+}
+
+.ventilador1, .ventilador2 {
+    float: left;
+    width: 15%;
 }
 
 .dataCont div img {
@@ -56,53 +69,144 @@ body {
     width: 100%;
 }
 
-.tittle {
+.title {
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
   color: white;
-  margin-top: 10px;
+  z-index: 10;
+  position: absolute;
+  left: 42%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
 }
 
 #img-background {
-    border: 5px solid #3c3c3b;
+    border: 5px solid black;
+    position: absolute;
+    left: 0.35%;
+    top: 220px;
+    width: 70%;
 }
 
 #ventiladores {
     z-index: 10;
     position: absolute;
-    left: 0.35%;
-    top: 220px;
-    width: 75%;
+    left: 6%;
+    top: 180px;
+    width: 70%;
 }
 
 #plantas {
     z-index: 20;
     position: absolute;
-    left: 0.35%;
+    left: 0.7%;
     top: 220px;
-    width: 75%;
+    width: 70%;
 }
 
 #riego {
     z-index: 30;
     position: absolute;
-    left: 0.35%;
+    left: 0.7%;
     top: 220px;
-    width: 75%;
+    width: 70%;
 }
 
 #luces {
     z-index: 40;
     position: absolute;
-    left: 0.35%;
+    left: 0.7%;
     top: 220px;
-    width: 75%;
+    width: 70%;
 }
 
-#container {
-    z-index: 50;
+#container, #OutLine, #Rec1, #Rec2, #Rec3, #Rec4, #Rec5, #Rec6, #Rec7, #Rec8 {
+    z-index: 10;
     position: absolute;
     left: 73%;
-    top: 250px;
-    width: 30%;
+    top: 225px;
+    width: 24%;
+}
+
+#medTemp {
+    z-index: 10;
+    position: absolute;
+    left: 7%;
+    top: 60px;
+    width: 8%;
+}
+
+#tempText {
+    z-index: 20;
+    position: absolute;
+    left: 6%;
+    top: 85px;
+}
+
+#medHum {
+    z-index: 10;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#medHum_background {
+    z-index: 0;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#humText {
+    z-index: 20;
+    position: absolute;
+    left: 22%;
+    top: 85px;
+}
+
+#medCO2 {
+    z-index: 10;
+    position: absolute;
+    left: 41%;
+    top: 60px;
+    width: 8%;
+}
+
+#co2Text {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 85px;
+}
+
+#vent1 {
+    z-index: 10;
+    position: absolute;
+    left: 62%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent1Text {
+    z-index: 20;
+    position: absolute;
+    left: 55%;
+    top: 85px;
+}
+
+#vent2 {
+    z-index: 10;
+    position: absolute;
+    left: 78%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent2Text {
+    z-index: 20;
+    position: absolute;
+    left: 72%;
+    top: 85px;
 }

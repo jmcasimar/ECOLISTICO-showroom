@@ -1,19 +1,41 @@
+@font-face {
+        font-family: "Dolce";
+        src: url("../fonts/Dolce Vita Heavy Bold.ttf");
+}
+
 body {
     width: 100%;
     padding: 0;
     margin: 0;
-
-    background-color: lightgray;
+    background-color: #c8a2c8;
+    font-family: "Trebuchet MS";
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
-.dataCont, .framesCont {
+.dataCont {
     width: 80%;
     margin: 50px auto;
+    margin-top: 25px;
+    color: #3c3c3b;
+    font-size: 20px;
+}
+
+.framesCont {
+    width: 75%;
+    margin: 50px auto;
+    margin-left: 0;
+    margin-bottom: 0;
 }
 
 .dataTemp, .dataHum, .dataCO2, .dataLoc {
     float: left;
-    width: 25%;
+    width: 20%;
+}
+
+.ventilador1, .ventilador2 {
+    float: left;
+    width: 15%;
 }
 
 .dataCont div img {
@@ -33,58 +55,158 @@ body {
     padding: 20px 5% !important;
 }
 
+.dataContainer {
+    float: right;
+    width: 30%;
+}
+
+.dataContainer img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
 .framesCont img {
     width: 100%;
 }
 
-.btnCont {
-    position: absolute;
-    top: 20px;
-    right: 10%;
+.title {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+  z-index: 10;
+  position: absolute;
+  left: 42%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
 }
 
-.dataBtnCont {
+#img-background {
+    border: 5px solid black;
     position: absolute;
-    top: 20px;
-    left: 10px;
-    width: 100px;
-}
-
-.dataBtnCont button {
-    width: 100px;
-    margin: 5px 0;
-    float: left;
-    display: block;
+    left: 0.35%;
+    top: 220px;
+    width: 70%;
 }
 
 #ventiladores {
     z-index: 10;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 6%;
+    top: 180px;
+    width: 70%;
 }
 
 #plantas {
     z-index: 20;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
 }
 
 #riego {
     z-index: 30;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
 }
 
 #luces {
     z-index: 40;
     position: absolute;
-    left: 10%;
-    top: 210px;
-    width: 80%;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#container, #OutLine, #Rec1, #Rec2, #Rec3, #Rec4, #Rec5, #Rec6, #Rec7, #Rec8 {
+    z-index: 10;
+    position: absolute;
+    left: 73%;
+    top: 225px;
+    width: 24%;
+}
+
+#medTemp {
+    z-index: 10;
+    position: absolute;
+    left: 7%;
+    top: 60px;
+    width: 8%;
+}
+
+#tempText {
+    z-index: 20;
+    position: absolute;
+    left: 6%;
+    top: 85px;
+}
+
+#medHum {
+    z-index: 10;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#medHum_background {
+    z-index: 0;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#humText {
+    z-index: 20;
+    position: absolute;
+    left: 22%;
+    top: 85px;
+}
+
+#medCO2 {
+    z-index: 10;
+    position: absolute;
+    left: 41%;
+    top: 60px;
+    width: 8%;
+}
+
+#co2Text {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 85px;
+}
+
+#vent1 {
+    z-index: 10;
+    position: absolute;
+    left: 62%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent1Text {
+    z-index: 20;
+    position: absolute;
+    left: 55%;
+    top: 85px;
+}
+
+#vent2 {
+    z-index: 10;
+    position: absolute;
+    left: 78%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent2Text {
+    z-index: 20;
+    position: absolute;
+    left: 72%;
+    top: 85px;
 }

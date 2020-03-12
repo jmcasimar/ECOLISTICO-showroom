@@ -1,9 +1,27 @@
+@font-face {
+        font-family: "Dolce";
+        src: url("../fonts/Dolce Vita Heavy Bold.ttf");
+}
+
 body {
     width: 100%;
     padding: 0;
     margin: 0;
+    background-color: #c8a2c8;
+    font-family: "Trebuchet MS";
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
 
-    background-color: lightgray;
+.title {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+  z-index: 10;
+  position: absolute;
+  left: 28%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
 }
 
 .framesCont {
@@ -15,8 +33,77 @@ body {
     width: 100%;
 }
 
-.btnCont {
+#tanques {
+    z-index: 10;
     position: absolute;
-    top: 20px;
-    right: 10%;
+    width: 90%;
+}
+
+#focoT1, #focoT2, #focoT3, #focoT4, #focoT5 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+}
+
+#entradaCompresor, #salidaRecirculado, #entradaSMaker, #salidaSMaker, #entradaRecirculado {
+    z-index: 0;
+    position: absolute;
+    width: 90%;
+}
+
+#nivelT1 {
+    z-index: 20;
+    position: absolute;
+    left: 20%;
+    top: 0px;
+    width: 90%;
+}
+
+#nivelT2 {
+    z-index: 20;
+    position: absolute;
+    left: 28%;
+    top: 0px;
+    width: 90%;
+}
+
+#nivelT3 {
+    z-index: 20;
+    position: absolute;
+    left: 40%;
+    top: 0px;
+    width: 90%;
+}
+
+#nivelT4 {
+    z-index: 20;
+    position: absolute;
+    left: 56%;
+    top: 0px;
+    width: 90%;
+}
+
+
+#nivelT5 {
+    z-index: 20;
+    position: absolute;
+    left: 48%;
+    top: 0px;
+    width: 90%;
+}
+
+#nivelTA {
+    z-index: 20;
+    position: absolute;
+    left: 68.5%;
+    top: 215px;
+    width: 90%;
+}
+
+#nivelTB {
+    z-index: 20;
+    position: absolute;
+    left: 7%;
+    top: 0px;
+    width: 90%;
 }
