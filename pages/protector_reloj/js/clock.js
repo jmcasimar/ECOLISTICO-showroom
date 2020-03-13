@@ -21,14 +21,27 @@ const minsHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
 
 // Total Frames
-const framesGrowy = 1865;
-const timePerFrameGrowy = 42;
+const animacion = 'ingles';
+let timePerFrameGrowy = 0;
+let framesGrowy = 0;
+if (animacion === 'original'){
+  timePerFrameGrowy = 42;
+  framesGrowy = 1864;
+}
+else if (animacion === 'español'){
+  timePerFrameGrowy = 126;
+  framesGrowy = 521;
+}
+else if (animacion === 'ingles'){
+  timePerFrameGrowy = 126;
+  framesGrowy = 521;
+}
+
 let frameNumberGrowy = 0;
 
 // Timers
 let timeWhenLastUpdateGrowy;
 let timeFromLastUpdateGrowy;
-
 
 /*
 query.equalTo('systemId', sysID);
@@ -97,6 +110,8 @@ function animacionGrowy(startTime){
    if (timeFromLastUpdateGrowy > timePerFrameGrowy) {
      console.log(frameNumberGrowy);
      let imageUrl = '';
+     // Original
+     if (animacion === 'original'){
        if (frameNumberGrowy<10){
          imageUrl = `./img/Growy/Growy_0000${frameNumberGrowy}.png`;
        } else if (frameNumberGrowy<100) {
@@ -108,13 +123,47 @@ function animacionGrowy(startTime){
        } else {
          imageUrl = `./img/Growy/Growy_${frameNumberGrowy}.png`;
        }
+     }
+    // Español
+    else if (animacion === 'español'){
+      if (frameNumberGrowy<10){
+        imageUrl = `./img/GROWY_ES/GROWY_ES0000${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<100) {
+        imageUrl = `./img/GROWY_ES/GROWY_ES000${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<1000) {
+        imageUrl = `./img/GROWY_ES/GROWY_ES00${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<10000) {
+        imageUrl = `./img/GROWY_ES/GROWY_ES0${frameNumberGrowy}.png`;
+      } else {
+        imageUrl = `./img/GROWY_ES/GROWY_ES${frameNumberGrowy}.png`;
+      }
+    }
+    // Ingles
+    else if (animacion === 'ingles'){
+      if (frameNumberGrowy<10){
+        imageUrl = `./img/GROWY_EN/GROWY_EN0000${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<100) {
+        imageUrl = `./img/GROWY_EN/GROWY_EN000${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<1000) {
+        imageUrl = `./img/GROWY_EN/GROWY_EN00${frameNumberGrowy}.png`;
+      } else if (frameNumberGrowy<10000) {
+        imageUrl = `./img/GROWY_EN/GROWY_EN0${frameNumberGrowy}.png`;
+      } else {
+        imageUrl = `./img/GROWY_EN/GROWY_EN${frameNumberGrowy}.png`;
+      }
+    }
        //$growy.css('background-image', 'url(' + imageUrl + ')');
        $growy.attr('src', imageUrl);
        timeWhenLastUpdateGrowy = startTime;
 
        if (frameNumberGrowy >= framesGrowy) {
            //$growy.css('background-image', `url(./img/Growy/Growy_0${frameNumberGrowy}.png)`);
-           $growy.attr('src', './img/Growy/Growy_0${frameNumberGrowy}.png');
+           // Original
+           if (animacion === 'original'){ $growy.attr('src', `./img/Growy/Growy_0${frameNumberGrowy}.png`); }
+           // Español
+           else if (animacion === 'español'){ $growy.attr('src', `./img/GROWY_ES/GROWY_ES0${frameNumberGrowy}.png`); }
+           // Ingles
+           else if (animacion === 'ingles'){ $growy.attr('src', `./img/GROWY_EN/GROWY_EN0${frameNumberGrowy}.png`); }
            return;
        } else {
            frameNumberGrowy = frameNumberGrowy + 1;
@@ -126,4 +175,4 @@ function animacionGrowy(startTime){
 //setInterval(setDate, 1000);
 
 //setDate();
-//animacionGrowy();
+animacionGrowy();

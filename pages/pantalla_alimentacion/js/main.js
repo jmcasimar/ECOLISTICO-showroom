@@ -1,18 +1,41 @@
-// botones de acción
-const $botonCirculado = $('#circulado');
-const $botonPresurizacion = $('#presurizacion');
-const $botonAlimentacion = $('#alimentacion');
+Parse.initialize("123456", "...", "...");
+Parse.serverURL = 'http://localhost:1337/parse';
+//Parse.serverURL = 'http://192.168.1.84:1337/parse';
+
+// System ID
+const sysID = "15-113-001";
 
 // contenedores de sprites
 const $alimentacionContenedor = $('#alimentacionContenedor');
+const $compresor = $('#compresor');
+const $entradaA = $('#entradaA');
+const $entradaB = $('#entradaB');
+const $salidaA = $('#salidaA');
+const $salidaB = $('#salidaB');
+const $manometroA = $('#manometroA');
+const $manometroB = $('#manometroB');
+const $nivelA = $('#nivelA');
+const $nivelB = $('#nivelB');
 
-const pathParte1 = './img/AnimAlimentacionP1/';
-const pathParte2 = './img/AnimAlimentacionP2/';
-const pathParte3 = './img/AnimAlimentacionP3/';
+const pathCompresor = './img/Compresor/';
+const pathEntradaA = './img/LineasAgua/AguaTanqueA/';
+const pathEntradaB = './img/LineasAgua/AguaTanqueB/';
+const pathSalidaA = './img/LineasAgua/SalidaTanqueA/';
+const pathSalidaB = './img/LineasAgua/SalidaTanqueB/';
+const pathManometroA = './img/Manometros/ManometroSubeTanqueA/';
+const pathManometroB = './img/Manometros/ManometroSubeTanqueB/';
+const pathNivelA = './img/Niveles/NivelSube/NivelTanqueASube/';
+const pathNivelB = './img/Niveles/NivelSube/NivelTanqueBSube/';
 
-const framesParte1 = 119;
-const framesParte2 = 70;
-const framesParte3 = 98;
+const framesCompresor = 69;
+const framesEntradaA = 120;
+const framesEntradaB = 120;
+const framesSalidaA = 96;
+const framesSalidaB = 96;
+const framesManometroA = 66;
+const framesManometroB = 66;
+const framesNivelA = 74;
+const framesNivelB = 74;
 
 const timePerFrame = 42;
 
@@ -29,11 +52,11 @@ let timeFromLastUpdateParte3;
 let frameNumberParte3 = 1;
 
 /* ANIMACION PARTE 1 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionParte1(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateParte1) timeWhenLastUpdateParte1 = startTime;
@@ -47,7 +70,7 @@ function animacionParte1(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $alimentacionContenedor.attr('src', pathParte1 + `AnimAlimentacionP1_${frameNumberParte1}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -67,11 +90,11 @@ function animacionParte1(startTime){
 }
 
 /* ANIMACION PARTE 3 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionParte2(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateParte2) timeWhenLastUpdateParte2 = startTime;
@@ -85,7 +108,7 @@ function animacionParte2(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $alimentacionContenedor.attr('src', pathParte2 + `AnimAlimentacionP2_${frameNumberParte2}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
@@ -105,11 +128,11 @@ function animacionParte2(startTime){
 }
 
 /* ANIMACION PARTE 3 */
-/* 
+/*
 La función 'frameByFrame' será llamada cuando se accione un botón o cuando cargue la seccion para dar entrada a las animaciones, usaremos 'requestAnimationFrame' de jQuery para mantener una animación suave
 */
 function animacionParte3(startTime){
-    /* 
+    /*
     'startTime' es un parametro de 'requestAnimationFrame', podemos considerar que es el tiempo actual, primero se calculará cuanto tiempo ha pasado desde el último cambio de frame
     */
    if (!timeWhenLastUpdateParte3) timeWhenLastUpdateParte3 = startTime;
@@ -123,7 +146,7 @@ function animacionParte3(startTime){
        Si ha pasado el tiempo suficiente actualizamos el frame
        */
        $alimentacionContenedor.attr('src', pathParte3 + `AnimAlimentacionP3_${frameNumberParte3}.png`);
-       
+
        /*
        Regresamos el tiempo transcurrido al inicio
        */
