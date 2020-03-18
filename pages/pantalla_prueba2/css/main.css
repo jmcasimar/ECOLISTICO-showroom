@@ -1,0 +1,495 @@
+@font-face {
+        font-family: "Dolce";
+        src: url("../fonts/Dolce Vita Heavy Bold.ttf");
+}
+
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: #c8a2c8;
+    font-family: "Trebuchet MS";
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.crecimiento1 {
+  position: absolute;
+  left: 0%;
+  top: 0px;
+  width: 50%;
+}
+
+.crecimiento2 {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  width: 50%;
+}
+
+.crecimiento3 {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  width: 50%;
+}
+
+.dataCont {
+    width: 80%;
+    margin: 50px auto;
+    margin-top: 25px;
+    color: #3c3c3b;
+    font-size: 20px;
+}
+
+.framesCont {
+    width: 70%;
+    margin: 50px auto;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.dataTemp, .dataHum, .dataCO2, .dataLoc {
+    float: left;
+    width: 20%;
+}
+
+.ventilador1, .ventilador2 {
+    float: left;
+    width: 15%;
+}
+
+.dataCont div img {
+    width: 40%;
+    float: left;
+    padding: 20px 5%;
+}
+
+.dataCont div p {
+    width: 40%;
+    float: left;
+    padding: 20px 5%;
+}
+
+.dataLoc img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
+.dataContainer {
+    float: right;
+    width: 30%;
+}
+
+.dataContainer img {
+    width: 100% !important;
+    padding: 20px 5% !important;
+}
+
+.framesCont img {
+    width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+  z-index: 10;
+  position: absolute;
+  left: 38%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
+}
+
+#img-background_1 {
+    border: 5px solid black;
+    position: absolute;
+    left: 0.35%;
+    top: 220px;
+    width: 70%;
+}
+
+#ventiladores_1 {
+    z-index: 10;
+    position: absolute;
+    left: 6%;
+    top: 180px;
+    width: 70%;
+}
+
+#plantas_1 {
+    z-index: 20;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#riego_1 {
+    z-index: 30;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#luces_1 {
+    z-index: 40;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#container_1, #OutLine_1, #Rec1_1, #Rec2_1, #Rec3_1, #Rec4_1, #Rec5_1, #Rec6_1, #Rec7_1, #Rec8_1 {
+    z-index: 10;
+    position: absolute;
+    left: 73%;
+    top: 225px;
+    width: 24%;
+}
+
+#medTemp_1 {
+    z-index: 10;
+    position: absolute;
+    left: 7%;
+    top: 60px;
+    width: 8%;
+}
+
+#tempText_1 {
+    z-index: 20;
+    position: absolute;
+    left: 6%;
+    top: 85px;
+}
+
+#medHum_1 {
+    z-index: 10;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#medHum_background_1 {
+    z-index: 0;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#humText_1 {
+    z-index: 20;
+    position: absolute;
+    left: 22%;
+    top: 85px;
+}
+
+#medCO2_1 {
+    z-index: 10;
+    position: absolute;
+    left: 41%;
+    top: 60px;
+    width: 8%;
+}
+
+#co2Text_1 {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 85px;
+}
+
+#vent1_1 {
+    z-index: 10;
+    position: absolute;
+    left: 62%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent1Text_1 {
+    z-index: 20;
+    position: absolute;
+    left: 55%;
+    top: 85px;
+}
+
+#vent2_1 {
+    z-index: 10;
+    position: absolute;
+    left: 78%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent2Text_1 {
+    z-index: 20;
+    position: absolute;
+    left: 72%;
+    top: 85px;
+}
+
+#img-background_2 {
+    border: 5px solid black;
+    position: absolute;
+    left: 0.35%;
+    top: 220px;
+    width: 70%;
+}
+
+#ventiladores_2 {
+    z-index: 10;
+    position: absolute;
+    left: 6%;
+    top: 180px;
+    width: 70%;
+}
+
+#plantas_2 {
+    z-index: 20;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#riego_2 {
+    z-index: 30;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#luces_2 {
+    z-index: 40;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#container_2, #OutLine_2, #Rec1_2, #Rec2_2, #Rec3_2, #Rec4_2, #Rec5_2, #Rec6_2, #Rec7_2, #Rec8_2 {
+    z-index: 10;
+    position: absolute;
+    left: 73%;
+    top: 225px;
+    width: 24%;
+}
+
+#medTemp_2 {
+    z-index: 10;
+    position: absolute;
+    left: 7%;
+    top: 60px;
+    width: 8%;
+}
+
+#tempText_2 {
+    z-index: 20;
+    position: absolute;
+    left: 6%;
+    top: 85px;
+}
+
+#medHum_2 {
+    z-index: 10;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#medHum_background_2 {
+    z-index: 0;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#humText_2 {
+    z-index: 20;
+    position: absolute;
+    left: 22%;
+    top: 85px;
+}
+
+#medCO2_2 {
+    z-index: 10;
+    position: absolute;
+    left: 41%;
+    top: 60px;
+    width: 8%;
+}
+
+#co2Text_2 {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 85px;
+}
+
+#vent1_2 {
+    z-index: 10;
+    position: absolute;
+    left: 62%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent1Text_2 {
+    z-index: 20;
+    position: absolute;
+    left: 55%;
+    top: 85px;
+}
+
+#vent2_2 {
+    z-index: 10;
+    position: absolute;
+    left: 78%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent2Text_2 {
+    z-index: 20;
+    position: absolute;
+    left: 72%;
+    top: 85px;
+}
+
+#img-background_3 {
+    border: 5px solid black;
+    position: absolute;
+    left: 0.35%;
+    top: 220px;
+    width: 70%;
+}
+
+#ventiladores_3 {
+    z-index: 10;
+    position: absolute;
+    left: 6%;
+    top: 180px;
+    width: 70%;
+}
+
+#plantas_3 {
+    z-index: 20;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#riego_3 {
+    z-index: 30;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#luces_3 {
+    z-index: 40;
+    position: absolute;
+    left: 0.7%;
+    top: 220px;
+    width: 70%;
+}
+
+#container_3, #OutLine_3, #Rec1_3, #Rec2_3, #Rec3_3, #Rec4_3, #Rec5_3, #Rec6_3, #Rec7_3, #Rec8_3 {
+    z-index: 10;
+    position: absolute;
+    left: 73%;
+    top: 225px;
+    width: 24%;
+}
+
+#medTemp_3 {
+    z-index: 10;
+    position: absolute;
+    left: 7%;
+    top: 60px;
+    width: 8%;
+}
+
+#tempText_3 {
+    z-index: 20;
+    position: absolute;
+    left: 6%;
+    top: 85px;
+}
+
+#medHum_3 {
+    z-index: 10;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#medHum_background_3 {
+    z-index: 0;
+    position: absolute;
+    left: 23%;
+    top: 60px;
+    width: 8%;
+}
+
+#humText_3 {
+    z-index: 20;
+    position: absolute;
+    left: 22%;
+    top: 85px;
+}
+
+#medCO2_3 {
+    z-index: 10;
+    position: absolute;
+    left: 41%;
+    top: 60px;
+    width: 8%;
+}
+
+#co2Text_3 {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 85px;
+}
+
+#vent1_3 {
+    z-index: 10;
+    position: absolute;
+    left: 62%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent1Text_3 {
+    z-index: 20;
+    position: absolute;
+    left: 55%;
+    top: 85px;
+}
+
+#vent2_3 {
+    z-index: 10;
+    position: absolute;
+    left: 78%;
+    top: 85px;
+    width: 5%;
+}
+
+#vent2Text_3 {
+    z-index: 20;
+    position: absolute;
+    left: 72%;
+    top: 85px;
+}

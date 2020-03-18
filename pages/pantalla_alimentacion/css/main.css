@@ -51,8 +51,18 @@ body {
     width: 90%;
 }
 
-#nivelA, #nivelB {
+#nivelA {
     z-index: 20;
+    top: 360px;
+    left: 38.2%;
     position: absolute;
-    width: 90%;
+    width: 4.7%;
+}
+
+#nivelB {
+    z-index: 20;
+    top: 370px;
+    left: 52.9%;
+    position: absolute;
+    width: 6.8%;
 }

@@ -29,12 +29,12 @@ if (animacion === 'original'){
   framesGrowy = 1864;
 }
 else if (animacion === 'español'){
-  timePerFrameGrowy = 126;
-  framesGrowy = 521;
+  timePerFrameGrowy = 42;
+  framesGrowy = 1750;
 }
 else if (animacion === 'ingles'){
-  timePerFrameGrowy = 126;
-  framesGrowy = 521;
+  timePerFrameGrowy = 42;
+  framesGrowy = 1750;
 }
 
 let frameNumberGrowy = 0;

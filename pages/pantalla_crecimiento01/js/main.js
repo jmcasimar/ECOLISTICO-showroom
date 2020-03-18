@@ -1,6 +1,6 @@
 Parse.initialize("123456", "...", "...");
-Parse.serverURL = 'http://localhost:1337/parse';
-//Parse.serverURL = 'http://192.168.1.84:1337/parse';
+//Parse.serverURL = 'http://localhost:1337/parse';
+Parse.serverURL = 'http://192.168.1.84:1337/parse';
 
 // System ID
 const sysID = "15-113-001";
@@ -844,14 +844,14 @@ $(document).ready(() => {
 
 /* Cuando hayan cargado todas las imágenes empezaremos las animaciones o podremos activarlas por medio de los botones correspondientes */
 $(window).on('load', () => {
-  /*requestRec1('yellow');
+  requestRec1('yellow');
   requestRec2('yellow');
   requestRec3('yellow');
   requestRec4('yellow');
   requestRec5('yellow');
   requestRec6('yellow');
   requestRec7('yellow');
-  requestRec8('yellow');*/
+  requestRec8('yellow');
   requestAnimationFrame(animacionPlantas);
   requestAnimationFrame(animacionLuces);
 });

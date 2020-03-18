@@ -24,8 +24,8 @@ const pathSalidaA = './img/LineasAgua/SalidaTanqueA/';
 const pathSalidaB = './img/LineasAgua/SalidaTanqueB/';
 const pathManometroA = './img/Manometros/ManometroSubeTanqueA/';
 const pathManometroB = './img/Manometros/ManometroSubeTanqueB/';
-const pathNivelA = './img/Niveles/NivelSube/NivelTanqueASube/';
-const pathNivelB = './img/Niveles/NivelSube/NivelTanqueBSube/';
+const pathNivelA = './img/Niveles/N_Nutrientes/';
+const pathNivelB = './img/Niveles/N_Agua/';
 
 const framesCompresor = 69;
 const framesEntradaA = 120;
