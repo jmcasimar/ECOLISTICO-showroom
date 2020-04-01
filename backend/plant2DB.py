@@ -5,7 +5,6 @@ import os
 import re
 import sys
 from datetime import datetime
-from credentials import parse
 
 IpRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
 DigitRegex="[0-9]"
@@ -29,14 +28,14 @@ try:
             print("\033[1;31;40mError: There is not changes in DB.")
     else:
         print("\033[1;31;40mError: Provide a valid number to update database.\nExample: '01201231'")
-        
+
 except Exception as e:
     ip = None
     print("\033[1;31;40mError: Provide a valid IP.\nExample: '192.168.1.150'\n{}".format(e))
-    
+
 if ip != None and len(update)==8:
     uri = 'http://{}:1337/parse'.format(ip)
-    
+
     # Define path to parse app
     os.environ["PARSE_API_ROOT"] = uri
 
@@ -48,7 +47,7 @@ if ip != None and len(update)==8:
 
     # App Variables
     register(parse['APPLICATION_ID'], parse['REST_API_KEY'], master_key=parse['MASTER_KEY'])
-            
+
     # Database Structures
     plantKeys = ['piso', 'lado', 'linea', 'contador']
 
@@ -91,7 +90,7 @@ if ip != None and len(update)==8:
         for property in properties:
             setattr(newObject, property, getattr(object, property))
         newObject.save()
-        
+
     def addNewPlant(floor, side):
         for i in range(1,13):
             lastPlant = getPlantCounter(floor, side, i)

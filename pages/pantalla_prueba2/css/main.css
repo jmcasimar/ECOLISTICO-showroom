@@ -13,25 +13,240 @@ body {
     overflow-y: hidden;
 }
 
+.sistemaCompresion {
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 25%;
+}
+
+.descIcon {
+    display: inline-block;
+    width: 18px;
+    margin-right: 10px;
+}
+
+.descIcon img {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.infoSistema {
+    position: absolute;
+    font-size: 20px;
+    width: 450px;
+    color: #3c3c3b;
+    left: 3%;
+    padding-top: 0px;
+}
+
+.mapContainer {
+    width: 80%;
+    margin: 0px auto;
+    padding-top: 150px;
+}
+
+.mapContainer img, .mapContainer map, .mapContainer svg {
+    width: 100%;
+}
+
+.btnContainer {
+    position: absolute;
+    right: 10%;
+    width: 200px;
+    bottom: 75px;
+}
+
+.btnContainer a {
+    display: block;
+    width: 60%;
+    margin: 15px auto;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    background-color: #3c3c3b;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.btnContainer1 {
+    position: absolute;
+    right: 10%;
+    width: 200px;
+    bottom: 30px;
+}
+
+.btnContainer1 a {
+    display: block;
+    width: 60%;
+    margin: 15px auto;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    background-color: #b40000;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.pickerWrap input {
+    border: 1px solid grey;
+    padding: 5px 10px;
+    margin-bottom: 25px;
+    width: 350px;
+    text-align: center;
+}
+
+.btnsWrap {
+  height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.modalAccept, .modalReject {
+    display: inline-block;
+    width: 100px;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-right: 30px;
+    text-align: center;
+}
+
+.modalAccept {
+    background-color: #82bc00;
+}
+
+.modalReject {
+    background-color: #3c3c3b;
+}
+
+.mainPage {
+  position: absolute;
+  left: 25%;
+  top: 0%;
+  width: 25%;
+}
+
+.clock {
+  width: 15rem;
+  height: 15rem;
+  top: 100px;
+  border: 20px solid white;
+  background-color: #808080;
+  border-radius: 50%;
+  margin: 50px auto;
+  position: relative;
+  padding: 2rem;
+  box-shadow:
+    0 0 0 4px rgba(0,0,0,0.1),
+    inset 0 0 0 3px #EFEFEF,
+    inset 0 0 10px black,
+    0 0 10px rgba(0,0,0,0.2);
+}
+
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(5px); /* account for the height of the clock hands */
+}
+
+.hour-hand {
+  width: 40%;
+  height: 15px;
+  border-radius: 15px;
+  background: black;
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.min-hand {
+  width: 50%;
+  height: 10px;
+  border-radius: 15px;
+  background: black;
+  position: absolute;
+  top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.second-hand {
+  width: 50%;
+  height: 4px;
+  border-radius: 15px;
+  background: black;
+  position: absolute;
+  top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+}
+
+.GrowyAnimated {
+  width: 100%;
+  /*height: 100%;*/
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
+.GrowyAnimated img {
+    width: 100%;
+    /*height: 100%;*/
+  }
+
+.clockScreen {
+  position: absolute;
+  left: 50%;
+  top: 0%;
+  width: 25%;
+}
+
+.recirculado {
+  position: absolute;
+  left: 75%;
+  top: 0%;
+  width: 25%;
+}
+
 .crecimiento1 {
   position: absolute;
   left: 0%;
-  top: 0px;
-  width: 50%;
+  top: 50%;
+  width: 25%;
 }
 
 .crecimiento2 {
   position: absolute;
-  left: 50%;
-  top: 0px;
-  width: 50%;
+  left: 25%;
+  top: 50%;
+  width: 25%;
 }
 
 .crecimiento3 {
   position: absolute;
-  left: 0%;
+  left: 50%;
   top: 50%;
-  width: 50%;
+  width: 25%;
+}
+
+.crecimiento4 {
+  position: absolute;
+  left: 75%;
+  top: 50%;
+  width: 25%;
 }
 
 .dataCont {
@@ -39,14 +254,7 @@ body {
     margin: 50px auto;
     margin-top: 25px;
     color: #3c3c3b;
-    font-size: 20px;
-}
-
-.framesCont {
-    width: 70%;
-    margin: 50px auto;
-    margin-left: 0;
-    margin-bottom: 0;
+    font-size: 30px;
 }
 
 .dataTemp, .dataHum, .dataCO2, .dataLoc {
@@ -86,7 +294,32 @@ body {
     padding: 20px 5% !important;
 }
 
+.framesCont {
+    width: 70%;
+    margin: 50px auto;
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
 .framesCont img {
+    width: 100%;
+}
+
+.framesCont1 {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.framesCont1 img {
+    width: 100%;
+}
+
+.framesCont2 {
+    width: 80%;
+    margin: 50px auto;
+}
+
+.framesCont2 img {
     width: 100%;
 }
 
@@ -101,7 +334,166 @@ body {
   text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
 }
 
-#img-background_1 {
+.title1 {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+  z-index: 10;
+  position: absolute;
+  left: 28%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
+}
+
+.title2 {
+  text-align: center;
+  font-size: 50px;
+  color: white;
+  z-index: 10;
+  position: absolute;
+  left: 38%;
+  top: 25px;
+  text-shadow: -2px 0px #3c3c3b, 0 2px #3c3c3b, 2px 0 #3c3c3b, 0 -2px #3c3c3b;
+}
+
+#tanques1 {
+    z-index: 10;
+    position: absolute;
+    width: 90%;
+}
+
+#entradaA, #entradaB, #salidaA, #salidaB, #manometroA, #manometroB {
+    z-index: 0;
+    position: absolute;
+    width: 90%;
+}
+
+#compresor {
+    z-index: 10;
+    position: absolute;
+    width: 90%;
+}
+
+#nivelA {
+    z-index: 20;
+    top: 320px;
+    left: 38.2%;
+    position: absolute;
+    width: 4.7%;
+}
+
+#nivelB {
+    z-index: 20;
+    top: 330px;
+    left: 52.9%;
+    position: absolute;
+    width: 6.8%;
+}
+
+#tanques {
+    z-index: 10;
+    position: absolute;
+    width: 90%;
+}
+
+#focoT1 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+    left: 46%;
+}
+
+#focoT2 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+    left: 38%;
+}
+
+#focoT3 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+    left: 30%;
+}
+
+#focoT4 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+    left: 18%;
+}
+
+#focoT5 {
+    z-index: 20;
+    position: absolute;
+    width: 90%;
+}
+
+#entradaCompresor, #salidaRecirculado, #entradaSMaker, #salidaSMaker, #entradaRecirculado {
+    z-index: 0;
+    position: absolute;
+    width: 90%;
+}
+
+#nivelT1 {
+    z-index: 20;
+    position: absolute;
+    left: 37%;
+    top: 225px;
+    width: 4%;
+}
+
+#nivelT2 {
+    z-index: 20;
+    position: absolute;
+    left: 45%;
+    top: 225px;
+    width: 4%;
+}
+
+#nivelT3 {
+    z-index: 20;
+    position: absolute;
+    left: 57%;
+    top: 225px;
+    width: 4%;
+}
+
+#nivelT4 {
+    z-index: 20;
+    position: absolute;
+    left: 66%;
+    top: 225px;
+    width: 4%;
+}
+
+
+#nivelT5 {
+    z-index: 20;
+    position: absolute;
+    left: 73%;
+    top: 225px;
+    width: 4%;
+}
+
+#nivelTA {
+    z-index: 20;
+    position: absolute;
+    left: 85.5%;
+    top: 415px;
+    width: 4%;
+}
+
+#nivelTB {
+    z-index: 20;
+    position: absolute;
+    left: 24%;
+    top: 225px;
+    width: 4%;
+}
+
+#img-background_1, #img-background_2, #img-background_3, #img-background_4 {
     border: 5px solid black;
     position: absolute;
     left: 0.35%;
@@ -109,7 +501,7 @@ body {
     width: 70%;
 }
 
-#ventiladores_1 {
+#ventiladores_1, #ventiladores_2, #ventiladores_3, #ventiladores_4 {
     z-index: 10;
     position: absolute;
     left: 6%;
@@ -117,7 +509,7 @@ body {
     width: 70%;
 }
 
-#plantas_1 {
+#plantas_1, #plantas_2, #plantas_3, #plantas_4 {
     z-index: 20;
     position: absolute;
     left: 0.7%;
@@ -125,7 +517,7 @@ body {
     width: 70%;
 }
 
-#riego_1 {
+#riego_1, #riego_2, #riego_3, #riego_4 {
     z-index: 30;
     position: absolute;
     left: 0.7%;
@@ -133,7 +525,7 @@ body {
     width: 70%;
 }
 
-#luces_1 {
+#luces_1, #luces_2, #luces_3, #luces_4 {
     z-index: 40;
     position: absolute;
     left: 0.7%;
@@ -141,7 +533,10 @@ body {
     width: 70%;
 }
 
-#container_1, #OutLine_1, #Rec1_1, #Rec2_1, #Rec3_1, #Rec4_1, #Rec5_1, #Rec6_1, #Rec7_1, #Rec8_1 {
+#container_1, #OutLine_1, #Rec1_1, #Rec2_1, #Rec3_1, #Rec4_1, #Rec5_1, #Rec6_1, #Rec7_1, #Rec8_1,
+#container_2, #OutLine_2, #Rec1_2, #Rec2_2, #Rec3_2, #Rec4_2, #Rec5_2, #Rec6_2, #Rec7_2, #Rec8_2,
+#container_3, #OutLine_3, #Rec1_3, #Rec2_3, #Rec3_3, #Rec4_3, #Rec5_3, #Rec6_3, #Rec7_3, #Rec8_3,
+#container_4, #OutLine_4, #Rec1_4, #Rec2_4, #Rec3_4, #Rec4_4, #Rec5_4, #Rec6_4, #Rec7_4, #Rec8_4 {
     z-index: 10;
     position: absolute;
     left: 73%;
@@ -149,7 +544,7 @@ body {
     width: 24%;
 }
 
-#medTemp_1 {
+#medTemp_1, #medTemp_2, #medTemp_3, #medTemp_4 {
     z-index: 10;
     position: absolute;
     left: 7%;
@@ -157,14 +552,14 @@ body {
     width: 8%;
 }
 
-#tempText_1 {
+#tempText_1, #tempText_2, #tempText_3, #tempText_4 {
     z-index: 20;
     position: absolute;
-    left: 6%;
-    top: 85px;
+    left: 3%;
+    top: 60px;
 }
 
-#medHum_1 {
+#medHum_1, #medHum_2, #medHum_3, #medHum_4 {
     z-index: 10;
     position: absolute;
     left: 23%;
@@ -172,7 +567,7 @@ body {
     width: 8%;
 }
 
-#medHum_background_1 {
+#medHum_background_1, #medHum_background_2, #medHum_background_3, #medHum_background_4 {
     z-index: 0;
     position: absolute;
     left: 23%;
@@ -180,14 +575,14 @@ body {
     width: 8%;
 }
 
-#humText_1 {
+#humText_1, #humText_2, #humText_3, #humText_4 {
     z-index: 20;
     position: absolute;
-    left: 22%;
-    top: 85px;
+    left: 19%;
+    top: 60px;
 }
 
-#medCO2_1 {
+#medCO2_1, #medCO2_2, #medCO2_3, #medCO2_4 {
     z-index: 10;
     position: absolute;
     left: 41%;
@@ -195,14 +590,14 @@ body {
     width: 8%;
 }
 
-#co2Text_1 {
+#co2Text_1, #co2Text_2, #co2Text_3, #co2Text_4 {
     z-index: 20;
     position: absolute;
-    left: 37%;
-    top: 85px;
+    left: 34%;
+    top: 60px;
 }
 
-#vent1_1 {
+#vent1_1, #vent1_2, #vent1_3, #vent1_4 {
     z-index: 10;
     position: absolute;
     left: 62%;
@@ -210,14 +605,14 @@ body {
     width: 5%;
 }
 
-#vent1Text_1 {
+#vent1Text_1, #vent1Text_2, #vent1Text_3, #vent1Text_4 {
     z-index: 20;
     position: absolute;
-    left: 55%;
-    top: 85px;
+    left: 52%;
+    top: 60px;
 }
 
-#vent2_1 {
+#vent2_1, #vent2_2, #vent2_3, #vent2_4 {
     z-index: 10;
     position: absolute;
     left: 78%;
@@ -225,271 +620,9 @@ body {
     width: 5%;
 }
 
-#vent2Text_1 {
+#vent2Text_1, #vent2Text_2, #vent2Text_3, #vent2Text_4 {
     z-index: 20;
     position: absolute;
-    left: 72%;
-    top: 85px;
-}
-
-#img-background_2 {
-    border: 5px solid black;
-    position: absolute;
-    left: 0.35%;
-    top: 220px;
-    width: 70%;
-}
-
-#ventiladores_2 {
-    z-index: 10;
-    position: absolute;
-    left: 6%;
-    top: 180px;
-    width: 70%;
-}
-
-#plantas_2 {
-    z-index: 20;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#riego_2 {
-    z-index: 30;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#luces_2 {
-    z-index: 40;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#container_2, #OutLine_2, #Rec1_2, #Rec2_2, #Rec3_2, #Rec4_2, #Rec5_2, #Rec6_2, #Rec7_2, #Rec8_2 {
-    z-index: 10;
-    position: absolute;
-    left: 73%;
-    top: 225px;
-    width: 24%;
-}
-
-#medTemp_2 {
-    z-index: 10;
-    position: absolute;
-    left: 7%;
+    left: 69%;
     top: 60px;
-    width: 8%;
-}
-
-#tempText_2 {
-    z-index: 20;
-    position: absolute;
-    left: 6%;
-    top: 85px;
-}
-
-#medHum_2 {
-    z-index: 10;
-    position: absolute;
-    left: 23%;
-    top: 60px;
-    width: 8%;
-}
-
-#medHum_background_2 {
-    z-index: 0;
-    position: absolute;
-    left: 23%;
-    top: 60px;
-    width: 8%;
-}
-
-#humText_2 {
-    z-index: 20;
-    position: absolute;
-    left: 22%;
-    top: 85px;
-}
-
-#medCO2_2 {
-    z-index: 10;
-    position: absolute;
-    left: 41%;
-    top: 60px;
-    width: 8%;
-}
-
-#co2Text_2 {
-    z-index: 20;
-    position: absolute;
-    left: 37%;
-    top: 85px;
-}
-
-#vent1_2 {
-    z-index: 10;
-    position: absolute;
-    left: 62%;
-    top: 85px;
-    width: 5%;
-}
-
-#vent1Text_2 {
-    z-index: 20;
-    position: absolute;
-    left: 55%;
-    top: 85px;
-}
-
-#vent2_2 {
-    z-index: 10;
-    position: absolute;
-    left: 78%;
-    top: 85px;
-    width: 5%;
-}
-
-#vent2Text_2 {
-    z-index: 20;
-    position: absolute;
-    left: 72%;
-    top: 85px;
-}
-
-#img-background_3 {
-    border: 5px solid black;
-    position: absolute;
-    left: 0.35%;
-    top: 220px;
-    width: 70%;
-}
-
-#ventiladores_3 {
-    z-index: 10;
-    position: absolute;
-    left: 6%;
-    top: 180px;
-    width: 70%;
-}
-
-#plantas_3 {
-    z-index: 20;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#riego_3 {
-    z-index: 30;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#luces_3 {
-    z-index: 40;
-    position: absolute;
-    left: 0.7%;
-    top: 220px;
-    width: 70%;
-}
-
-#container_3, #OutLine_3, #Rec1_3, #Rec2_3, #Rec3_3, #Rec4_3, #Rec5_3, #Rec6_3, #Rec7_3, #Rec8_3 {
-    z-index: 10;
-    position: absolute;
-    left: 73%;
-    top: 225px;
-    width: 24%;
-}
-
-#medTemp_3 {
-    z-index: 10;
-    position: absolute;
-    left: 7%;
-    top: 60px;
-    width: 8%;
-}
-
-#tempText_3 {
-    z-index: 20;
-    position: absolute;
-    left: 6%;
-    top: 85px;
-}
-
-#medHum_3 {
-    z-index: 10;
-    position: absolute;
-    left: 23%;
-    top: 60px;
-    width: 8%;
-}
-
-#medHum_background_3 {
-    z-index: 0;
-    position: absolute;
-    left: 23%;
-    top: 60px;
-    width: 8%;
-}
-
-#humText_3 {
-    z-index: 20;
-    position: absolute;
-    left: 22%;
-    top: 85px;
-}
-
-#medCO2_3 {
-    z-index: 10;
-    position: absolute;
-    left: 41%;
-    top: 60px;
-    width: 8%;
-}
-
-#co2Text_3 {
-    z-index: 20;
-    position: absolute;
-    left: 37%;
-    top: 85px;
-}
-
-#vent1_3 {
-    z-index: 10;
-    position: absolute;
-    left: 62%;
-    top: 85px;
-    width: 5%;
-}
-
-#vent1Text_3 {
-    z-index: 20;
-    position: absolute;
-    left: 55%;
-    top: 85px;
-}
-
-#vent2_3 {
-    z-index: 10;
-    position: absolute;
-    left: 78%;
-    top: 85px;
-    width: 5%;
-}
-
-#vent2Text_3 {
-    z-index: 20;
-    position: absolute;
-    left: 72%;
-    top: 85px;
 }

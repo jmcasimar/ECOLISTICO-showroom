@@ -6,10 +6,149 @@
 
     <link rel="stylesheet" href="./css/main.css">
 
-    <title>ShowRoom</title>
+    <title>Control</title>
 </head>
 <body>
-  <div class="crecimiento1">
+  <div class="sistemaCompresion" id="sistemaCompresion" style="visibility: hidden;">
+    <div id="header" class="title">
+      <b>Sistema inyección</b>
+    </div>
+
+    <div class="framesCont2">
+        <img src="./img/Tanques_Contenedor.png" alt="Tanques" id="tanques1">
+        <img src="./img/Compresor/Compresor_0.png" alt="Compresor" id="compresor">
+        <img src="./img/LineasAgua/AguaTanqueA/AguaTanqueA_0.png" alt="Entrada Tanque A" id="entradaA">
+        <img src="./img/LineasAgua/AguaTanqueB/AguaTanqueB_0.png" alt="Entrada Tanque B" id="entradaB">
+        <img src="./img/LineasAgua/SalidaTanqueA/SalidaTanqueA_0.png" alt="Salida Tanque A" id="salidaA">
+        <img src="./img/LineasAgua/SalidaTanqueB/SalidaTanqueB_0.png" alt="Salida Tanque B" id="salidaB">
+        <img src="./img/Manometros/ManometroSubeTanqueA/ManometroSubeTanqueA_0.png" alt="Manometro A" id="manometroA">
+        <img src="./img/Manometros/ManometroSubeTanqueB/ManometroSubeTanqueB_0.png" alt="Manometro B" id="manometroB">
+        <img src="./img/Niveles/N_Nutrientes/NivelesNutrientes_0.png" alt="Nivel A" id="nivelA">
+        <img src="./img/Niveles/N_Agua/NivelesAgua_0.png" alt="Nivel B" id="nivelB">
+    </div>
+  </div>
+
+  <div class="mainPage">
+    <div class="infoSistema">
+        <p>
+            <span class="descIcon">
+                <img src="./img/location.png" alt="Ubicación Icon">
+            </span>
+            <b>Ubicación:</b>
+            <span id="loc">LOC</span>
+        </p>
+
+        <p>
+            <span class="descIcon">
+                <img src="./img/temperature.png" alt="Temperatura Icon">
+            </span>
+            <b>Temperatura:</b>
+            <span id="temp">TEMP</span>
+        </p>
+
+        <p>
+            <span class="descIcon">
+                <img src="./img/humidity.png" alt="Humedad Icon">
+            </span>
+            <b>Humedad:</b>
+            <span id="hum">HUM</span>
+        </p>
+
+        <p>
+            <span class="descIcon">
+                <img src="./img/system.png" alt="Sistema Icon">
+            </span>
+            <b>Versión de Sistema:</b>
+            <span id="vos">VOS</span>
+        </p>
+
+        <p>
+            <span class="descIcon">
+                <img src="./img/software.png" alt="Software Icon">
+            </span>
+            <b>Versión de Software:</b>
+            <span id="vsw">VSW</span>
+        </p>
+    </div>
+
+    <div class="mapContainer">
+        <img id="contenedorMap" src="./img/contenedor.png" alt="Contenedor ECOLISTICO" usemap="#contenedorEcolistico">
+
+        <map name="contenedorEcolistico">
+            <area shape="poly" coords="182,301,314,338,315,541,181,500" href="#contenedor" alt="Puerta de contenedor">
+
+            <area shape="poly" coords="401,533,395,514,387,514,387,531,379,528,381,510,373,503,376,425,376,414,388,409,403,408,418,417,428,412,441,412,450,416,456,413,449,407,448,404,445,398,449,390,461,385,465,378,476,382,480,394,484,391,484,404,488,405,488,412,483,413,488,417,489,496,483,502,476,505,478,518,467,518,467,503,462,505,456,502,452,506,448,507,445,527,438,528,432,510,427,509,425,527,419,524,418,507,412,512,408,531" href="#tanques1" alt="Sistema de Compresión">
+
+            <area shape="poly" coords="528,507,529,487,507,483,502,475,503,396,508,391,519,387,538,387,553,390,561,392,565,390,566,385,570,382,578,377,591,377,600,377,605,374,614,372,624,369,635,369,663,363,670,358,679,356,689,355,699,355,704,354,710,351,717,350,726,350,738,346,746,342,752,341,759,341,765,342,771,343,776,343,782,349,785,418,791,423,790,434,798,434,799,426,804,423,809,420,820,418,834,418,843,421,851,426,856,429,856,435,844,440,830,443,814,443,801,441,792,444,791,447,663,479" href="#tanques2" alt="Sistema de Recirculación">
+        </map>
+    </div>
+
+    <div class="btnContainer">
+        <a id="btnCorner" href="#modalPrompt" rel="modal:open" style="visibility: hidden;">TimeLapse</a>
+        <a id="btnGrower" href="#">Growy</a>
+        <a id="btnCorner" href="../maps/index.html">Regresar a Mapa</a>
+    </div>
+
+    <div class="btnContainer1">
+        <a id="btnCorner" href="../login/index.html">Cerrar Sesión</a>
+    </div>
+
+    <!-- Modal HTML embedded directly into document -->
+    <div id="modalPrompt" class="modal">
+        <div class="pickerWrap">
+            <p>Da click en la fecha para elegir un rango nuevo.</p>
+            <input type="text" name="datetimes">
+        </div>
+        <div class="btnsWrap">
+            <a id="modalAceptar" class="modalAccept" href="#" rel="modal:close">Aceptar</a>
+            <a class="modalReject" href="#" rel="modal:close">Cancelar</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="clockScreen">
+    <div class="clock" id="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand" id="hour-hand"></div>
+            <div class="hand min-hand" id="min-hand"></div>
+            <div class="hand second-hand" id="second-hand"></div>
+        </div>
+    </div>
+    <div class="GrowyAnimated" id="GrowyAnimated" style="visibility: hidden;">
+      <img src="./img/GROWY_EN/GROWY_EN00000.png" alt="Growy" id="Growy">
+    </div>
+  </div>
+
+  <div class="recirculado" id="recirculado" style="visibility: hidden;">
+    <div id="header" class="title1">
+      <b>Sistema nutrición y recirculado</b>
+    </div>
+
+    <div class="framesCont1">
+        <img src="./img/Tanques.png" alt="Tanques" id="tanques">
+
+        <img src="./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_0.png" alt="Foco T1" id="focoT1">
+        <img src="./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_0.png" alt="Foco T2" id="focoT2">
+        <img src="./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_0.png" alt="Foco T3" id="focoT3">
+        <img src="./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_0.png" alt="Foco T4" id="focoT4">
+        <img src="./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_0.png" alt="Foco T5" id="focoT5">
+
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel T1" id="nivelT1">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel T2" id="nivelT2">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel T3" id="nivelT3">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel T4" id="nivelT4">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel T5" id="nivelT5">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel TA" id="nivelTA">
+        <img src="./img/Niveles/Nivel_0.png" alt="Nivel TB" id="nivelTB">
+
+        <img src="./img/LineasAgua/AguaSale/AguaSale_0.png" alt="Entrada Sistema Compresión" id="entradaCompresor">
+        <img src="./img/LineasAgua/AguaSaliendoTanques/AguaSaleTanque1/AguaSaleTanque1_0.png" alt="Salida Recirculado" id="salidaRecirculado">
+        <img src="./img/LineasAgua/LlenadoTanqueGris/llenadoTanqueGris_0.png" alt="Entrada sMaker" id="entradaSMaker">
+        <img src="./img/LineasAgua/VaciadoTanqueGris/VaciadoTanqueGris_0.png" alt="Salida sMaker" id="salidaSMaker">
+        <img src="./img/LineasAgua/On/LineaAguaOn1/LineaAguaOn1_0.png" alt="Entrada Recirculado" id="entradaRecirculado">
+    </div>
+  </div>
+  <div class="crecimiento1" id="crecimiento1" style="visibility: hidden;">
     <div id="header" class="title">
       <b>Germinación</b>
     </div>
@@ -66,7 +205,7 @@
     </div>
   </div>
 
-  <div class="crecimiento2">
+  <div class="crecimiento2" id="crecimiento2" style="visibility: hidden;">
     <div id="header" class="title">
       <b>Etapa 1</b>
     </div>
@@ -123,7 +262,7 @@
     </div>
   </div>
 
- <div class="crecimiento3">
+ <div class="crecimiento3" id="crecimiento3" style="visibility: hidden;">
    <div id="header" class="title">
      <b>Etapa 2</b>
    </div>
@@ -179,6 +318,63 @@
      <img src="./img/Rectangulos/RectanguloOutline_Front.png" alt="Outline Rectangulo" id="OutLine_3">
    </div>
  </div>
+
+ <div class="crecimiento4" id="crecimiento4" style="visibility: hidden;">
+   <div id="header" class="title">
+     <b>Cosecha</b>
+   </div>
+
+   <div class="dataCont">
+     <div class="dataTemp">
+         <img src="./img/Medidor_Temp/Medidor_Temp_0.png" alt="Medidor Temperatura" id="medTemp_4">
+         <p id="tempText_4"><b><span>0 ºC</span></b></p>
+     </div>
+
+     <div class="dataHum">
+         <img src="./img/Medidor_Humedad/background.png" alt="Medidor Humedad" id="medHum_background_4">
+         <img src="./img/Medidor_Humedad/Medidor_Humedad_0.png" alt="Medidor Humedad" id="medHum_4">
+         <p id="humText_4"><b><span>0 %</span></b></p>
+     </div>
+
+     <div class="dataCO2">
+         <img src="./img/Medidor_CO2/Medidor_CO2_0.png" alt="Medidor CO2"  id="medCO2_4">
+         <p id="co2Text_4"><b><span>0 ppm</span></b></p>
+     </div>
+
+     <div class="ventilador1">
+         <img src="./img/Ventilador1/Ventilador1_0.png" alt="Extractor"  id="vent1_4">
+         <p id="vent1Text_4"><b><span>Extractor</span></b></p>
+     </div>
+
+     <div class="ventilador2">
+         <img src="./img/Ventilador2/Ventilador2_0.png" alt="Inyector"  id="vent2_4">
+         <p id="vent2Text_4"><b><span>Inyector</span></b></p>
+     </div>
+   </div>
+
+   <div class="framesCont">
+     <img src="./img/Fondo.png" alt="Fondo Sistema de Crecimiento" id="img-background_4">
+
+     <img src="./img/Ventiladores/Ventiladores_0.png" alt="Ventiladores" id="ventiladores_4">
+
+     <img src="./img/PlantasP3/PlantitasP3_0.png" alt="Plantas Etapa 3" id="plantas_4">
+
+     <img src="./img/ChorrosAgua/ChorrosAgua_0.png" alt="Riego" id="riego_4">
+
+     <img src="./img/FocosAmarillos/FocosAmarillos_0.png" alt="Iluminación" id="luces_4">
+
+     <img src="./img/Rectangulos/FondoBlanco_Back.png" alt="Fondo Blanco" id="container_4">
+     <img src="./img/Rectangulos/Rectangulo1/Rectangulo1_0.png" alt="Rec1" id="Rec1_4">
+     <img src="./img/Rectangulos/Rectangulo2/Rectangulo2_0.png" alt="Rec2" id="Rec2_4">
+     <img src="./img/Rectangulos/Rectangulo3/Rectangulo3_0.png" alt="Rec3" id="Rec3_4">
+     <img src="./img/Rectangulos/Rectangulo4/Rectangulo4_0.png" alt="Rec4" id="Rec4_4">
+     <img src="./img/Rectangulos/Rectangulo5/Rectangulo5_0.png" alt="Rec5" id="Rec5_4">
+     <img src="./img/Rectangulos/Rectangulo6/Rectangulo6_0.png" alt="Rec6" id="Rec6_4">
+     <img src="./img/Rectangulos/Rectangulo7/Rectangulo7_0.png" alt="Rec7" id="Rec7_4">
+     <img src="./img/Rectangulos/Rectangulo8/Rectangulo8_0.png" alt="Rec8" id="Rec8_4">
+     <img src="./img/Rectangulos/RectanguloOutline_Front.png" alt="Outline Rectangulo" id="OutLine_4">
+   </div>
+ </div>
     <!-- Parse -->
     <script src="./js/parse.min.js"></script>
 
@@ -189,6 +385,22 @@
         crossorigin="anonymous">
     </script>
 
+    <!-- Main Js -->
     <script src="./js/main.js"></script>
+
+    <!-- Control  -->
+    <script src="./js/control.js"></script>
+
+    <!-- Image Mapping -->
+    <script src="./js/jquery.rwdImageMaps.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <!-- Date Picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </body>
 </html>
