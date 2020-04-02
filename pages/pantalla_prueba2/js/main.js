@@ -32,6 +32,17 @@ const secondHand = document.querySelector('.second-hand');
 const minsHand = document.querySelector('.min-hand');
 const hourHand = document.querySelector('.hour-hand');
 
+// contenedores de sprites (Compresor)
+const $compresor = $('#compresor');
+const $entradaA = $('#entradaA');
+const $entradaB = $('#entradaB');
+const $salidaA = $('#salidaA');
+const $salidaB = $('#salidaB');
+const $manometroA = $('#manometroA');
+const $manometroB = $('#manometroB');
+const $nivelA = $('#nivelA');
+const $nivelB = $('#nivelB');
+
 // contenedores de sprites (Recirculado)
 const $focoT1 = $('#focoT1');
 const $focoT2 = $('#focoT2');
@@ -130,15 +141,24 @@ const $vent2_4 = $('#vent2_4');
 // Path to img
 const genericPath = "./img/";
 /**/
+const pathCompresor = "./img/Compresor/Compresor_";
+const pathEntradaA = "./img/LineasAgua/AguaTanqueA/AguaTanqueA_";
+const pathEntradaB = "./img/LineasAgua/AguaTanqueB/AguaTanqueB_";
+const pathSalidaA = "./img/LineasAgua/SalidaTanqueA/SalidaTanqueA_";
+const pathSalidaB = "./img/LineasAgua/SalidaTanqueB/SalidaTanqueB_";
+const pathManometroA = "./img/Manometros/ManometroSubeTanqueA/ManometroSubeTanqueA_";
+const pathManometroB = "./img/Manometros/ManometroSubeTanqueB/ManometroSubeTanqueB_";
+const pathNivelA = "./img/Niveles/N_Nutrientes/NivelesNutrientes_";
+const pathNivelB = "./img/Niveles/N_Agua/NivelesAgua_";
+/**/
 const pathFocosRojos = "./img/Focos/Rojos/FocoRojoT5/FocoRojoTanque5_";
 const pathFocosVerdes = "./img/Focos/Verdes/FocoVerdeT5/FocoVerdeTanque5_";
 const pathNiveles = "./img/Niveles/";
-const pathEntradaCompresor = "./img/LineasAgua/AguaSale/";
+const pathEntradaCompresor = "./img/LineasAgua/AguaSale/AguaSale_";
 let pathEntradaRecirculado = "./img/LineasAgua/On/LineaAguaOn1/LineaAguaOn1_";
 let pathSalidaRecirculado = "./img/LineasAgua/AguaSaliendoTanques/AguaSaleTanque1/AguaSaleTanque1_";
 const pathEntradaSMaker = "./img/LineasAgua/LlenadoTanqueGris/llenadoTanqueGris_";
 const pathSalidaSMaker = "./img/LineasAgua/VaciadoTanqueGris/VaciadoTanqueGris_";
-/**/
 const pathVentiladores = './img/Ventiladores/';
 const pathVentilador1 = './img/Ventilador1/';
 const pathVentilador2 = './img/Ventilador2/';
@@ -164,12 +184,17 @@ const totalFramesMedHum = 120;
 const totalFramesMedCO2 = 120;
 const totalFramesRectangulo = 48;
 const totalFramesVent = 48;
-/**/
 const totalFrameLineasAgua72 = 72;
 const totalFrameLineasAgua58 = 58;
 const totalFrameLineasAgua49 = 49;
 const totalFrameFocoTanque = 39;
 const totalFrameNivelRecirculado = 25;
+/**/
+const totalFrameCompresor = 69;
+const totalFrameNivelCompresor = 72;
+const totalFrameManometroCompresor = 66;
+const totalFrameEntradaCompresor = 120;
+const totalFrameSalidaCompresor = 96;
 /**/
 
 // Animation velocity
@@ -181,6 +206,7 @@ const timePerFrameMedidores = 42;
 const timePerFrameRectangulo = 42;
 const timePerFrameRecirculado = 42;
 const timePerFrameReloj = 1000;
+const timePerFrameCompresor = 42;
 let riegoVelocity = 1;
 
 // Actual Frames
@@ -202,6 +228,25 @@ else if (animacion === 'ingles'){
 }
 
 let frameNumberGrowy = 0;
+
+// (Compresor)
+let framesCompresor = 0;
+let framesEntradaA = 0;
+let framesEntradaB = 0;
+let framesSalidaA = 0;
+let framesSalidaB = 0;
+let framesManometroA = 0;
+let framesManometroB = 0;
+let framesNivelA = 0;
+let framesNivelB = 0;
+let framesNumberEntradaA = 0;
+let framesNumberEntradaB = 0;
+let framesNumberSalidaA = 0;
+let framesNumberSalidaB = 0;
+let framesNumberManometroA = 0;
+let framesNumberManometroB = 0;
+let framesNumberNivelA = 0;
+let framesNumberNivelB = 0;
 
 // (Recirculado)
 let framesFocoT1 = 0;
@@ -353,6 +398,9 @@ let frameNumberVent2_4 = 0;
 let timeWhenLastUpdateGrowy;
 let timeFromLastUpdateGrowy;
 
+let timeWhenLastUpdateCompresor;
+let timeFromLastUpdateCompresor;
+
 let timeWhenLastUpdateRecirculado;
 let timeFromLastUpdateRecirculado;
 
@@ -390,13 +438,26 @@ let timeWhenLastUpdateReloj;
 let timeFromLastUpdateReloj;
 
 // Aux variables
+// Compresor
+let showCompresor = false;
+let showCompresorStage = 0;
+let runCompresor = false;
+
 // Recirculado
 let showRecirculado = false;
+let showRecirculadoStage = 0;
 let actTank1 = 0;
 let actTank2 = 0;
 let actTank3 = 0;
 let actTank4 = 0;
 let actTank5 = 0;
+let EntradaTanqueA = false;
+let EntradaTanqueB = false;
+let SalidaTanqueA = false;
+let SalidaTanqueB = false;
+let RecirculadoEntradaCompresor = false;
+let RecirculadoEntradaSMaker = false;
+let RecirculadoSalidaSMaker = false;
 let RecirculadoEntrada = false;
 let TanqueEntrada = 0;
 let RecirculadoSalida = false;
@@ -405,6 +466,7 @@ let TanqueSalida = 0;
 // Manecillas del reloj
 let secondsDegrees = 0;
 
+let showPlanta = false;
 // (Siembra)
 let showPlanta1 = false;
 let runVent1_1 = false;
@@ -1520,7 +1582,294 @@ function animation(startTime){
 
   if (timeFromLastUpdateRecirculado > timePerFrameRecirculado) {
     if (showRecirculado) {
+      if(framesNumberNivelT1 !== framesNivelT1) {
+        $nivelT1.attr('src', pathNiveles + `Nivel_${framesNumberNivelT1}.png`);
+        if (framesNumberNivelT1 > framesNivelT1) {
+            framesNumberNivelT1 = framesNumberNivelT1 - 1;
+        } else {
+            framesNumberNivelT1 = framesNumberNivelT1 + 1;
+        }
+      } else if(showRecirculadoStage===7) {
+        showRecirculadoStage += 1;
+        recirculationIndicator(1, 0);
+        recirculationIndicator(2, 0);
+        recirculationIndicator(3, 0);
+        recirculationIndicator(4, 0);
+        recirculationIndicator(5, 0);
+        emptyRecirculationEntrada();
+      } else if(showRecirculadoStage===19) {
+        showRecirculadoStage += 1;
+        emptyRecirculationSalida();
+      }
 
+      if(framesNumberNivelT2 !== framesNivelT2) {
+        $nivelT2.attr('src', pathNiveles + `Nivel_${framesNumberNivelT2}.png`);
+        if (framesNumberNivelT2 > framesNivelT2) {
+            framesNumberNivelT2 = framesNumberNivelT2 - 1;
+        } else {
+            framesNumberNivelT2 = framesNumberNivelT2 + 1;
+        }
+      } else if (showRecirculadoStage===6) {
+        showRecirculadoStage += 1;
+        levelRecirculation(1, 180);
+        levelRecirculation(6, 80);
+      }
+
+      if(framesNumberNivelT3 !== framesNivelT3) {
+        $nivelT3.attr('src', pathNiveles + `Nivel_${framesNumberNivelT3}.png`);
+        if (framesNumberNivelT3 > framesNivelT3) {
+            framesNumberNivelT3 = framesNumberNivelT3 - 1;
+        } else {
+            framesNumberNivelT3 = framesNumberNivelT3 + 1;
+        }
+      } else if (showRecirculadoStage===5) {
+        showRecirculadoStage += 1;
+
+        levelRecirculation(2, 180);
+        levelRecirculation(6, 100);
+      }
+
+      if(framesNumberNivelT4 !== framesNivelT4) {
+        $nivelT4.attr('src', pathNiveles + `Nivel_${framesNumberNivelT4}.png`);
+        if (framesNumberNivelT4 > framesNivelT4) {
+            framesNumberNivelT4 = framesNumberNivelT4 - 1;
+        } else {
+            framesNumberNivelT4 = framesNumberNivelT4 + 1;
+        }
+      } else if (showRecirculadoStage===4) {
+        showRecirculadoStage += 1;
+        levelRecirculation(3, 180);
+        levelRecirculation(6, 120);
+      }
+
+      if(framesNumberNivelT5 !== framesNivelT5) {
+        $nivelT5.attr('src', pathNiveles + `Nivel_${framesNumberNivelT5}.png`);
+        if (framesNumberNivelT5 > framesNivelT5) {
+            framesNumberNivelT5 = framesNumberNivelT5 - 1;
+        } else {
+            framesNumberNivelT5 = framesNumberNivelT5 + 1;
+        }
+      } else if (showRecirculadoStage===3) {
+        showRecirculadoStage += 1;
+        levelRecirculation(4, 180);
+        levelRecirculation(6, 140);
+      }
+
+      if(framesNumberNivelTA !== framesNivelTA) {
+        $nivelTA.attr('src', pathNiveles + `Nivel_${framesNumberNivelTA}.png`);
+        if (framesNumberNivelTA > framesNivelTA) {
+            framesNumberNivelTA = framesNumberNivelTA - 1;
+        } else {
+            framesNumberNivelTA = framesNumberNivelTA + 1;
+        }
+      } else if(showRecirculadoStage===1){
+        showRecirculadoStage += 1;
+        fillRecirculationEntrada(1);
+        levelRecirculation(6, 160);
+        recirculationIndicator(1, 1);
+        recirculationIndicator(2, 1);
+        recirculationIndicator(3, 1);
+        recirculationIndicator(4, 1);
+        recirculationIndicator(5, 1);
+      }
+
+      if(framesNumberNivelTB !== framesNivelTB) {
+        $nivelTB.attr('src', pathNiveles + `Nivel_${framesNumberNivelTB}.png`);
+        if (framesNumberNivelTB > framesNivelTB) {
+            framesNumberNivelTB = framesNumberNivelTB - 1;
+        } else {
+            framesNumberNivelTB = framesNumberNivelTB + 1;
+        }
+      } else if(showRecirculadoStage===11) {
+        showRecirculadoStage += 1;
+        recirculationIndicator(5, 0);
+        emptyRecirculationSalida();
+      } else if(showRecirculadoStage===15) {
+        showRecirculadoStage += 1;
+        emptySMaker(false);
+      }
+
+      if(actTank1===1 || actTank1===2) {
+        let actURL = '';
+        if(actTank1===1){
+           actURL = `${pathFocosVerdes}${framesFocoT1}.png`;
+        } else if(actTank1===2){
+           actURL = `${pathFocosRojos}${framesFocoT1}.png`;
+        }
+        $focoT1.attr('src', actURL);
+        if(framesFocoT1 >= totalFrameFocoTanque) {
+          framesFocoT1 = 0;
+        } else {
+          framesFocoT1 = framesFocoT1 + 1;
+        }
+      }
+
+      if(actTank2===1 || actTank2===2) {
+        let actURL = '';
+        if(actTank2===1){
+           actURL = `${pathFocosVerdes}${framesFocoT2}.png`;
+        } else if(actTank2===2){
+           actURL = `${pathFocosRojos}${framesFocoT2}.png`;
+        }
+        $focoT2.attr('src', actURL);
+        if(framesFocoT2 >= totalFrameFocoTanque) {
+          framesFocoT2 = 0;
+        } else {
+          framesFocoT2 = framesFocoT2 + 1;
+        }
+      }
+
+      if(actTank3===1 || actTank3===2) {
+        let actURL = '';
+        if(actTank3===1){
+           actURL = `${pathFocosVerdes}${framesFocoT3}.png`;
+        } else if(actTank3===2){
+           actURL = `${pathFocosRojos}${framesFocoT3}.png`;
+        }
+        $focoT3.attr('src', actURL);
+        if(framesFocoT3 >= totalFrameFocoTanque) {
+          framesFocoT3 = 0;
+        } else {
+          framesFocoT3 = framesFocoT3 + 1;
+        }
+      }
+
+      if(actTank4===1 || actTank4===2) {
+        let actURL = '';
+        if(actTank4===1){
+           actURL = `${pathFocosVerdes}${framesFocoT4}.png`;
+        } else if(actTank4===2){
+           actURL = `${pathFocosRojos}${framesFocoT4}.png`;
+        }
+        $focoT4.attr('src', actURL);
+        if(framesFocoT4 >= totalFrameFocoTanque) {
+          framesFocoT4 = 0;
+        } else {
+          framesFocoT4 = framesFocoT4 + 1;
+        }
+      }
+
+      if(actTank5===1 || actTank5===2) {
+        let actURL = '';
+        if(actTank5===1){
+           actURL = `${pathFocosVerdes}${framesFocoT5}.png`;
+        } else if(actTank5===2){
+           actURL = `${pathFocosRojos}${framesFocoT5}.png`;
+        }
+        $focoT5.attr('src', actURL);
+        if(framesFocoT5 >= totalFrameFocoTanque) {
+          framesFocoT5 = 0;
+        } else {
+          framesFocoT5 = framesFocoT5 + 1;
+        }
+      }
+
+      if(RecirculadoEntrada){
+        if(framesEntradaRecirculado < totalFrameLineasAgua49){
+          $entradaRecirculado.attr('src', `${pathEntradaRecirculado}${framesEntradaRecirculado}.png`);
+          framesEntradaRecirculado = framesEntradaRecirculado + 1;
+        } else {
+          RecirculadoEntrada = false;
+          if (showRecirculadoStage===2) {
+            showRecirculadoStage += 1;
+            levelRecirculation(5, 180);
+            levelRecirculation(6, 160);
+          } else if(showRecirculadoStage===8) {
+            showRecirculadoStage += 1;
+            recirculationIndicator(5, 2);
+            fillRecirculationSalida();
+          }
+        }
+      }
+
+      if(RecirculadoSalida){
+        if(framesSalidaRecirculado < totalFrameLineasAgua72){
+          $salidaRecirculado.attr('src', `${pathSalidaRecirculado}${framesSalidaRecirculado}.png`);
+          framesSalidaRecirculado = framesSalidaRecirculado + 1;
+          if(framesSalidaRecirculado===36){
+              RecirculadoSalida = false;
+              if(showRecirculadoStage===9) {
+                showRecirculadoStage += 1;
+                fillSMaker(true);
+              } else if(showRecirculadoStage===17) {
+                showRecirculadoStage += 1;
+                recirculationIndicator(1, 2);
+                fillCompressor(true);
+              }
+          }
+        } else {
+          RecirculadoSalida = false;
+          if(showRecirculadoStage===12) {
+            showRecirculadoStage += 1;
+            fillSMaker(false);
+          } else if(showRecirculadoStage===20) {
+            showRecirculadoStage += 1;
+            fillCompressor(false);
+            recirculationIndicator(1, 0);
+          }
+        }
+      }
+
+      if(RecirculadoEntradaSMaker){
+        if(framesEntradaSMaker <= totalFrameLineasAgua72){
+          $entradaSMaker.attr('src', `${pathEntradaSMaker}${framesEntradaSMaker}.png`);
+          framesEntradaSMaker = framesEntradaSMaker + 1;
+          if(framesEntradaSMaker===36){
+              RecirculadoEntradaSMaker = false;
+              if(showRecirculadoStage===10) {
+                showRecirculadoStage += 1;
+                levelRecirculation(7, 180);
+                levelRecirculation(5, 30);
+              }
+          }
+        } else {
+          RecirculadoEntradaSMaker = false;
+          if(showRecirculadoStage===13) {
+            showRecirculadoStage += 1;
+            emptySMaker(true);
+          }
+        }
+      }
+
+      if(RecirculadoSalidaSMaker){
+        if(framesSalidaSMaker <= totalFrameLineasAgua58){
+          $salidaSMaker.attr('src', `${pathSalidaSMaker}${framesSalidaSMaker}.png`);
+          framesSalidaSMaker = framesSalidaSMaker + 1;
+          if(framesSalidaSMaker===28){
+              RecirculadoSalidaSMaker = false;
+              if(showRecirculadoStage===14) {
+                showRecirculadoStage += 1;
+                levelRecirculation(7, 20);
+              }
+          }
+        } else {
+          RecirculadoSalidaSMaker = false;
+          if(showRecirculadoStage===16) {
+            showRecirculadoStage += 1;
+            fillRecirculationSalida(1);
+          }
+        }
+      }
+
+      if(RecirculadoEntradaCompresor){
+        if(framesEntradaCompresor <= totalFrameLineasAgua72){
+          $entradaCompresor.attr('src', `${pathEntradaCompresor}${framesEntradaCompresor}.png`);
+          framesEntradaCompresor = framesEntradaCompresor + 1;
+          if(framesEntradaCompresor===36){
+              RecirculadoEntradaCompresor = false;
+              if(showRecirculadoStage===18) {
+                showRecirculadoStage += 1;
+                levelRecirculation(1, 30);
+              }
+          }
+        } else {
+          RecirculadoEntradaCompresor = false;
+          if(showRecirculadoStage===21) {
+            showRecirculadoStage += 1;
+            showRecirculado = false;
+          }
+        }
+      }
     } else {
       if(framesNumberNivelT1 !== framesNivelT1) {
         $nivelT1.attr('src', pathNiveles + `Nivel_${framesNumberNivelT1}.png`);
@@ -1675,16 +2024,295 @@ function animation(startTime){
           framesSalidaRecirculado = framesSalidaRecirculado + 1;
           if(framesSalidaRecirculado===36){
               RecirculadoSalida = false;
-              emptyRecirculationEntrada();
           }
         } else {
           RecirculadoSalida = false;
         }
       }
 
+      if(RecirculadoEntradaSMaker){
+        if(framesEntradaSMaker <= totalFrameLineasAgua72){
+          $entradaSMaker.attr('src', `${pathEntradaSMaker}${framesEntradaSMaker}.png`);
+          framesEntradaSMaker = framesEntradaSMaker + 1;
+          if(framesEntradaSMaker===36){
+              RecirculadoEntradaSMaker = false;
+          }
+        } else {
+          RecirculadoEntradaSMaker = false;
+        }
+      }
+
+      if(RecirculadoSalidaSMaker){
+        if(framesSalidaSMaker <= totalFrameLineasAgua58){
+          $salidaSMaker.attr('src', `${pathSalidaSMaker}${framesSalidaSMaker}.png`);
+          framesSalidaSMaker = framesSalidaSMaker + 1;
+          if(framesSalidaSMaker===28){
+              RecirculadoSalidaSMaker = false;
+          }
+        } else {
+          RecirculadoSalidaSMaker = false;
+        }
+      }
+
+      if(RecirculadoEntradaCompresor){
+        if(framesEntradaCompresor <= totalFrameLineasAgua72){
+          $entradaCompresor.attr('src', `${pathEntradaCompresor}${framesEntradaCompresor}.png`);
+          framesEntradaCompresor = framesEntradaCompresor + 1;
+          if(framesEntradaCompresor===36){
+              RecirculadoEntradaCompresor = false;
+          }
+        } else {
+          RecirculadoEntradaCompresor = false;
+        }
+      }
     }
     timeWhenLastUpdateRecirculado = startTime;
   }
+
+
+  if (!timeWhenLastUpdateCompresor) timeWhenLastUpdateCompresor = startTime;
+  timeFromLastUpdateCompresor = startTime - timeWhenLastUpdateCompresor;
+
+  if (timeFromLastUpdateCompresor > timePerFrameCompresor) {
+    if (showCompresor) {
+      if (runCompresor) {
+        $compresor.attr('src', `${pathCompresor}${framesCompresor}.png`);
+        if (framesCompresor >= totalFrameCompresor) {
+            framesCompresor = 0;
+        } else {
+            framesCompresor = framesCompresor + 1;
+        }
+      }
+
+      if (framesNumberManometroA !== framesManometroA){
+        $manometroA.attr('src', `${pathManometroA}${framesNumberManometroA}.png`);
+        if (framesNumberManometroA > framesManometroA) {
+          framesNumberManometroA = framesNumberManometroA - 1;
+        } else {
+          framesNumberManometroA = framesNumberManometroA + 1;
+        }
+      } else if (showCompresorStage===3){
+        showCompresorStage += 1;
+        runCompresor = false;
+        requestSalidaTanque(true, 'A');
+      }
+
+      if (framesNumberManometroB !== framesManometroB){
+        $manometroB.attr('src', `${pathManometroB}${framesNumberManometroB}.png`);
+        if (framesNumberManometroB > framesManometroB) {
+          framesNumberManometroB = framesNumberManometroB - 1;
+        } else {
+          framesNumberManometroB = framesNumberManometroB + 1;
+        }
+      } else if (showCompresorStage===9){
+        showCompresorStage += 1;
+        runCompresor = false;
+        requestSalidaTanque(true, 'B');
+      }
+
+      if(framesNumberNivelA !== framesNivelA) {
+        $nivelA.attr('src', `${pathNivelA}${framesNumberNivelA}.png`);
+        if (framesNumberNivelA > framesNivelA) {
+            framesNumberNivelA = framesNumberNivelA - 1;
+        } else {
+            framesNumberNivelA = framesNumberNivelA + 1;
+        }
+      } else if(showCompresorStage===2){
+        showCompresorStage += 1;
+        runCompresor = true;
+        requestPressure(135, 'A');
+        requestEntradaTanque(false, 'A');
+      } else if (showCompresorStage===5){
+        showCompresorStage += 1;
+        requestSalidaTanque(false, 'A');
+      }
+
+      if(framesNumberNivelB !== framesNivelB) {
+        $nivelB.attr('src', `${pathNivelB}${framesNumberNivelB}.png`);
+        if (framesNumberNivelB > framesNivelB) {
+            framesNumberNivelB = framesNumberNivelB - 1;
+        } else {
+            framesNumberNivelB = framesNumberNivelB + 1;
+        }
+      } else if (showCompresorStage===8){
+        showCompresorStage += 1;
+        runCompresor = true;
+        requestPressure(135, 'B');
+        requestEntradaTanque(false, 'B');
+      } else if (showCompresorStage===11){
+        showCompresorStage += 1;
+        showCompresor = false;
+        requestSalidaTanque(false, 'B');
+      }
+
+      if(EntradaTanqueA){
+        if(framesEntradaA <= totalFrameEntradaCompresor){
+          $entradaA.attr('src', `${pathEntradaA}${framesEntradaA}.png`);
+          framesEntradaA = framesEntradaA + 1;
+          if(framesEntradaA===60){
+              EntradaTanqueA = false;
+              if(showCompresorStage===1){
+                showCompresorStage += 1;
+                requestLevel(130, 'A');
+              }
+          }
+        } else {
+          EntradaTanqueA = false;
+        }
+      }
+
+      if(EntradaTanqueB){
+        if(framesEntradaB <= totalFrameEntradaCompresor){
+          $entradaB.attr('src', `${pathEntradaB}${framesEntradaB}.png`);
+          framesEntradaB = framesEntradaB + 1;
+          if(framesEntradaB===60){
+              EntradaTanqueB = false;
+              if (showCompresorStage===7){
+                showCompresorStage += 1;
+                requestLevel(100, 'B');
+              }
+          }
+        } else {
+          EntradaTanqueB = false;
+        }
+      }
+
+      if(SalidaTanqueA){
+        if(framesSalidaA <= totalFrameSalidaCompresor){
+          $salidaA.attr('src', `${pathSalidaA}${framesSalidaA}.png`);
+          framesSalidaA = framesSalidaA + 1;
+          if(framesSalidaA===73){
+              SalidaTanqueA = false;
+              if (showCompresorStage===4){
+                showCompresorStage += 1;
+                runCompresor = false;
+                requestLevel(25, 'A');
+                requestPressure(30, 'A');
+              }
+          }
+        } else {
+          SalidaTanqueA = false;
+          if (showCompresorStage===6){
+            showCompresorStage += 1;
+            requestEntradaTanque(true, 'B');
+          }
+        }
+      }
+
+      if(SalidaTanqueB){
+        if(framesSalidaB <= totalFrameSalidaCompresor){
+          $salidaB.attr('src', `${pathSalidaB}${framesSalidaB}.png`);
+          framesSalidaB = framesSalidaB + 1;
+          if(framesSalidaB===73){
+              SalidaTanqueB = false;
+              if (showCompresorStage===10){
+                showCompresorStage += 1;
+                requestLevel(20, 'B');
+                requestPressure(30, 'B');
+              }
+          }
+        } else {
+          SalidaTanqueB = false;
+        }
+      }
+    } else {
+      if (runCompresor) {
+        $compresor.attr('src', `${pathCompresor}${framesCompresor}.png`);
+        if (framesCompresor >= totalFrameCompresor) {
+            framesCompresor = 0;
+        } else {
+            framesCompresor = framesCompresor + 1;
+        }
+      }
+
+      if (framesNumberManometroA !== framesManometroA){
+        $manometroA.attr('src', `${pathManometroA}${framesNumberManometroA}.png`);
+        if (framesNumberManometroA > framesManometroA) {
+          framesNumberManometroA = framesNumberManometroA - 1;
+        } else {
+          framesNumberManometroA = framesNumberManometroA + 1;
+        }
+      }
+
+      if (framesNumberManometroB !== framesManometroB){
+        $manometroB.attr('src', `${pathManometroB}${framesNumberManometroB}.png`);
+        if (framesNumberManometroB > framesManometroB) {
+          framesNumberManometroB = framesNumberManometroB - 1;
+        } else {
+          framesNumberManometroB = framesNumberManometroB + 1;
+        }
+      }
+
+      if(framesNumberNivelA !== framesNivelA) {
+        $nivelA.attr('src', `${pathNivelA}${framesNumberNivelA}.png`);
+        if (framesNumberNivelA > framesNivelA) {
+            framesNumberNivelA = framesNumberNivelA - 1;
+        } else {
+            framesNumberNivelA = framesNumberNivelA + 1;
+        }
+      }
+
+      if(framesNumberNivelB !== framesNivelB) {
+        $nivelB.attr('src', `${pathNivelB}${framesNumberNivelB}.png`);
+        if (framesNumberNivelB > framesNivelB) {
+            framesNumberNivelB = framesNumberNivelB - 1;
+        } else {
+            framesNumberNivelB = framesNumberNivelB + 1;
+        }
+      }
+
+      if(EntradaTanqueA){
+        if(framesEntradaA <= totalFrameEntradaCompresor){
+          $entradaA.attr('src', `${pathEntradaA}${framesEntradaA}.png`);
+          framesEntradaA = framesEntradaA + 1;
+          if(framesEntradaA===60){
+              EntradaTanqueA = false;
+          }
+        } else {
+          EntradaTanqueA = false;
+        }
+      }
+
+      if(EntradaTanqueB){
+        if(framesEntradaB <= totalFrameEntradaCompresor){
+          $entradaB.attr('src', `${pathEntradaB}${framesEntradaB}.png`);
+          framesEntradaB = framesEntradaB + 1;
+          if(framesEntradaB===60){
+              EntradaTanqueB = false;
+          }
+        } else {
+          EntradaTanqueB = false;
+        }
+      }
+
+      if(SalidaTanqueA){
+        if(framesSalidaA <= totalFrameSalidaCompresor){
+          $salidaA.attr('src', `${pathSalidaA}${framesSalidaA}.png`);
+          framesSalidaA = framesSalidaA + 1;
+          if(framesSalidaA===73){
+              SalidaTanqueA = false;
+          }
+        } else {
+          SalidaTanqueA = false;
+        }
+      }
+
+      if(SalidaTanqueB){
+        if(framesSalidaB <= totalFrameSalidaCompresor){
+          $salidaB.attr('src', `${pathSalidaB}${framesSalidaB}.png`);
+          framesSalidaB = framesSalidaB + 1;
+          if(framesSalidaB===73){
+              SalidaTanqueB = false;
+          }
+        } else {
+          SalidaTanqueB = false;
+        }
+      }
+    }
+    timeWhenLastUpdateCompresor = startTime;
+  }
+
+
 
   if(scr.attributes.growy!==undefined && !scr.attributes.growy){
     if (!timeWhenLastUpdateReloj) timeWhenLastUpdateReloj = startTime;
@@ -1733,6 +2361,60 @@ function setDate() {
 
   const hourDegrees = ((hour / 12) * 360) + ((mins/60)*30) + 90;
   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+}
+
+function requestPressure(pressure, tank) {
+  const maxPressure = 200;
+  const percentage = pressure/maxPressure;
+  const frame = parseInt(totalFrameManometroCompresor*percentage, 10);
+  if (tank==='A') {
+    framesManometroA = frame;
+  } else {
+    framesManometroB = frame;
+  }
+}
+
+function requestLevel(liters, tank) {
+  let maxLiters = 0;
+  if (tank==='A') { maxLiters = 160; }
+  else { maxLiters = 120; }
+
+  const percentage = liters/maxLiters;
+  const frame = parseInt(totalFrameNivelCompresor*percentage, 10);
+  if (tank==='A') { framesNivelA = frame; }
+  else { framesNivelB = frame; }
+}
+
+function requestEntradaTanque(inTank, tank) {
+  if (tank==='A'){
+    if (EntradaTanqueA===false) {
+      EntradaTanqueA=true;
+      if (inTank===true) { framesEntradaA = 0; }
+      else { framesEntradaA = 61; }
+    }
+  } else if (tank==='B') {
+    if (EntradaTanqueB===false) {
+      EntradaTanqueB=true;
+      if (inTank===true) { framesEntradaB = 0; }
+      else { framesEntradaB = 61; }
+    }
+  }
+}
+
+function requestSalidaTanque(outTank, tank) {
+  if (tank==='A') {
+    if (SalidaTanqueA===false) {
+      SalidaTanqueA=true;
+      if (outTank===true) { framesSalidaA = 0; }
+      else { framesSalidaA = 73; }
+    }
+  } else if (tank==='B') {
+    if (SalidaTanqueB===false) {
+      SalidaTanqueB=true;
+      if (outTank===true) { framesSalidaB = 0; }
+      else { framesSalidaB = 73; }
+    }
+  }
 }
 
 function levelRecirculation(tank, liters){
@@ -1852,7 +2534,7 @@ function fillRecirculationSalida(tank) {
   }
 }
 
-function emptyRecirculationEntrada(){
+function emptyRecirculationSalida(){
   if (RecirculadoSalida===false) {
     RecirculadoSalida=true;
     if(TanqueSalida===1) {
@@ -1867,6 +2549,34 @@ function emptyRecirculationEntrada(){
       pathSalidaRecirculado = "./img/LineasAgua/AguaSaliendoTanques/AguaSaleTanque1/AguaSaleTanque1_";
     }
     framesSalidaRecirculado = 37;
+  }
+}
+
+function fillSMaker(inSMaker) {
+  if (RecirculadoEntradaSMaker===false && RecirculadoEntradaCompresor===false) {
+    RecirculadoEntradaSMaker=true;
+    $entradaCompresor.css("z-index", "0");
+    $entradaSMaker.css("z-index", "1");
+    if (inSMaker===true) { framesEntradaSMaker = 0; }
+    else { framesEntradaSMaker = 37; }
+  }
+}
+
+function emptySMaker(outSMaker) {
+  if (RecirculadoSalidaSMaker===false) {
+    RecirculadoSalidaSMaker=true;
+    if (outSMaker===true) { framesSalidaSMaker = 0; }
+    else { framesSalidaSMaker = 29; }
+  }
+}
+
+function fillCompressor(inCompressor) {
+  if (RecirculadoEntradaCompresor===false && RecirculadoEntradaSMaker ===false) {
+    RecirculadoEntradaCompresor=true;
+    $entradaCompresor.css("z-index", "1");
+    $entradaSMaker.css("z-index", "0");
+    if (inCompressor===true) { framesEntradaCompresor = 0; }
+    else { framesEntradaCompresor = 37; }
   }
 }
 
@@ -2694,45 +3404,18 @@ function startPlantas(){
 
 function startRecirculation(){
   /* Start Show Recirculation */
+  showRecirculado = true;
   $recirculado.css("visibility", "visible");
-  levelRecirculation(1, 100);
-  levelRecirculation(2, 100);
-  levelRecirculation(3, 100);
-  levelRecirculation(4, 100);
-  levelRecirculation(5, 100);
-  levelRecirculation(6, 20);
-  levelRecirculation(7, 150);
-  recirculationIndicator(1, 2);
-  recirculationIndicator(2, 2);
-  recirculationIndicator(3, 1);
-  recirculationIndicator(4, 2);
-  recirculationIndicator(5, 1);
-  fillRecirculationEntrada(1);
-  fillRecirculationSalida(5);
-  /*
-  for (var j = 1; j < 8 + 1; j++) {
-    requestRec('yellow', j, 1);
-  }
-  showPlanta1 = true;
-  runVent1_1 = true;
-  runRiego_1 = true;
-  */
+  levelRecirculation(6, 200);
+  showRecirculadoStage += 1;
 }
 
 function startCompressor(){
-  /* Start Show Recirculation */
+  /* Start Show Compressor */
   $sistemaCompresion.css("visibility", "visible");
-  /*
-  requestTemp(18, 1);
-  requestHum(70, 1);
-  requestCO2(450, 1);
-  for (var j = 1; j < 8 + 1; j++) {
-    requestRec('yellow', j, 1);
-  }
-  showPlanta1 = true;
-  runVent1_1 = true;
-  runRiego_1 = true;
-  */
+  showCompresor = true;
+  showCompresorStage += 1;
+  requestEntradaTanque(true, 'A');
 }
 
 function startGrowy(){
@@ -3012,13 +3695,20 @@ query1.find()
           console.log('Screens object updated', object.attributes);
           scr = object;
           if (object.attributes.floor1) {
-            startPlantas();
+            if (showPlanta===false){
+              showPlanta = true;
+              startPlantas();
+            }
           }
           if (object.attributes.recirculation) {
-            startRecirculation();
+            if (showRecirculadoStage===0){
+              startRecirculation();
+            }
           }
           if (object.attributes.compressor) {
-            startCompressor();
+            if (showCompresorStage===0){
+              startCompressor();
+            }
           }
         }
       });
@@ -3108,6 +3798,31 @@ Para poder hacer un loop de imágenes necesitamos precargar las imágenes que va
 */
 $(document).ready(() => {
   const t0 = Date.now();
+
+  for (var i = 1; i < totalFrameCompresor + 1; i++) {
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathCompresor}${i}.png');"></div>`);
+  }
+
+  for (var i = 1; i < totalFrameEntradaCompresor + 1; i++) {
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathEntradaA}${i}.png');"></div>`);
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathEntradaB}${i}.png');"></div>`);
+  }
+
+  for (var i = 1; i < totalFrameSalidaCompresor + 1; i++) {
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathSalidaA}${i}.png');"></div>`);
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathSalidaB}${i}.png');"></div>`);
+  }
+
+  for (var i = 1; i < totalFrameManometroCompresor + 1; i++) {
+    console
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathManometroA}${i}.png');"></div>`);
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathManometroB}${i}.png');"></div>`);
+  }
+
+  for (var i = 1; i < totalFrameNivelCompresor + 1; i++) {
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathNivelA}${i}.png');"></div>`);
+    $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${pathNivelB}${i}.png');"></div>`);
+  }
 
   for (var i = 1; i < totalFrameNivelRecirculado + 1; i++) {
     $('body').append(`<div id="preload-image-${000 + i}" style="background-image: url('${genericPath}Niveles/Nivel_${i}.png');"></div>`);
@@ -3211,9 +3926,6 @@ $(document).ready(() => {
     else if (animacion === 'ingles'){ $('body').append(`<div id="preload-image-${0 + i}" style="background-image: url('${genericPath}GROWY_EN/GROWY_EN${j}');"></div>`); }
   }
 
-  /* Start Show Recirculado */
-
-  /* Start Show Recirulado */
   console.log("Call to charge image " + (Date.now() - t0) + " milliseconds.");
 });
 
