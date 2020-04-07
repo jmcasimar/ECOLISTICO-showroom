@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+"""
 import os
 from datetime import datetime
 
@@ -188,7 +188,7 @@ esp = espObject()
 esp.T1R = 20
 print(esp.getData())
 print( getattr(esp, "T1R"))
-"""
+
 st = State.Query.all().order_by('createdAt', descending=True).limit(1)
 st = st[0]
 print(st.objectId)
@@ -197,3 +197,20 @@ if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
 
 newEntry(st, stateKeys)
 """
+
+print('Entender uso operadores')
+
+OPERATORS = [
+        'lt', 'lte', 'gt', 'gte', 'ne', 'in', 'nin', 'exists', 'select', 'dontSelect', 'all', 'regex', 'relatedTo', 'nearSphere'
+    ]
+
+def extract_filter_operator(parameter):
+    for op in OPERATORS:
+        underscored = '__%s' % op
+        print(underscored)
+        if parameter.endswith(underscored):
+            print(parameter[:-len(underscored)], op)
+            return parameter[:-len(underscored)], op
+    return parameter, None
+
+extract_filter_operator('porfin__gte')

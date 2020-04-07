@@ -2,7 +2,7 @@
 import os
 import re
 import json
-from time import sleep
+from time import sleep, time
 import credentials as cr
 from bson import json_util
 from datetime import datetime
@@ -10,11 +10,8 @@ import paho.mqtt.client as mqtt
 from mqttCallback import mqttController
 """
 # PENDIENTE
-1- Detectar litros para actualizar el estado de los volumenes de agua
-2- Estado On/Off Compresor
-3- Estados de las bombas
-
-Estos últimos se pueden obtener parcialmente de las líneas updateSystemState.
+1- Robustecer actualización de eventos para que baja latencia de lectura
+en el log no afecte al registro de todos los eventos definidos como importantes
 """
 # Define path to parse app
 os.environ['PARSE_API_ROOT'] = cr.db_uri
@@ -215,6 +212,45 @@ class growerObject():
         }
         return struct
 
+# Create Water Class to write in it
+class Water(Object):
+    system = ''
+    RealTime = datetime.now()
+    waste = 0
+    EV1A1 = 0
+    EV1A2 = 0
+    EV1A3 = 0
+    EV1A4 = 0
+    EV1B1 = 0
+    EV1B2 = 0
+    EV1B3 = 0
+    EV1B4 = 0
+    EV2A1 = 0
+    EV2A2 = 0
+    EV2A3 = 0
+    EV2A4 = 0
+    EV2B1 = 0
+    EV2B2 = 0
+    EV2B3 = 0
+    EV2B4 = 0
+    EV3A1 = 0
+    EV3A2 = 0
+    EV3A3 = 0
+    EV3A4 = 0
+    EV3B1 = 0
+    EV3B2 = 0
+    EV3B3 = 0
+    EV3B4 = 0
+    EV4A1 = 0
+    EV4A2 = 0
+    EV4A3 = 0
+    EV4A4 = 0
+    EV4B1 = 0
+    EV4B2 = 0
+    EV4B3 = 0
+    EV4B4 = 0
+    pass
+
 # Global Functions
 # Function to save new object
 def newEntry(object, properties):
@@ -228,6 +264,18 @@ def updateState(object, property, value):
     global update
     if(getattr(object, property) != value):
         update = True
+        setattr(object, property, value)
+
+# Function to save new object in Water
+def newWaterEntry(object, properties):
+    newObject = Water()
+    for property in properties:
+        setattr(newObject, property, getattr(object, property))
+    newObject.save()
+
+# Function to update some property in state
+def updateWaterState(object, property, value):
+    if(getattr(object, property) != value):
         setattr(object, property, value)
 
 # Get pointer
@@ -311,6 +359,12 @@ st = st[0]
 if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
     setattr(st, 'system', getPointer('Config', conf.objectId))
 
+# Create Water object to report consumption
+wtr = Water()
+# Create a Pointer object to State Class
+if(getattr(wtr, 'system') != getPointer('Config', conf.objectId)):
+    setattr(wtr, 'system', getPointer('Config', conf.objectId))
+
 # Define mqtt Controller for communication
 mqttControl = mqttController()
 
@@ -379,7 +433,7 @@ while True:
                             updateValve = False
                             updateState(st, 'RealTime', dateObj)
                             newEntry(st, cr.stateKeys) # Update database
-                            print("DB UPDATED")
+                            #print("DB UPDATED")
                     # Here is where I have to decode te lines and parse to database
                     if len(line)>45:
                         dateString = line[0:19]
@@ -451,7 +505,42 @@ while True:
                                     print('REGEX failed getting pressure')
                             elif('liters' in msg): # Info from pressure sensors
                                 liters = re.findall('\d+\.\d+', msg)[0]
-                                #print('liters', liters)
+                                if('Level' in msg):
+                                    if ('Recirculation Tank' in msg): updateState(st, 'Vol_Recirculation', float(liters))
+                                    elif('Solution1'): updateState(st, 'Vol1', float(liters))
+                                    elif('Solution2'): updateState(st, 'Vol2', float(liters))
+                                    elif('Solution3'): updateState(st, 'Vol3', float(liters))
+                                    elif('Solution4'): updateState(st, 'Vol4', float(liters))
+                                    elif('Solution5'): updateState(st, 'Vol5', float(liters))
+                                    elif('SMaker'): updateState(st, 'Vol_SMaker', float(liters))
+                                elif('Water Consumption' in msg):
+                                    ev = re.findall('[1-4][(A-B)][1-4]', msg)
+                                    if(len(ev) == 1 ): updateWaterState(wtr, 'EV{}'.format(ev[0]), float(liters))
+                                elif('Wasted Water Volume' in msg): updateWaterState(wtr, 'waste', float(liters))
+                            elif('Restarting all water parameters saved' in msg):
+                                updateWaterState(wtr, 'RealTime', dateObj)
+                                newWaterEntry(wtr, cr.waterKeys) # Update database
+                            elif('from solution' in msg):
+                                sol = re.findall("from solution[1-4]", msg)
+                                if(len(sol)==1):
+                                    if('to nutrition kegs' in msg): updateState(st, 'PumpOut', int(sol[0][-1]))
+                                    elif('to solution maker' in msg): updateState(st, 'PumpOut', int(sol[0][-1])+10)
+                                elif('from solution 5' in msg): updateState(st, 'PumpOut', 5)
+                            elif('Move Out finished' in msg): updateState(st, 'PumpOut', 250)
+                            elif('Emptying solution Maker' in msg): updateState(st, 'PumpSMaker', 1)
+                            elif('Solution Maker emptied' in msg): updateState(st, 'PumpSMaker', 0)
+                            elif('updateSystemState' in msg):
+                                systemParam = msg.split(',')
+                                if(len(systemParam) >= 11):
+                                    updateState(st, 'Vol_Nut', float(systemParam[2]))
+                                    updateState(st, 'Vol_H2O', float(systemParam[3]))
+                                    updateState(st, 'PumpIn', int(systemParam[6]))
+                                    if( (systemParam[7]=='1' or systemParam[7]=='10' or systemParam[7]=='40' or systemParam[7]=='41' or
+                                    systemParam[7]=='42' or systemParam[7]=='43' or systemParam[7]=='44' or systemParam[7]=='45' or
+                                    systemParam[7]=='51' or systemParam[7]=='52' or systemParam[7]=='55' or systemParam[7]=='60' or
+                                    systemParam[7]=='251' or systemParam[8]=='10') and  not st.compressor):
+                                        updateState(st, 'compressor', True)
+                                    elif (st.compressor): updateState(st, 'compressor', False)
                         #elif(device.startswith('motorsGrower')): print('motorsGrower')
                         #elif(device.startswith('solutionMaker')): print('solutionMaker')
                         elif(device.startswith('esp')):
@@ -481,7 +570,7 @@ while True:
             if updateValve: updateValve = False
             updateState(st, 'RealTime', dateObj)
             newEntry(st, cr.stateKeys) # Update database
-            print("DB UPDATED")
+            #print("DB UPDATED")
         #except Exception as e: print(e)
     elif(fSize > os.path.getsize(file)): fSize = os.path.getsize(file)
     sleep(0.1) # Avoiding HIGH CPU usage
