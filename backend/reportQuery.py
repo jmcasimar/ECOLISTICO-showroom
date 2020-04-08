@@ -48,6 +48,8 @@ def stateQuery(initialHour, finalHour):
         resultNumber += i
         if (i<limitNumber): runQuery = False
 
+    print('Vivencias registradas en la base de datos entre el {0} y el {1}: {2} resultados'.format(initialHour, finalHour, len(results)))
+
     return results
 
 def waterQuery(initialHour, finalHour):
@@ -67,7 +69,7 @@ def waterQuery(initialHour, finalHour):
 
     return waterResults
 
-def plantQuery(floor, side):
+def plantQuery(floor, side, printResult = False):
     # Query to know the plants that are inside the system
     line = 1 # PARAM
     #plant = Plant.Query.filter(system=ptrSystem).filter(piso=floor).filter(lado=side).filter(linea=line).order_by('createdAt', descending=True).limit(165)
@@ -80,7 +82,7 @@ def plantQuery(floor, side):
     for i,pl in enumerate(plant):
         i += 1
         newPlant = {}
-        newPlant['index'] = i + 1
+        newPlant['index'] = i
         newPlant['fechaSiembra'] = (pl.createdAt-deltaUTC)
         newPlant['diasDentro'] = (datetime.now()-(pl.createdAt-deltaUTC)).days
         plantArray.append(newPlant)
@@ -137,15 +139,16 @@ def plantQuery(floor, side):
                 waterConsumption += getattr(water, zone)
 
         pl['consumoAgua'] = waterConsumption
-        """
-        #DEBUG
-        if(pl['index']<10): print('Index:{0}\t\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
-        pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
-        pl['consumoAgua']))
-        else: print('Index:{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
-        pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
-        pl['consumoAgua']))
-        """
+
+        # DEBUG
+        if printResult:
+            if(pl['index']<10): print('Index:{0}\t\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
+            pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
+            pl['consumoAgua']))
+            else: print('Index:{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
+            pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
+            pl['consumoAgua']))
+
     return plantArray
 
 register(cr.APPLICATION_ID, cr.REST_API_KEY, master_key=cr.MASTER_KEY)
@@ -162,12 +165,13 @@ ptrSystem = {
 print('System Configuration ID: {}'.format(conf.objectId))
 
 # Query to know the State of the System between 2 dates
+"""
+# DEBUG
 iHour = datetime(2020,4,3) # PARAM
 fHour = datetime(2020,4,6) # PARAM
 stateResult = stateQuery(iHour, fHour)
-print('Vivencias registradas en la base de datos entre el {0} y el {1}: {2} resultados'.format(iHour, fHour, len(stateResult)))
 
-plant1A = plantQuery(1, 'A')
+plant1A = plantQuery(1, 'A', True)
 plant1B = plantQuery(1, 'B')
 plant2A = plantQuery(2, 'A')
 plant2B = plantQuery(2, 'B')
@@ -175,3 +179,4 @@ plant3A = plantQuery(3, 'A')
 plant3B = plantQuery(3, 'B')
 plant4A = plantQuery(4, 'A')
 plant4B = plantQuery(4, 'B')
+"""

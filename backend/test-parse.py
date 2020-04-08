@@ -198,19 +198,11 @@ if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
 newEntry(st, stateKeys)
 """
 
-print('Entender uso operadores')
+import reportQuery as rQ
+from datetime import datetime
 
-OPERATORS = [
-        'lt', 'lte', 'gt', 'gte', 'ne', 'in', 'nin', 'exists', 'select', 'dontSelect', 'all', 'regex', 'relatedTo', 'nearSphere'
-    ]
+stateResult = rQ.stateQuery(datetime(2020,4,3), datetime(2020,4,6))
+for st in stateResult:
+    print(st.RealTime)
 
-def extract_filter_operator(parameter):
-    for op in OPERATORS:
-        underscored = '__%s' % op
-        print(underscored)
-        if parameter.endswith(underscored):
-            print(parameter[:-len(underscored)], op)
-            return parameter[:-len(underscored)], op
-    return parameter, None
-
-extract_filter_operator('porfin__gte')
+plant1A = rQ.plantQuery(1, 'A', True)
