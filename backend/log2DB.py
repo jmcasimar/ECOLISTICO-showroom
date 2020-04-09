@@ -437,7 +437,11 @@ while True:
                     # Here is where I have to decode te lines and parse to database
                     if len(line)>45:
                         dateString = line[0:19]
-                        dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
+                        try: dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
+                        except Exception as e:
+                            dateObj = datetime.now()
+                            print('EROR dateObj: {}'.format(e))
+                            print('dateString = {}'.format(dateString))
                         device = line[20:36].strip(' ')
                         level = line[36:45].strip(' ')
                         msg = line[45:]
@@ -504,19 +508,22 @@ while True:
                                 except:
                                     print('REGEX failed getting pressure')
                             elif('liters' in msg): # Info from pressure sensors
-                                liters = re.findall('\d+\.\d+', msg)[0]
-                                if('Level' in msg):
-                                    if ('Recirculation Tank' in msg): updateState(st, 'Vol_Recirculation', float(liters))
-                                    elif('Solution1'): updateState(st, 'Vol1', float(liters))
-                                    elif('Solution2'): updateState(st, 'Vol2', float(liters))
-                                    elif('Solution3'): updateState(st, 'Vol3', float(liters))
-                                    elif('Solution4'): updateState(st, 'Vol4', float(liters))
-                                    elif('Solution5'): updateState(st, 'Vol5', float(liters))
-                                    elif('SMaker'): updateState(st, 'Vol_SMaker', float(liters))
-                                elif('Water Consumption' in msg):
-                                    ev = re.findall('[1-4][(A-B)][1-4]', msg)
-                                    if(len(ev) == 1 ): updateWaterState(wtr, 'EV{}'.format(ev[0]), float(liters))
-                                elif('Wasted Water Volume' in msg): updateWaterState(wtr, 'waste', float(liters))
+                                try:
+                                    liters = re.findall('\d+\.\d+', msg)[0]
+                                    if('Level' in msg):
+                                        if ('Recirculation Tank' in msg): updateState(st, 'Vol_Recirculation', float(liters))
+                                        elif('Solution1' in msg): updateState(st, 'Vol1', float(liters))
+                                        elif('Solution2' in msg): updateState(st, 'Vol2', float(liters))
+                                        elif('Solution3' in msg): updateState(st, 'Vol3', float(liters))
+                                        elif('Solution4' in msg): updateState(st, 'Vol4', float(liters))
+                                        elif('Solution5' in msg): updateState(st, 'Vol5', float(liters))
+                                        elif('SMaker' in msg): updateState(st, 'Vol_SMaker', float(liters))
+                                    elif('Water Consumption' in msg):
+                                        ev = re.findall('[1-4][(A-B)][1-4]', msg)
+                                        if(len(ev) == 1 ): updateWaterState(wtr, 'EV{}'.format(ev[0]), float(liters))
+                                    elif('Wasted Water Volume' in msg): updateWaterState(wtr, 'waste', float(liters))
+                                except:
+                                    print('REGEX failed getting liters')
                             elif('Restarting all water parameters saved' in msg):
                                 updateWaterState(wtr, 'RealTime', dateObj)
                                 newWaterEntry(wtr, cr.waterKeys) # Update database

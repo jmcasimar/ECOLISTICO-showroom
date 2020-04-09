@@ -205,4 +205,4 @@ stateResult = rQ.stateQuery(datetime(2020,4,3), datetime(2020,4,6))
 for st in stateResult:
     print(st.RealTime)
 
-plant1A = rQ.plantQuery(1, 'A', True)
+plant1A = rQ.plantQuery(1, 'A')

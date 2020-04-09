@@ -2,12 +2,12 @@
 import os
 import json
 from time import sleep, time
-import credentials as cr
 from bson import json_util
 from datetime import datetime, timedelta
 
 # Define path to parse app
-os.environ['PARSE_API_ROOT'] = cr.db_uri
+#os.environ['PARSE_API_ROOT'] = 'http://localhost:1337/parse'
+os.environ['PARSE_API_ROOT'] = 'http://192.168.1.74:1337/parse'
 
 from parse_rest.datatypes import Function, Object, GeoPoint
 from parse_rest.connection import register
@@ -151,10 +151,10 @@ def plantQuery(floor, side, printResult = False):
 
     return plantArray
 
-register(cr.APPLICATION_ID, cr.REST_API_KEY, master_key=cr.MASTER_KEY)
+register('123456', '...', master_key='...')
 
 # Query the configuration of the system
-conf = Config.Query.filter(city=cr.cityFilter).filter(state=cr.stateFilter).filter(locationNumber=cr.numberFilter)
+conf = Config.Query.filter(city='Valle de Bravo').filter(state='Edo. de Mexico').filter(locationNumber=1)
 conf = conf[0]
 ptrSystem = {
     '__type': 'Pointer',
@@ -163,20 +163,3 @@ ptrSystem = {
 }
 
 print('System Configuration ID: {}'.format(conf.objectId))
-
-# Query to know the State of the System between 2 dates
-"""
-# DEBUG
-iHour = datetime(2020,4,3) # PARAM
-fHour = datetime(2020,4,6) # PARAM
-stateResult = stateQuery(iHour, fHour)
-
-plant1A = plantQuery(1, 'A', True)
-plant1B = plantQuery(1, 'B')
-plant2A = plantQuery(2, 'A')
-plant2B = plantQuery(2, 'B')
-plant3A = plantQuery(3, 'A')
-plant3B = plantQuery(3, 'B')
-plant4A = plantQuery(4, 'A')
-plant4B = plantQuery(4, 'B')
-"""
