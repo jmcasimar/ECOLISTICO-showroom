@@ -3425,8 +3425,8 @@ function startGrowy(){
 }
 
 Parse.initialize("123456", "...", "...");
-//Parse.serverURL = 'http://localhost:1337/parse';
-Parse.serverURL = 'http://192.168.1.84:1337/parse';
+Parse.serverURL = 'http://localhost:1337/parse';
+//Parse.serverURL = 'http://192.168.1.84:1337/parse';
 
 // System ID
 const sysID = "15-113-001";
