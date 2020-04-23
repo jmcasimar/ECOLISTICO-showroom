@@ -7,10 +7,11 @@ from credentials import system
 import paho.mqtt.publish as publish
 
 class mqttController():
-    def __init__(self):
+    def __init__(self, logger):
         # Define aux variables
         self.clientConnected = False
         self.actualTime = time()
+        self.log = logger
 
     # Function to display hostname and IP address
     def getIP(self):
@@ -19,7 +20,7 @@ class mqttController():
             host_name = socket.gethostname()
             host_ip = socket.gethostbyname(host_name)
         except:
-            print("Unable to get Hostname and IP")
+            self.log.error("Unable to get Hostname and IP")
         return host_ip
 
     # Callback fires when conected to MQTT broker.
@@ -30,8 +31,8 @@ class mqttController():
             message += " Connection succesful"
             mssg = "Master connected"
             client.subscribe(Topic)
-            print(message)
-            print("Subscribed topic= {}".format(Topic))
+            self.log.info(message)
+            self.log.info("Subscribed topic= {}".format(Topic))
         else:
             message += " Connection refused"
             if(rc == 1): message += " - incorrect protocol version"
@@ -40,7 +41,7 @@ class mqttController():
             elif(rc == 4): message += " - bad username or password"
             elif(rc == 5): message += " - not authorised"
             else: message += " - currently unused"
-            print(message)
+            self.log.error(message)
 
     # Callback fires when a published message is received.
     def on_message(self, client, userdata, msg):
@@ -49,14 +50,14 @@ class mqttController():
         if message.startswith('whatIsMyIP'):
             IP = self.getIP()
             publish.single('{}/Server'.format(system['ID']), IP, hostname = system['brokerIP'])
-            print('IP sent to master')
+            self.log.info('IP sent to master')
 
     # Callback fires when message published
     def on_publish(self, client, userdata, mid):
-        print("Message delivered")
+        self.log.info("Message delivered")
 
     # Callback fires when client disconnected
     def on_disconnect(self, client, userdata, rc):
-        print("Client MQTT Disconnected")
+        self.log.warning("Client MQTT Disconnected")
         self.clientConnected = False
         self.actualTime = time()

@@ -2,3 +2,4 @@
 **/__pycache__
 # Confidential Files
 backend/credentials.py
+backend/temp
