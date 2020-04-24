@@ -442,14 +442,17 @@ try:
                         # Here is where I have to decode te lines and parse to database
                         if len(line)>45:
                             dateString = line[0:19]
-                            try: dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
-                            except Exception as e:
-                                dateObj = datetime.now()
-                                log.logger.error('dateObj: {}'.format(e))
-                                log.logger.error('dateString = {}'.format(dateString))
                             device = line[20:36].strip(' ')
                             level = line[36:45].strip(' ')
                             msg = line[45:]
+                            if (dateString!=''): dateObj = datetime.strptime(dateString, '%Y-%m-%d %H:%M:%S')
+                            else:
+                                dateObj = datetime.now()
+                                log.logger.error('dateObj: {}'.format(e))
+                                log.logger.error('dateString = {}'.format(dateString))
+                                log.logger.error('device = {}'.format(device))
+                                log.logger.error('level = {}'.format(level))
+                                log.logger.error('msg = {}'.format(msg))
                             # Get relevant master info
                             if(device.startswith('master')):
                                 if('C' in msg and '%RH' in msg and 'm' in msg):
