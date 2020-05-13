@@ -442,6 +442,9 @@ let timeFromLastUpdateReloj;
 let showCompresor = false;
 let showCompresorStage = 0;
 let runCompresor = false;
+let irrigationSystem = 0;
+let auxEntradaA = false;
+let auxEntradaB = false;
 
 // Recirculado
 let showRecirculado = false;
@@ -462,6 +465,8 @@ let RecirculadoEntrada = false;
 let TanqueEntrada = 0;
 let RecirculadoSalida = false;
 let TanqueSalida = 0;
+let auxEntradaRec = 0;
+let auxSalidaRec = 0;
 
 // Manecillas del reloj
 let secondsDegrees = 0;
@@ -3517,6 +3522,152 @@ query1.find()
           }
 
           // If not timelapse or initial show then
+          if(!scr.attributes.timeLapse.render && scr.attributes.compressor && showCompresor===false){
+            // Compresor
+            if (object.attributes.compressor===true && runCompresor===false) {
+              runCompresor = true;
+            } else if (object.attributes.compressor===false && runCompresor===true) {
+              runCompresor = false;
+            }
+            // Pressure Nutrition
+            if (object.attributes.P_Nut !== undefined && object.attributes.P_Nut !== null){
+              requestPressure(object.attributes.P_Nut, 'A');
+            }
+            // Pressure H2O
+            if (object.attributes.P_H2O !== undefined && object.attributes.P_H2O !== null){
+              requestPressure(object.attributes.P_H2O, 'B');
+            }
+            // Level Nutrition
+            if (object.attributes.Vol_Nut !== undefined && object.attributes.Vol_Nut !== null){
+              requestLevel(object.attributes.Vol_Nut, 'A');
+            }
+            // Level Nutrition
+            if (object.attributes.Vol_H2O !== undefined && object.attributes.Vol_H2O !== null){
+              requestLevel(object.attributes.Vol_H2O, 'B');
+            }
+            // Irrigation
+            if ( (object.attributes.EV1A1 || object.attributes.EV1B1 ||
+                  object.attributes.EV2A1 || object.attributes.EV2B1 ||
+                  object.attributes.EV3A1 || object.attributes.EV3B1 ||
+                  object.attributes.EV4A1 || object.attributes.EV4B1 ||
+                  object.attributes.EV1A2 || object.attributes.EV1B2 ||
+                  object.attributes.EV2A2 || object.attributes.EV2B2 ||
+                  object.attributes.EV3A2 || object.attributes.EV3B2 ||
+                  object.attributes.EV4A2 || object.attributes.EV4B2 ||
+                  object.attributes.EV1A3 || object.attributes.EV1B3 ||
+                  object.attributes.EV2A3 || object.attributes.EV2B3 ||
+                  object.attributes.EV3A3 || object.attributes.EV3B3 ||
+                  object.attributes.EV4A3 || object.attributes.EV4B3 ||
+                  object.attributes.EV1A4 || object.attributes.EV1B4 ||
+                  object.attributes.EV2A4 || object.attributes.EV2B4 ||
+                  object.attributes.EV3A4 || object.attributes.EV3B4 ||
+                  object.attributes.EV4A4 || object.attributes.EV4B4) ) {
+              if (irrigationSystem === 0) {
+                irrigationSystem += 1;
+                requestSalidaTanque(true, 'A');
+              }
+              else if (irrigationSystem === 2) {
+                irrigationSystem += 1;
+                requestSalidaTanque(true, 'B');
+              }
+            } else if (
+              (!object.attributes.EV2A1 && !object.attributes.EV2B1 &&
+              !object.attributes.EV3A1 && !object.attributes.EV3B1 &&
+              !object.attributes.EV4A1 && !object.attributes.EV4B1 &&
+              !object.attributes.EV1A2 && !object.attributes.EV1B2 &&
+              !object.attributes.EV2A2 && !object.attributes.EV2B2 &&
+              !object.attributes.EV3A2 && !object.attributes.EV3B2 &&
+              !object.attributes.EV4A2 && !object.attributes.EV4B2 &&
+              !object.attributes.EV1A3 && !object.attributes.EV1B3 &&
+              !object.attributes.EV2A3 && !object.attributes.EV2B3 &&
+              !object.attributes.EV3A3 && !object.attributes.EV3B3 &&
+              !object.attributes.EV4A3 && !object.attributes.EV4B3 &&
+              !object.attributes.EV1A4 && !object.attributes.EV1B4 &&
+              !object.attributes.EV2A4 && !object.attributes.EV2B4 &&
+              !object.attributes.EV3A4 && !object.attributes.EV3B4 &&
+              !object.attributes.EV4A4 && object.attributes.EV4B4) ) {
+              if (irrigationSystem === 1) {
+                irrigationSystem += 1;
+                requestSalidaTanque(false, 'A');
+              }
+              else if (irrigationSystem === 3) {
+                irrigationSystem = 0;
+                requestSalidaTanque(false, 'B');
+              }
+            }
+            // Input
+            if (!auxEntradaA && ((object.attributes.PumpOut<5 && object.attributes.PumpOut>0) || object.attributes.PumpSMaker===1) ){
+              auxEntradaA = true;
+              requestEntradaTanque(true, 'A');
+            } else if (auxEntradaA && (object.attributes.PumpOut===250 || object.attributes.PumpSMaker===0)) {
+              auxEntradaA = false;
+              requestEntradaTanque(false, 'A');
+            }
+            if (!auxEntradaB && object.attributes.PumpOut===5){
+              auxEntradaB = true;
+              requestEntradaTanque(true, 'B');
+            } else if (auxEntradaB && object.attributes.PumpOut===250) {
+              auxEntradaB = false;
+              requestEntradaTanque(false, 'B');
+            }
+          }
+
+          // If not timelapse or initial show then
+          if(!scr.attributes.timeLapse.render && scr.attributes.recirculation && showRecirculado===false){
+            // Level 1
+            if (object.attributes.Vol1 !== undefined && object.attributes.Vol1 !== null){
+              levelRecirculation(2, object.attributes.Vol1);
+            }
+            // Level 2
+            if (object.attributes.Vol2 !== undefined && object.attributes.Vol2 !== null){
+              levelRecirculation(3, object.attributes.Vol2);
+            }
+            // Level 3
+            if (object.attributes.Vol3 !== undefined && object.attributes.Vol3 !== null){
+              levelRecirculation(4, object.attributes.Vol3);
+            }
+            // Level 4
+            if (object.attributes.Vol4 !== undefined && object.attributes.Vol4 !== null){
+              levelRecirculation(5, object.attributes.Vol4);
+            }
+            // Level Water
+            if (object.attributes.Vol5 !== undefined && object.attributes.Vol5 !== null){
+              levelRecirculation(1, object.attributes.Vol5);
+            }
+            // Level SMaker
+            if (object.attributes.Vol_SMaker !== undefined && object.attributes.Vol_SMaker !== null){
+              levelRecirculation(7, object.attributes.Vol_SMaker);
+            }
+            // Level Recirculado
+            if (object.attributes.Vol_Recirculation !== undefined && object.attributes.Vol_Recirculation !== null){
+              levelRecirculation(6, object.attributes.Vol_Recirculation);
+            }
+            // Pump In
+            if (auxEntradaRec===0 && object.attributes.PumpIn<10){
+              auxEntradaRec = object.attributes.PumpIn+1;
+              fillRecirculationEntrada(object.attributes.PumpIn+1);
+            } else if (auxEntradaRec!==0 && object.attributes.PumpIn===250) {
+              auxEntradaRec=0;
+              emptyRecirculationEntrada();
+            }
+            // Pump Out
+            if (auxSalidaRec===0 && object.attributes.PumpOut<20 && object.attributes.PumpOut>0 ){
+              auxSalidaRec = object.attributes.PumpOut+1;
+              fillRecirculationSalida(object.attributes.PumpOut+1);
+            } else if(auxSalidaRec!==0 && object.attributes.PumpOut<20 && object.attributes.PumpOut>0 && RecirculadoSalida===false) {
+              auxSalidaRec += 20;
+              if (auxSalidaRec>20) { fillSMaker(true); }
+              else { fillCompressor(true); }
+            } else if (auxSalidaRec!==0 && object.attributes.PumpIn===250) {
+              if (auxSalidaRec>20) { fillSMaker(false); }
+              else { fillCompressor(false); }
+              emptyRecirculationSalida();
+              auxSalidaRec=0;
+            }
+
+          }
+
+          // If not timelapse or initial show then
           if(!scr.attributes.timeLapse.render && scr.attributes.floor1 && scr.attributes.floor2 &&
              scr.attributes.floor3 && scr.attributes.floor4 && showPlanta1===false &&
             showPlanta2===false && showPlanta3===false && showPlanta4===false){
@@ -3611,65 +3762,65 @@ query1.find()
               queryRiego_4 = true;
             } else { queryRiego_4 = false; }
 
-            if (object.attributes.Grower1.temp !== undefined || object.attributes.Grower1.temp !== null){
+            if (object.attributes.Grower1.temp !== undefined && object.attributes.Grower1.temp !== null){
               if (Math.abs(actualTemp_1-object.attributes.Grower1.temp)>1) {
                 requestTemp(object.attributes.Grower1.temp, 1);
               }
             }
-            if (object.attributes.Grower1.hum !== undefined || object.attributes.Grower1.hum !== null){
+            if (object.attributes.Grower1.hum !== undefined && object.attributes.Grower1.hum !== null){
               if (Math.abs(actualHum_1-object.attributes.Grower1.hum)>5) {
                 requestHum(object.attributes.Grower1.hum, 1);
               }
             }
-            if (object.attributes.Grower1.co2 !== undefined || object.attributes.Grower1.co2 !== null){
+            if (object.attributes.Grower1.co2 !== undefined && object.attributes.Grower1.co2 !== null){
               if (Math.abs(actualCO2_1-object.attributes.Grower1.co2)>15) {
                 requestCO2(object.attributes.Grower1.co2, 1);
               }
             }
 
-            if (object.attributes.Grower2.temp !== undefined || object.attributes.Grower2.temp !== null){
+            if (object.attributes.Grower2.temp !== undefined && object.attributes.Grower2.temp !== null){
               if (Math.abs(actualTemp_2-object.attributes.Grower2.temp)>1) {
                 requestTemp(object.attributes.Grower2.temp, 2);
               }
             }
-            if (object.attributes.Grower2.hum !== undefined || object.attributes.Grower2.hum !== null){
+            if (object.attributes.Grower2.hum !== undefined && object.attributes.Grower2.hum !== null){
               if (Math.abs(actualHum_2-object.attributes.Grower2.hum)>5) {
                 requestHum(object.attributes.Grower2.hum, 2);
               }
             }
-            if (object.attributes.Grower2.co2 !== undefined || object.attributes.Grower2.co2 !== null){
+            if (object.attributes.Grower2.co2 !== undefined && object.attributes.Grower2.co2 !== null){
               if (Math.abs(actualCO2_2-object.attributes.Grower2.co2)>15) {
                 requestCO2(object.attributes.Grower2.co2, 2);
               }
             }
 
-            if (object.attributes.Grower3.temp !== undefined || object.attributes.Grower3.temp !== null){
+            if (object.attributes.Grower3.temp !== undefined && object.attributes.Grower3.temp !== null){
               if (Math.abs(actualTemp_3-object.attributes.Grower3.temp)>1) {
                 requestTemp(object.attributes.Grower3.temp, 3);
               }
             }
-            if (object.attributes.Grower3.hum !== undefined || object.attributes.Grower3.hum !== null){
+            if (object.attributes.Grower3.hum !== undefined && object.attributes.Grower3.hum !== null){
               if (Math.abs(actualHum_3-object.attributes.Grower3.hum)>5) {
                 requestHum(object.attributes.Grower3.hum, 3);
               }
             }
-            if (object.attributes.Grower3.co2 !== undefined || object.attributes.Grower3.co2 !== null){
+            if (object.attributes.Grower3.co2 !== undefined && object.attributes.Grower3.co2 !== null){
               if (Math.abs(actualCO2_3-object.attributes.Grower3.co2)>15) {
                 requestCO2(object.attributes.Grower3.co2, 3);
               }
             }
 
-            if (object.attributes.Grower4.temp !== undefined || object.attributes.Grower4.temp !== null){
+            if (object.attributes.Grower4.temp !== undefined && object.attributes.Grower4.temp !== null){
               if (Math.abs(actualTemp_4-object.attributes.Grower4.temp)>1) {
                 requestTemp(object.attributes.Grower4.temp, 4);
               }
             }
-            if (object.attributes.Grower4.hum !== undefined || object.attributes.Grower4.hum !== null){
+            if (object.attributes.Grower4.hum !== undefined && object.attributes.Grower4.hum !== null){
               if (Math.abs(actualHum_4-object.attributes.Grower4.hum)>5) {
                 requestHum(object.attributes.Grower4.hum, 4);
               }
             }
-            if (object.attributes.Grower4.co2 !== undefined || object.attributes.Grower4.co2 !== null){
+            if (object.attributes.Grower4.co2 !== undefined && object.attributes.Grower4.co2 !== null){
               if (Math.abs(actualCO2_4-object.attributes.Grower4.co2)>15) {
                 requestCO2(object.attributes.Grower4.co2, 4);
               }
