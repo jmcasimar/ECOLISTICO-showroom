@@ -115,7 +115,11 @@ def plantQuery(floor, side, printResult = False):
             pl['diasEtapa3'] = plantArray[i-pos2+1]['diasDentro'] - plantArray[i-pos3+1]['diasDentro']
             pl['diasEtapa4'] = (datetime.now()-plantArray[i-pos3-1]['fechaSiembra']).days
 
-        waterConsumption = 0
+        waterConsumption1 = 0
+        waterConsumption2 = 0
+        waterConsumption3 = 0
+        waterConsumption4 = 0
+
         hoy = datetime.now()
         fechaEtapa3 = hoy - timedelta(days=pl['diasEtapa4'])
         fechaEtapa2 = fechaEtapa3 - timedelta(days=pl['diasEtapa3'])
@@ -127,27 +131,31 @@ def plantQuery(floor, side, printResult = False):
             compareTime = water.createdAt-deltaUTC
             if(compareTime>=fechaInicio and compareTime<fechaEtapa1):
                 zone = 'EV{0}{1}1'.format(floor,side)
-                waterConsumption += getattr(water, zone)
+                waterConsumption1 += getattr(water, zone)
             elif(compareTime>=fechaEtapa1 and compareTime<fechaEtapa2):
                 zone = 'EV{0}{1}2'.format(floor,side)
-                waterConsumption += getattr(water, zone)
+                waterConsumption2 += getattr(water, zone)
             elif(compareTime>=fechaEtapa2 and compareTime<fechaEtapa3):
                 zone = 'EV{0}{1}3'.format(floor,side)
-                waterConsumption += getattr(water, zone)
+                waterConsumption3 += getattr(water, zone)
             elif(compareTime>=fechaEtapa3 and compareTime<hoy):
                 zone = 'EV{0}{1}4'.format(floor,side)
-                waterConsumption += getattr(water, zone)
+                waterConsumption4 += getattr(water, zone)
 
-        pl['consumoAgua'] = waterConsumption
+        pl['consumoAgua1'] = waterConsumption1
+        pl['consumoAgua2'] = waterConsumption2
+        pl['consumoAgua3'] = waterConsumption3
+        pl['consumoAgua4'] = waterConsumption4
+        pl['consumoAguaTotal'] = waterConsumption1+waterConsumption2+waterConsumption3+waterConsumption4
 
         # DEBUG
         if printResult:
-            if(pl['index']<10): print('Index:{0}\t\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
+            if(pl['index']<10): print('Index:{0}\t\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\t{11}'.format(
             pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
-            pl['consumoAgua']))
-            else: print('Index:{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
+            pl['consumoAgua1'], pl['consumoAgua2'], pl['consumoAgua3'], pl['consumoAgua4'], pl['consumoAguaTotal']))
+            else: print('Index:{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\t{11}'.format(
             pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
-            pl['consumoAgua']))
+            pl['consumoAgua1'], pl['consumoAgua2'], pl['consumoAgua3'], pl['consumoAgua4'], pl['consumoAguaTotal']))
 
     return plantArray
 

@@ -69,10 +69,14 @@ Para acceder a las propiedades del diccionario se requieren las siguientes palab
 import reportQuery as rQ
 from datetime import datetime
 
-stateResult = rQ.stateQuery(datetime(2020,4,6), datetime.now())
+stateResult = rQ.stateQuery(datetime(2020,4,6), datetime(2020,4,9,23,59,0))
+aux = False
 for st in stateResult:
-    print(st.RealTime, st.tempExt, st.Grower3['co2'], st.ESP_Front['T1R'], st.Vol1)
+    if st.L1S1!=aux:
+        print(st.RealTime)
+        aux=st.L1S1
 
+"""
 plant1A = rQ.plantQuery(1, 'A')
 for pl in plant1A:
     if(pl['index']<10): print('Index:{0}\t\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
@@ -81,3 +85,4 @@ for pl in plant1A:
     else: print('Index:{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}'.format(
     pl['index'], pl['diasDentro'], pl['diasEtapa1'], pl['diasEtapa2'], pl['diasEtapa3'], pl['diasEtapa4'], pl['fechaSiembra'],
     pl['consumoAgua']))
+"""
