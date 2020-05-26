@@ -19,10 +19,14 @@ function init() {
     })
 
     myFactory.events.add('click', function () {
+      var url = "../index.html";
+      window.location.href = url;
+      /*
       var mapa = document.getElementById("map");
       mapa.style.display = 'none';
       var clsUp = document.getElementById("closeUp");
       clsUp.style.display = "inline-block";
+      */
     });
     var myGeoObjects = [
       new ymaps.Placemark([19.43, -99.13], {
