@@ -25,11 +25,11 @@ from parse_rest.connection import ParseBatcher
 from parse_rest.core import ResourceRequestBadRequest, ParseError
 
 # Create Config State to Query
-class Config(Object):
+class config(Object):
     pass
 
 # Create State Class to Query and write in it
-class State(Object):
+class state(Object):
     system = ''
     RealTime = datetime.now()
     Vol_Recirculation = 0
@@ -215,7 +215,7 @@ class growerObject():
         return struct
 
 # Create Water Class to write in it
-class Water(Object):
+class water(Object):
     system = ''
     RealTime = datetime.now()
     waste = 0
@@ -256,7 +256,7 @@ class Water(Object):
 # Global Functions
 # Function to save new object
 def newEntry(object, properties):
-    newObject = State()
+    newObject = state()
     for property in properties:
         setattr(newObject, property, getattr(object, property))
     newObject.save()
@@ -270,7 +270,7 @@ def updateState(object, property, value):
 
 # Function to save new object in Water
 def newWaterEntry(object, properties):
-    newObject = Water()
+    newObject = water()
     for property in properties:
         setattr(newObject, property, getattr(object, property))
     newObject.save()
@@ -351,23 +351,23 @@ fSize = os.path.getsize(file)
 log.logger.info('Actual size of log file: {} bytes'.format(fSize))
 
 # Query the configuration of the system
-conf = Config.Query.filter(city=cr.cityFilter).filter(state=cr.stateFilter).filter(locationNumber=cr.numberFilter)
+conf = config.Query.filter(city=cr.cityFilter).filter(state=cr.stateFilter).filter(locationNumber=cr.numberFilter)
 conf = conf[0]
 log.logger.info('System Configuration ID: {}'.format(conf.objectId))
 
 # Query the last state saved in the State class
-st = State.Query.all().order_by('createdAt', descending=True).limit(1)
+st = state.Query.all().order_by('createdAt', descending=True).limit(1)
 st = st[0]
 
 # Create a Pointer object to State Class
-if(getattr(st, 'system') != getPointer('Config', conf.objectId)):
-    setattr(st, 'system', getPointer('Config', conf.objectId))
+if(getattr(st, 'system') != getPointer('config', conf.objectId)):
+    setattr(st, 'system', getPointer('config', conf.objectId))
 
 # Create Water object to report consumption
-wtr = Water()
+wtr = water()
 # Create a Pointer object to State Class
-if(getattr(wtr, 'system') != getPointer('Config', conf.objectId)):
-    setattr(wtr, 'system', getPointer('Config', conf.objectId))
+if(getattr(wtr, 'system') != getPointer('config', conf.objectId)):
+    setattr(wtr, 'system', getPointer('config', conf.objectId))
 
 # Define mqtt Controller for communication
 mqttControl = mqttController(log.logger)
